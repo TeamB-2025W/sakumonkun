@@ -1,0 +1,45 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+
+# Python virtual environment
+.env
+venv/
+env/
+ENV/
+bin/
+lib/
+include/
+pyvenv.cfg
+.Python
+Scripts/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Local development settings
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Database
+*.sqlite3
+
+# Log files
+*.log
+
+# Media and static files (開発環境用)
+/media/
+/static/

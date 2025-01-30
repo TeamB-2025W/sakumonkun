@@ -1,0 +1,8 @@
+{% extends 'app/base.html'%}
+
+{% block content %}
+<h1>新規登録</h1>
+<form placeholder="メールアドレス">
+<form placeholder="パスワード">
+<a href="{% url 'app:login' %}">ログイン</a>
+{% endblock %}
