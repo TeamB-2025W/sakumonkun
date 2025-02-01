@@ -1,13 +1,13 @@
 services:
 
   db:
-    container_name: django-blog-db
+    container_name: sakumon-db
     image: mysql:8.0
     volumes:
       - db-store:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: django_blog_db
+      MYSQL_DATABASE: sakumon_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       TZ: 'Asia/Tokyo'
@@ -18,7 +18,7 @@ services:
       retries: 5
 
   web:
-    container_name: django-blog-web
+    container_name: sakumon-web
     build: .
     command: tail -f /dev/null
     volumes:
