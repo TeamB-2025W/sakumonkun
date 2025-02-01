@@ -19,10 +19,9 @@ services:
 
   web:
     container_name: sakumon-web
-    build: .
-    command: tail -f /dev/null
+    build: project
     volumes:
-      - .:/code
+      - ./project:/code
     ports:
       - "8000:8000"
     depends_on:
