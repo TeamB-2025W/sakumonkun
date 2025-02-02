@@ -2,7 +2,16 @@
 
 {% block content %}
 <h1>新規登録</h1>
-<form placeholder="メールアドレス">
-<form placeholder="パスワード">
+<form>
+  <label for="username">ユーザー名</label>
+  <input id="email">
+  <label for="email">メールアドレス</label>
+  <input id="email">
+  <label for="password">パスワード</label>
+  <input id="password">
+  <label for="password2">パスワード確認</label>
+  <input id="password2">
+  <button>登録</button>
+</form>
 <a href="{% url 'app:login' %}">ログイン</a>
 {% endblock %}
