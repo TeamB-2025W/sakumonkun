@@ -18,24 +18,6 @@ class User(models.Model):
 
 # class Choice(models.Model):
 
-# 問題単位に対応している
-class Answer(models.Model):
-    id = models.AutoField(primary_key=True)
-    sessionid =  models.ForeignKey(
-        Session, verbose_name='セッションID', on_delete=models.PROTECT,
-    )
-    questionid =  models.ForeignKey(
-        Question, verbose_name='質問ID', on_delete=models.PROTECT,
-    )
-    selectedchoice = models.IntegerField('選択肢', max_length=200)
-    iscorrect = models.BooleanField('正解', default=False)
-    answered_at = models.DateTimeField('回答日時', default=timezone.now)
-    created_at = models.DateTimeField('作成日時', default=timezone.now)
-    updated_at = models.DateTimeField('更新日時', default=timezone.now)
-
-    class Meta:
-        db_table = 'answers'
-
 class Session(models.Model):
     id = models.AutoField(primary_key=True)
     testid = models.ForeignKey(
@@ -48,3 +30,21 @@ class Session(models.Model):
 
     class Meta:
         db_table = 'sessions'
+
+# 問題単位に対応している
+class Answer(models.Model):
+    id = models.AutoField(primary_key=True)
+    sessionid =  models.ForeignKey(
+        Session, verbose_name='セッションID', on_delete=models.PROTECT,
+    )
+    questionid =  models.ForeignKey(
+        Question, verbose_name='質問ID', on_delete=models.PROTECT,
+    )
+    selectedchoice = models.IntegerField('選択肢')
+    iscorrect = models.BooleanField('正解', default=False)
+    answered_at = models.DateTimeField('回答日時', default=timezone.now)
+    created_at = models.DateTimeField('作成日時', default=timezone.now)
+    updated_at = models.DateTimeField('更新日時', default=timezone.now)
+
+    class Meta:
+        db_table = 'answers'
