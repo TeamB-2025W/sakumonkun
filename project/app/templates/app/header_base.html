@@ -3,9 +3,9 @@
 {% block header %}
   <header>
     <nav>
-      <a>ホーム</a>
-      <a>ユーザー情報</a>
-      <a>ログアウト</a>
+      <a href="{% url 'app:home' %}" class="link-button">ホーム</a>
+      <a href="{% url 'app:user_edit' %}" class="link-button">ユーザー情報</a>
+      <a href="{% url 'app:logout' %}" class="link-button">ログアウト</a>
     </nav>
   </header>
 {% endblock %}

@@ -21,7 +21,7 @@ def register(request):
     context = {
         'form': form
     }
-    return render(request, 'app/user_register.html', context)
+    return render(request, 'app/user/register.html', context)
 
 def login(request):
     if request.method == 'POST':
@@ -36,13 +36,13 @@ def login(request):
             except:
                 return redirect('app:login')
     
-    return render(request, 'app/user_login.html')
+    return render(request, 'app/user/login.html')
 
 
 
 def logout(request, pk):
     request.session.clear()
-    return render(request, 'app/user_logout.html')
+    return render(request, 'app/user/logout.html')
 
 
 def username(request, pk, username):
