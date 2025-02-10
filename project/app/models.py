@@ -22,7 +22,7 @@ class Test(models.Model):
         User, 
         verbose_name='ユーザーID', 
         on_delete=models.PROTECT,
-        db_column='user_id'
+        db_column='userid'
     )
     title = models.CharField('問題タイトル', max_length=50)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
@@ -41,7 +41,7 @@ class Question(models.Model):
         Test, 
         verbose_name='テストID', 
         on_delete=models.PROTECT,
-        db_column='test_id'
+        db_column='testid'
     )
     correct_choiceid = models.IntegerField('正解の選択肢')
     text = models.CharField('問題文', max_length=20)
@@ -62,7 +62,7 @@ class QuestionChoice(models.Model):
         Question, 
         verbose_name='問題ID', 
         on_delete=models.PROTECT,
-        db_column='question_id'
+        db_column='questionid'
     )
     
     text = models.CharField('選択肢文', max_length=20)
@@ -82,7 +82,7 @@ class Session(models.Model):
         Test, 
         verbose_name='テストID', 
         on_delete=models.PROTECT,
-        db_column='test_id'
+        db_column='testid'
     )
     guestname = models.CharField('ゲスト名', max_length=20)
                                  
@@ -103,13 +103,13 @@ class Answer(models.Model):
         Session, 
         verbose_name='セッションID', 
         on_delete=models.PROTECT,
-        db_column='session_id'
+        db_column='sessionid'
     )
     question = models.ForeignKey(
         Question, 
         verbose_name='質問ID', 
         on_delete=models.PROTECT,
-        db_column='question_id'
+        db_column='questionid'
     )
     selected_choiceid = models.IntegerField('選択肢')
     iscorrect = models.BooleanField('正解', default=False)
