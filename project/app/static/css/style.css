@@ -1,0 +1,77 @@
+body {
+  background: #00bfff;
+  padding: 8px;
+}
+
+header,
+.home-main {
+  background: #fff;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+header > nav {
+  display: flex;
+  gap: 16px;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+th {
+  font-size: 1.25rem;
+}
+
+header > nav > a:nth-of-type(2) {
+  margin-left: auto;
+  color: #fff;
+}
+
+.link-button {
+  background: #00bfff;
+  padding: 0 4px;
+  border-radius: 4px;
+  border: 1px solid black;
+  font-weight: bold;
+  display: block;
+  width: 160px;
+  text-align: center;
+}
+
+.home-main {
+  margin-top: 12px;
+  padding: 12px;
+}
+
+.create-link {
+  color: #fff;
+  font-size: 1.25rem;
+  width: 200px;
+}
+
+.home-main > table {
+  border: 2px solid black;
+  width: 100%;
+  text-align: center;
+}
+
+.function-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.function-buttons > a {
+  width: 40px;
+  color: #fff;
+}
+
+.function-buttons > a:nth-of-type(1) {
+  width: 80px;
+}
+
+.function-buttons > a:nth-of-type(3) {
+  background: #ff1500;
+}

@@ -1,5 +1,6 @@
 from django.urls import path
 from app.views import user_views
+from app.views import tmp_views
 
 app_name = 'app'
 
@@ -11,6 +12,10 @@ urlpatterns = [
     path('user/logout/', user_views.logout, name='logout'),
     path('user/update/username/', user_views.username, name='username'),
     path('user/update/password/', user_views.password, name='password'),
+    path('', tmp_views.home, name='home'),
+    path('test/create/', tmp_views.create, name='test_create'),
+    path('test/create/tmp', tmp_views.creation_successful, name='creation_successful'),
+    path('user/edit', tmp_views.user_edit, name='user_edit'),
 
     # Test-related URLs
 
