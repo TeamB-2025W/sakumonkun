@@ -1,5 +1,5 @@
 from django import forms
-from app.models.user_model import User
+from ..models import User
 
 
 class UserCreateForm(forms.ModelForm):
