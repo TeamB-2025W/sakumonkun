@@ -18,7 +18,7 @@ class User(models.Model):
 
 class Test(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(
+    userid = models.ForeignKey(
         User, 
         verbose_name='ユーザーID', 
         on_delete=models.PROTECT,
@@ -37,7 +37,7 @@ class Test(models.Model):
 
 class Question(models.Model):
     id = models.AutoField(primary_key=True)
-    test = models.ForeignKey(
+    testid = models.ForeignKey(
         Test, 
         verbose_name='テストID', 
         on_delete=models.PROTECT,
@@ -58,7 +58,7 @@ class Question(models.Model):
 
 class QuestionChoice(models.Model):
     id = models.AutoField(primary_key=True)
-    question = models.ForeignKey(
+    questionid = models.ForeignKey(
         Question, 
         verbose_name='問題ID', 
         on_delete=models.PROTECT,
@@ -76,9 +76,9 @@ class QuestionChoice(models.Model):
         return str(self.id)
 
 
-class Session(models.Model):
+class Examination(models.Model):
     id = models.AutoField(primary_key=True)
-    test = models.ForeignKey(
+    testid = models.ForeignKey(
         Test, 
         verbose_name='テストID', 
         on_delete=models.PROTECT,
@@ -90,7 +90,7 @@ class Session(models.Model):
     updated_at = models.DateTimeField('更新日時', default=timezone.now)
 
     class Meta:
-        db_table = 'sessions'
+        db_table = 'examinations'
 
     def __str__(self):
         return str(self.id)
@@ -99,15 +99,15 @@ class Session(models.Model):
 # 問題単位に対応している
 class Answer(models.Model):
     id = models.AutoField(primary_key=True)
-    session = models.ForeignKey(
-        Session, 
-        verbose_name='セッションID', 
+    examinationid = models.ForeignKey(
+        Examination, 
+        verbose_name='受験ID', 
         on_delete=models.PROTECT,
-        db_column='sessionid'
+        db_column='examinationid'
     )
-    question = models.ForeignKey(
+    questionid = models.ForeignKey(
         Question, 
-        verbose_name='質問ID', 
+        verbose_name='問題ID', 
         on_delete=models.PROTECT,
         db_column='questionid'
     )
@@ -122,3 +122,4 @@ class Answer(models.Model):
 
     def __str__(self):
         return str(self.id)
+        
