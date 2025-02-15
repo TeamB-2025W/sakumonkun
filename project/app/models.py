@@ -85,7 +85,7 @@ class Examination(models.Model):
         db_column='testid'
     )
     guestname = models.CharField('ゲスト名', max_length=20)
-                                 
+    answered_at = models.DateTimeField('回答日時', default=timezone.now)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
     updated_at = models.DateTimeField('更新日時', default=timezone.now)
 
@@ -113,7 +113,6 @@ class Answer(models.Model):
     )
     selected_choiceid = models.IntegerField('選択肢')
     iscorrect = models.BooleanField('正解', default=False)
-    answered_at = models.DateTimeField('回答日時', default=timezone.now)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
     updated_at = models.DateTimeField('更新日時', default=timezone.now)
 
