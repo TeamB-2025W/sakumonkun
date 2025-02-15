@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from app.forms import UserCreateForm
-from app.models.user_model import User
+from app.models import User
 
-
+""""""
 def home(request):
     return render(request, 'app/test/index.html')
 
