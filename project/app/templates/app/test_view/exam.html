@@ -1,0 +1,39 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ model.title }}</h2>
+    <p>{{ model.description }}</p>
+
+    <form method="post" action="{% url 'app:post_exam' model.id %}">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="guestname" class="form-label">お名前</label>
+            <input type="text" class="form-control" id="guestname" name="guestname" required>
+        </div>
+
+        {% for item in question_list %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">問題 {{ forloop.counter }}: {{ item.question.text }}</h5>
+                
+                {% for questionchoice in item.questionchoices %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" 
+                           name="question_{{ item.question.id }}" 
+                           id="questionchoice_{{ questionchoice.id }}"
+                           value="{{ questionchoice.id }}">
+                    <label class="form-check-label" for="questionchoice_{{ questionchoice.id }}">
+                        {{ questionchoice.text }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">回答を送信</button>
+    </form>
+</div>
+{% endblock %}

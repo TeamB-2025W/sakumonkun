@@ -18,11 +18,11 @@ class User(models.Model):
 
 class Test(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(
+    userid = models.ForeignKey(
         User, 
         verbose_name='ユーザーID', 
         on_delete=models.PROTECT,
-        db_column='user_id'
+        db_column='userid'
     )
     title = models.CharField('問題タイトル', max_length=50)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
@@ -37,11 +37,11 @@ class Test(models.Model):
 
 class Question(models.Model):
     id = models.AutoField(primary_key=True)
-    test = models.ForeignKey(
+    testid = models.ForeignKey(
         Test, 
         verbose_name='テストID', 
         on_delete=models.PROTECT,
-        db_column='test_id'
+        db_column='testid'
     )
     correct_choiceid = models.IntegerField('正解の選択肢')
     text = models.CharField('問題文', max_length=20)
@@ -58,11 +58,11 @@ class Question(models.Model):
 
 class QuestionChoice(models.Model):
     id = models.AutoField(primary_key=True)
-    question = models.ForeignKey(
+    questionid = models.ForeignKey(
         Question, 
         verbose_name='問題ID', 
         on_delete=models.PROTECT,
-        db_column='question_id'
+        db_column='questionid'
     )
     
     text = models.CharField('選択肢文', max_length=20)
@@ -76,21 +76,21 @@ class QuestionChoice(models.Model):
         return str(self.id)
 
 
-class Session(models.Model):
+class Examination(models.Model):
     id = models.AutoField(primary_key=True)
-    test = models.ForeignKey(
+    testid = models.ForeignKey(
         Test, 
         verbose_name='テストID', 
         on_delete=models.PROTECT,
-        db_column='test_id'
+        db_column='testid'
     )
     guestname = models.CharField('ゲスト名', max_length=20)
-                                 
+    answered_at = models.DateTimeField('回答日時', default=timezone.now)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
     updated_at = models.DateTimeField('更新日時', default=timezone.now)
 
     class Meta:
-        db_table = 'sessions'
+        db_table = 'examinations'
 
     def __str__(self):
         return str(self.id)
@@ -99,21 +99,20 @@ class Session(models.Model):
 # 問題単位に対応している
 class Answer(models.Model):
     id = models.AutoField(primary_key=True)
-    session = models.ForeignKey(
-        Session, 
-        verbose_name='セッションID', 
+    examinationid = models.ForeignKey(
+        Examination, 
+        verbose_name='受験ID', 
         on_delete=models.PROTECT,
-        db_column='session_id'
+        db_column='examinationid'
     )
-    question = models.ForeignKey(
+    questionid = models.ForeignKey(
         Question, 
-        verbose_name='質問ID', 
+        verbose_name='問題ID', 
         on_delete=models.PROTECT,
-        db_column='question_id'
+        db_column='questionid'
     )
     selected_choiceid = models.IntegerField('選択肢')
     iscorrect = models.BooleanField('正解', default=False)
-    answered_at = models.DateTimeField('回答日時', default=timezone.now)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
     updated_at = models.DateTimeField('更新日時', default=timezone.now)
 
@@ -122,3 +121,4 @@ class Answer(models.Model):
 
     def __str__(self):
         return str(self.id)
+        
