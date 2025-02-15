@@ -1,8 +1,15 @@
 from django.urls import path
 from app.views import user, exam
+from app.views import tmp_views, user_views # テスト用のビュー
+
 app_name = 'app'
 
 urlpatterns = [
+    # テスト用のURL
+    path('', tmp_views.home, name='home'),
+    path('test/create/', tmp_views.create, name='test_create'),
+    path('test/create/tmp', tmp_views.creation_successful, name='creation_successful'),
+    path('user/edit', tmp_views.user_edit, name='user_edit'),
     # User-related URLs
     # path('user/', user_views.info, name='info'),
     # path('user/register/', user_views.register, name='register'),
