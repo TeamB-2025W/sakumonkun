@@ -3,14 +3,14 @@ body {
     background-color:#00BFFF;
 }
 
-.answer_background {
+.result_background {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.answer_header {
+.result_header {
     background-color: white;
     min-width: 95vw;
     font-size: 40px;
@@ -20,7 +20,7 @@ body {
     box-shadow: 0 1px 2px 2px black;
 }
 
-.answer_container {
+.result_container {
     background-color: white;
     min-width: 95vw;
     font-size: 30px;
@@ -31,10 +31,38 @@ body {
     box-shadow: 0 1px 2px 2px black;
 }
 
+.score_title {
+    margin-left: 15px;
+}
+
+.result_score {
+    margin-left: 30px;
+}
+
+.score {
+    color: red;
+}
+
 .question_box {
     margin-left: 10px;
  }
 
 .selected_choice {
   margin-left: 15px;
+}
+
+.judge {
+    font-size: 40px;
+}
+
+.judge_icon {
+    font-size: 60px;
+}
+
+.correct {
+    color: red;
+}
+
+.incorrect {
+    color: blue;
 }

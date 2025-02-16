@@ -72,3 +72,16 @@ body {
     background-color: #3079b5;
     color: #fff;
 }
+
+.finish_button_box {
+    text-align: center;
+}
+
+.exam_finish_button {
+    background-color: #00BFFF;
+    color: white;
+    font-size: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
