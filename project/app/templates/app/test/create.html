@@ -9,7 +9,7 @@
 
 <ol id="questions">
   <li id="question">
-    <h3>問題１</h3>
+    <h3>問題1</h3>
     <textarea placeholder="問題文" form="create-test" rows="5" cols="96"></textarea>
 
     <label class="flex choiceies">
@@ -18,24 +18,24 @@
     </label>
     <ol class="choiceies">
       <li class="flex">
-        <label>１</label>
+        <label>1</label>
         <input>
-        <input type="radio" name="correct">
+        <input type="radio" name="correct-1">
       </li>
       <li class="flex">
-        <label>２</label>
+        <label>2</label>
         <input>
-        <input type="radio" name="correct">
+        <input type="radio" name="correct-1">
       </li>
       <li class="flex">
-        <label>３</label>
+        <label>3</label>
         <input>
-        <input type="radio" name="correct">
+        <input type="radio" name="correct-1">
       </li>
       <li class="flex">
-        <label>４</label>
+        <label>4</label>
         <input>
-        <input type="radio" name="correct">
+        <input type="radio" name="correct-1">
       </li>
     </ol>
 
@@ -45,8 +45,13 @@
 </ol>
 
 <div class="button-area">
-  <button>
+  <button id="addQuestionButton">
     ＋問題を追加する
+  </button>
+</div>
+<div class="button-area">
+  <button id="removeQuestionButton">
+    ー１番下の問題を削除する
   </button>
 </div>
 <div class="button-area">
@@ -54,4 +59,9 @@
     問題作成を完了する
   </button>
 </div>
+{% endblock %}
+
+{% load static %}
+{% block extra_js %}
+<script src="{% static 'js/create.js' %}"></script>
 {% endblock %}

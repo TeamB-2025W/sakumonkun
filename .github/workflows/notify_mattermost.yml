@@ -1,0 +1,16 @@
+name: Notify Mattermost on Dev Update
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Mattermost
+        run: |
+          curl -X POST -H 'Content-Type: application/json' \
+               -d '{"text": "### 🚀 Dev Branch Updated"}' \
+               "https://chat.raretech.site/hooks/bf44oxcnbbrmfc456661ysd1zo"
