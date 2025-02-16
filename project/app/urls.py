@@ -31,7 +31,7 @@ urlpatterns = [
     path('test/records/', tmp_views.test_records, name='test_records'),
     path('test/modal/confirm_test_deletion/', tmp_views.test_delete, name='test_delete'),
     path('test/modal/confirm_ques_deletion/', tmp_views.question_delete, name='question_delete'),
-    path('test/<int:testid>/results', exam.GetExamResultList, name='get_exam_result_list'),
+    path('test/<int:testid>/results', exam.ExamResultList, name='exam_result_list'),
 
 
     # Question-related URLs
@@ -51,7 +51,7 @@ urlpatterns = [
     # Exam-related URLs
     path('exam/<int:testid>/', exam.GetExam, name='get_exam'),  # 受験ページ
     path('exam/<int:testid>/post/', exam.PostExam, name='post_exam'),  # 回答送信
-    path('exam/result/<int:examinationid>/', exam.GetExamResult, name='exam_result'),  # 結果ページ
+    path('exam/result/<int:examinationid>/', exam.ExamResult, name='exam_result'),  # 結果ページ
 
 
 ]

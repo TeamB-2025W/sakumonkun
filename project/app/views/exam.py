@@ -86,7 +86,7 @@ def PostExam(request, testid):
         return redirect('app:exam_result', examinationid=examination.id)
 
 
-def GetExamResult(request, examinationid):
+def ExamResult(request, examinationid):
     """試験結果画面を表示する
 
     Returns:
@@ -129,7 +129,7 @@ def GetExamResult(request, examinationid):
     return render(request, 'app/test_view/exam_result.html', context) 
 
 
-def GetExamResultList(request, testid):
+def ExamResultList(request, testid):
     """特定のテストに紐づく試験結果一覧画面を表示する
 
     Returns:
