@@ -2,11 +2,17 @@
 {% block title %}テスト作成成功{% endblock %}
 
 {% block content %}
-<h1>テスト作成を完了しました。</h1>
-<p>テストの名前</p>
-<p>ーーーーー</p>
-<label for="test-url">テストのURL</label>
-<input id="test-url">
-<button>コピーする</button>
-<a href="{% url 'app:home' %}">ホームに戻る</a>
+<div class="creation-successful">
+  <h1 class=>テスト作成を完了しました。</h1>
+  <p>テストの名前</p>
+  <p>ーーーーー</p>
+  <label for="test-url">テストのURL</label>
+  <div class="flex">
+    <input id="test-url">
+    <button>コピーする</button>
+  </div>
+</div>
+<div class="creation-successful">
+  <a href="{% url 'app:home' %}">ホームに戻る</a>
+</div>
 {% endblock %}
