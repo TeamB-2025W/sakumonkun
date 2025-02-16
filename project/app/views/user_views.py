@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from app.forms import UserCreateForm
+from app.forms.user import UserCreateForm
 from app.models import User
 
 
