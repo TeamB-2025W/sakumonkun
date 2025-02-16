@@ -1,6 +1,7 @@
 "use strict";
 
 const addQuestionButton = document.getElementById("addQuestionButton");
+const removeQuestionButton = document.getElementById("removeQuestionButton");
 
 addQuestionButton.addEventListener("click", () => {
   addQuestionForm();
@@ -10,6 +11,14 @@ addQuestionButton.addEventListener("click", () => {
     enableButton(addQuestionButton);
   }, 1000);
 });
+
+removeQuestionButton.addEventListener("click", () => {
+  console.log("clicked");
+  disableButton(removeQuestionButton);
+  setTimeout(() => {
+    enableButton(removeQuestionButton);
+  }, 1000);
+})
 
 function addQuestionForm() {
   // 要素を作成・属性の設定
