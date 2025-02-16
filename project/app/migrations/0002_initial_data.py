@@ -6,6 +6,9 @@ def create_initial_data(apps, schema_editor):
     Test = apps.get_model('app', 'Test')
     Question = apps.get_model('app', 'Question')
     QuestionChoice = apps.get_model('app', 'QuestionChoice')
+    Examination = apps.get_model('app', 'Examination')
+    Answer = apps.get_model('app', 'Answer')
+    
 
     # ユーザーデータ
     users = [
@@ -92,13 +95,100 @@ def create_initial_data(apps, schema_editor):
         QuestionChoice(id=9, questionid_id=3, text='実行ファイル'),
     ]
     QuestionChoice.objects.bulk_create(choices)
+    
+    # 受験データ
+    examinations = [
+        Examination(
+            id=1,
+            testid_id=1,
+            guestname='ゲスト太郎',
+            answered_at=timezone.now(),
+            created_at=timezone.now(),
+            updated_at=timezone.now()
+        ),
+        Examination(
+            id=2,
+            testid_id=1,
+            guestname='ゲスト次郎',
+            answered_at=timezone.now(),
+            created_at=timezone.now(),
+            updated_at=timezone.now()
+        ),
+        Examination(
+            id=3,
+            testid_id=2,
+            guestname='ゲスト三郎',
+            answered_at=timezone.now(),
+            created_at=timezone.now(),
+            updated_at=timezone.now()
+        ),
+    ]
+    Examination.objects.bulk_create(examinations)
 
+    # 回答データ
+    answers = [
+        # ゲスト太郎の回答（testid=1の全問題に回答）
+        Answer(
+            id=1,
+            examinationid_id=1,
+            questionid_id=1,
+            selected_choiceid=1,  # 正解：読みやすい構文
+            iscorrect=True,
+            created_at=timezone.now(),
+            updated_at=timezone.now()
+        ),
+        Answer(
+            id=2,
+            examinationid_id=1,
+            questionid_id=2,
+            selected_choiceid=5,  # 正解：データ管理システム
+            iscorrect=True,
+            created_at=timezone.now(),
+            updated_at=timezone.now()
+        ),
+        # ゲスト次郎の回答（testid=1の全問題に回答、一部不正解）
+        Answer(
+            id=3,
+            examinationid_id=2,
+            questionid_id=1,
+            selected_choiceid=2,  # 不正解：複雑な構文
+            iscorrect=False,
+            created_at=timezone.now(),
+            updated_at=timezone.now()
+        ),
+        Answer(
+            id=4,
+            examinationid_id=2,
+            questionid_id=2,
+            selected_choiceid=5,  # 正解：データ管理システム
+            iscorrect=True,
+            created_at=timezone.now(),
+            updated_at=timezone.now()
+        ),
+        # ゲスト三郎の回答（testid=2の問題に回答）
+        Answer(
+            id=5,
+            examinationid_id=3,
+            questionid_id=3,
+            selected_choiceid=7,  # 正解：データ格納場所
+            iscorrect=True,
+            created_at=timezone.now(),
+            updated_at=timezone.now()
+        ),
+    ]
+    Answer.objects.bulk_create(answers)
+
+    
 def remove_initial_data(apps, schema_editor):
     User = apps.get_model('app', 'User')
     Test = apps.get_model('app', 'Test')
     Question = apps.get_model('app', 'Question')
     QuestionChoice = apps.get_model('app', 'QuestionChoice')
+    Examination = apps.get_model('app', 'Examination')
+    Answer = apps.get_model('app', 'Answer')
 
+    Answer.objects.all().delete()
+    Examination.objects.all().delete()
     QuestionChoice.objects.all().delete()
     Question.objects.all().delete()
     Test.objects.all().delete()

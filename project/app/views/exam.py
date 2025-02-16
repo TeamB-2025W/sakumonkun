@@ -35,10 +35,6 @@ def GetExam(request, testid):
 def PostExam(request, testid):
     """試験の回答を保存する
 
-    Args:
-        request: HTTPリクエスト（POSTメソッド）
-        testid: テストID
-
     Expected POST data:
         guestname (str): 受験者名
             - input要素のname属性: "guestname"
@@ -74,6 +70,7 @@ def PostExam(request, testid):
         for question in Question.objects.filter(testid=testid):
             # questionはオブジェクトなのでidにアクセス可能
             selected_choiceid = request.POST.get(f'question_{question.id}')
+            #   value="{{ questionchoice.id }}"   <=   question_1
             is_correct = False
             
             if selected_choiceid:
@@ -130,3 +127,26 @@ def GetExamResult(request, examinationid):
     }
 
     return render(request, 'app/test_view/exam_result.html', context) 
+
+
+def GetExamResultList(request, testid):
+    """特定のテストに紐づく試験結果一覧画面を表示する
+
+    Returns:
+        テンプレートコンテキスト:
+            test (Test): テスト情報
+            examination_list (QuerySet[Examination]): 受験情報一覧
+    """
+    test = Test.objects.get(pk=testid)
+    examination_list = Examination.objects.filter(testid=testid)
+    
+    for examination in examination_list:
+        examination.correct_count = examination.answer_set.filter(iscorrect=True).count()
+        examination.total_count = examination.answer_set.count()
+    
+    context = {
+        'test': test,
+        'examination_list': examination_list,
+    }
+    
+    return render(request, 'app/test_view/test_results.html', context)

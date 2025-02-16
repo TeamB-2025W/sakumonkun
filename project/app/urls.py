@@ -10,6 +10,7 @@ urlpatterns = [
     path('test/create/tmp', tmp_views.creation_successful, name='creation_successful'),
     path('user/edit', tmp_views.user_edit, name='user_edit'),
 
+
     # User-related URLs
     # path('user/', user_views.info, name='info'),
     # path('user/register/', user_views.register, name='register'),
@@ -17,6 +18,7 @@ urlpatterns = [
     path('user/logout/', user_views.logout, name='logout'),
     # path('user/update/username/', user_views.username, name='username'),
     # path('user/update/password/', user_views.password, name='password'),
+
 
     # Test-related URLs
     # path('', tmp_views.home, name='home'),
@@ -29,6 +31,7 @@ urlpatterns = [
     path('test/records/', tmp_views.test_records, name='test_records'),
     path('test/modal/confirm_test_deletion/', tmp_views.test_delete, name='test_delete'),
     path('test/modal/confirm_ques_deletion/', tmp_views.question_delete, name='question_delete'),
+    path('test/<int:testid>/results', exam.GetExamResultList, name='get_exam_result_list'),
 
 
     # Question-related URLs
@@ -49,5 +52,6 @@ urlpatterns = [
     path('exam/<int:testid>/', exam.GetExam, name='get_exam'),  # 受験ページ
     path('exam/<int:testid>/post/', exam.PostExam, name='post_exam'),  # 回答送信
     path('exam/result/<int:examinationid>/', exam.GetExamResult, name='exam_result'),  # 結果ページ
+
 
 ]
