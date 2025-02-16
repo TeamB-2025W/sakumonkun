@@ -28,7 +28,7 @@ def get_exam(request, testid):
         'model': model,
         'question_list': question_list  # このキー名が重要
     }
-    return render(request, 'app/test_view/exam.html', context) 
+    return render(request, 'app/exam/exam.html', context) 
 
 
 def post_exam(request, testid):
@@ -125,7 +125,7 @@ def exam_result(request, examinationid):
         'total_count': total_count,
     }
 
-    return render(request, 'app/test_view/exam_result.html', context) 
+    return render(request, 'app/exam/exam_result.html', context) 
 
 
 def exam_result_list(request, testid):
@@ -148,4 +148,4 @@ def exam_result_list(request, testid):
         'examination_list': examination_list,
     }
     
-    return render(request, 'app/test_view/test_results.html', context)
+    return render(request, 'app/test/records.html', context)
