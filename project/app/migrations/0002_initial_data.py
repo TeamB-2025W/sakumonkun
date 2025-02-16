@@ -8,6 +8,7 @@ def create_initial_data(apps, schema_editor):
     QuestionChoice = apps.get_model('app', 'QuestionChoice')
     Examination = apps.get_model('app', 'Examination')
     Answer = apps.get_model('app', 'Answer')
+    
 
     # ユーザーデータ
     users = [
@@ -94,7 +95,7 @@ def create_initial_data(apps, schema_editor):
         QuestionChoice(id=9, questionid_id=3, text='実行ファイル'),
     ]
     QuestionChoice.objects.bulk_create(choices)
-
+    
     # 受験データ
     examinations = [
         Examination(
@@ -177,6 +178,7 @@ def create_initial_data(apps, schema_editor):
     ]
     Answer.objects.bulk_create(answers)
 
+    
 def remove_initial_data(apps, schema_editor):
     User = apps.get_model('app', 'User')
     Test = apps.get_model('app', 'Test')
