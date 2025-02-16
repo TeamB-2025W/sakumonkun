@@ -1,5 +1,4 @@
 {% extends 'app/header_base.html' %}
-<<<<<<< HEAD
 {% load static %}
 
 {% block title %}テスト編集{% endblock %}
@@ -56,12 +55,4 @@
     問題作成を完了する
   </button>
   <a href="{% url 'app:creation_successful' %}">作成完了ページ臨時表示</a>
-=======
-{% block title %}テスト作成成功{% endblock %}
-
-{% block content %}
-<h1>テスト編集画面</h1>
-<p>編集が完了しました</p>
-<a href="{% url 'app:home' %}">ホームに戻る</a>
->>>>>>> 0e120d9dda7018a9e327fee380fc6f343df5b831
 {% endblock %}
