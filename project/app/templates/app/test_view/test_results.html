@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ test.title }}の受験結果一覧</h2>
+
+    <table class="table table-hover mt-3">
+        <thead>
+            <tr>
+                <th>受験者名</th>
+                <th>点数</th>
+                <th>受験日時</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for examination in examination_list %}
+            <tr>
+                <td>{{ examination.guestname }}</td>
+                <td>{{ examination.correct_count }}/{{ examination.total_count }}</td>
+                <td>{{ examination.answered_at|date:"Y/m/d H:i" }}</td>
+                <td>
+                    <a href="{% url 'app:exam_result' examinationid=examination.id %}" 
+                       class="btn btn-primary btn-sm">
+                        詳細を見る
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">まだ受験データがありません</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %} 
