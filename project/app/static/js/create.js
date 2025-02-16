@@ -13,7 +13,7 @@ addQuestionButton.addEventListener("click", () => {
 });
 
 removeQuestionButton.addEventListener("click", () => {
-  console.log("clicked");
+  removeQuestionForm();
   disableButton(removeQuestionButton);
   setTimeout(() => {
     enableButton(removeQuestionButton);
@@ -94,4 +94,13 @@ function disableButton(addQuestionButton) {
 function enableButton(addQuestionButton) {
   addQuestionButton.disabled = false;
   addQuestionButton.style.background = "#00bfff";
+}
+// 一つ目は除いて最後の要素を削除する
+function removeQuestionForm() {
+  // 親要素
+  const questions = document.getElementById("questions");
+  const lastIndex = questions.children.length - 1;
+  if (lastIndex < 1) return;
+  const removeQuestion = questions.children[lastIndex];
+  questions.removeChild(removeQuestion);
 }
