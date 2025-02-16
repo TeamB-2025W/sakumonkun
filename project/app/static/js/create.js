@@ -6,6 +6,9 @@ addQuestionButton.addEventListener("click", () => {
   addQuestionForm();
   // 連打防止のため1秒無効化
   disableButton(addQuestionButton);
+  setTimeout(() => {
+    enableButton(addQuestionButton);
+  }, 1000);
 });
 
 function addQuestionForm() {
@@ -77,4 +80,9 @@ function addQuestionForm() {
 function disableButton(addQuestionButton) {
   addQuestionButton.disabled = true;
   addQuestionButton.style.background = "gray";
+}
+
+function enableButton(addQuestionButton) {
+  addQuestionButton.disabled = false;
+  addQuestionButton.style.background = "#00bfff";
 }
