@@ -2,55 +2,56 @@
 {% block title %}テスト作成{% endblock %}
 
 {% block content %}
-<form>
+<form id="create-test">
   <label for="test-title">テストタイトル</label>
   <input id="test-title">
-</div>
-<form>
-  <ol>
-    <li>
-      <h3>問題１</h3>
-      <input placeholder="問題文">
-  
-      <div>
-        <p>選択肢</p>
-        <p>正答</p>
-      </div>
-      <fieldset>
-        <div>
-          <label>１</label>
-          <input>
-          <input type="radio" name="correct">
-        </div>
-        <div>
-          <label>２</label>
-          <input>
-          <input type="radio" name="correct">
-        </div>
-        <div>
-          <label>３</label>
-          <input>
-          <input type="radio" name="correct">
-        </div>
-        <div>
-          <label>４</label>
-          <input>
-          <input type="radio" name="correct">
-        </div>
-      </fieldset>
-  
-      <label for="commentary">解説</label>
-      <input for="commentary" placeholder="解説文">
-    </li>
-  </ol>
 </form>
 
-<button>
-  ＋問題を追加する
-</button>
+<ol id="questions">
+  <li id="question">
+    <h3>問題１</h3>
+    <textarea placeholder="問題文" form="create-test" rows="5" cols="96"></textarea>
 
-<button>
-  問題作成を完了する
-</button>
-<a href="{% url 'app:creation_successful' %}">作成完了ページ臨時表示</a>
+    <label class="flex choiceies">
+      <p>選択肢</p>
+      <p>正答</p>
+    </label>
+    <ol class="choiceies">
+      <li class="flex">
+        <label>１</label>
+        <input>
+        <input type="radio" name="correct">
+      </li>
+      <li class="flex">
+        <label>２</label>
+        <input>
+        <input type="radio" name="correct">
+      </li>
+      <li class="flex">
+        <label>３</label>
+        <input>
+        <input type="radio" name="correct">
+      </li>
+      <li class="flex">
+        <label>４</label>
+        <input>
+        <input type="radio" name="correct">
+      </li>
+    </ol>
+
+    <label for="commentary" class="commentary">解説</label>
+    <textarea class="commentary" id="commentary" placeholder="解説文" rows="7" cols="96"></textarea>
+  </li>
+</ol>
+
+<div class="button-area">
+  <button>
+    ＋問題を追加する
+  </button>
+</div>
+<div class="button-area">
+  <button type="submit">
+    問題作成を完了する
+  </button>
+</div>
 {% endblock %}

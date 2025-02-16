@@ -2,13 +2,13 @@
 {% block title %}login{% endblock %}
 
 {% block content %}
-<h1>作問くん</h1>
-<form>
+<h1 class="login-block">作問くん</h1>
+<form class="login-form">
   <label for="email">メールアドレス</label>
   <input id="email">
   <label for="password">パスワード</label>
   <input id="password">
   <button>ログイン</button>
 </form>
-<a href="{% url 'app:register' %}">新規登録</a>
+<a href="{% url 'app:register' %}" class="login-block">新規登録</a>
 {% endblock %}
