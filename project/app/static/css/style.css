@@ -3,13 +3,23 @@ body {
   padding: 8px;
 }
 
+main {
+  width: 720px;
+  margin: 0 auto;
+}
+
 header,
-.home-main {
+.home-main,
+#create-test,
+#question,
+.button-area,
+.creation-successful {
   background: #fff;
   padding: 12px;
   border-radius: 4px;
   border: 1px solid black;
 }
+
 header > nav {
   display: flex;
   gap: 16px;
@@ -20,8 +30,24 @@ a {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 th {
   font-size: 1.25rem;
+}
+
+ol {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.flex {
+  display: flex;
 }
 
 header > nav > a:nth-of-type(2) {
@@ -29,7 +55,9 @@ header > nav > a:nth-of-type(2) {
   color: #fff;
 }
 
-.link-button {
+.link-button,
+.creation-successful > a,
+.creation-successful > .flex > button {
   background: #00bfff;
   padding: 0 4px;
   border-radius: 4px;
@@ -45,7 +73,8 @@ header > nav > a:nth-of-type(2) {
   padding: 12px;
 }
 
-.create-link {
+.create-link,
+.creation-successful > a {
   color: #fff;
   font-size: 1.25rem;
   width: 200px;
@@ -74,4 +103,170 @@ header > nav > a:nth-of-type(2) {
 
 .function-buttons > a:nth-of-type(3) {
   background: #ff1500;
+}
+
+#create-test {
+  margin-top: 12px;
+  padding-left: 40px;
+}
+
+#create-test > label {
+  font-weight: bold;
+}
+
+#create-test > input {
+  display: block;
+  margin-left: 40px;
+  width: 520px;
+}
+
+label.choiceies > p {
+  font-weight: bold;
+  display: block;
+}
+
+label.choiceies > p:nth-of-type(1) {
+  margin-right: auto;
+}
+
+ol.choiceies > li > * {
+  display: block;
+  margin-top: 8px;
+}
+
+ol.choiceies > li > input:nth-of-type(1) {
+  width: 640px;
+  margin-left: 8px;
+  margin-right: 12px;
+}
+
+.commentary {
+  display: block;
+}
+
+label.commentary {
+  font-weight: bold;
+  margin-top: 16px;
+}
+
+.button-area {
+  margin-top: 12px;
+}
+
+.button-area > button {
+  background: #00bfff;
+  color: #fff;
+  width: 320px;
+  border-radius: 4px;
+  margin: 0 auto;
+  display: block;
+}
+
+.login-block,
+.login-form,
+.register > * {
+  width: 216px;
+  margin: 0 auto;
+}
+
+h1.login-block {
+  margin-top: 80px;
+  font-size: 3rem;
+  color: #fff;
+}
+
+.login-form > * ,
+.register-form > * {
+  margin: 0 auto;
+  display: block;
+}
+
+.login-form > label,
+.register-form > label {
+  color: #fff;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.login-form > button,
+.register-form > button {
+  margin-top: 40px;
+  width: 96px;
+  font-size: 1rem;
+}
+
+a.login-block {
+  width: 96px;
+  display: block;
+  background: buttonface;
+  color: buttontext;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin-top: 12px;
+}
+
+.register {
+  background: #fff;
+  padding: 80px 0;
+}
+
+.register > h1 {
+  font-size: 3rem;
+}
+
+.register-form > label {
+  color: #00bfff;
+  font-weight: bold;
+}
+
+.register-form > button {
+  background: #00bfff;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.register > a {
+  width: 96px;
+  display: block;
+  text-align: center;
+  border: 2px solid #00bfff;
+  border-radius: 4px;
+  margin-top: 12px;
+}
+
+.creation-successful {
+  margin: 12px;
+}
+
+.creation-successful > * {
+  width: 520px;
+  margin: 12px auto;
+}
+
+.creation-successful > h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.creation-successful > p:nth-of-type(1),
+.creation-successful > label {
+  font-weight: bold;
+  display: block;
+  font-size: 1.25rem;
+}
+
+.creation-successful > p:nth-of-type(2),
+.creation-successful > .flex {
+  padding-left: 48px;
+}
+
+.creation-successful > .flex > input {
+  width: 400px;
+}
+
+.creation-successful > .flex > button {
+  width: 80px;
+  color: #fff;
+  margin-left: 16px;
 }

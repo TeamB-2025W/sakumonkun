@@ -1,6 +1,5 @@
 from django.urls import path
-from app.views import user, exam, tmp_views, user_views
-
+from app.views import user, exam, tmp_views
 app_name = 'app'
 
 urlpatterns = [
@@ -12,12 +11,12 @@ urlpatterns = [
 
 
     # User-related URLs
-    # path('user/', user_views.info, name='info'),
-    # path('user/register/', user_views.register, name='register'),
-    # path('user/login/', user_views.login, name='login'),
-    path('user/logout/', user_views.logout, name='logout'),
-    # path('user/update/username/', user_views.username, name='username'),
-    # path('user/update/password/', user_views.password, name='password'),
+    # path('user/', user.info, name='info'),
+    # path('user/register/', user.register, name='register'),
+    # path('user/login/', user.login, name='login'),
+    path('user/logout/', user.logout, name='logout'),
+    # path('user/update/username/', user.username, name='username'),
+    # path('user/update/password/', user.password, name='password'),
 
 
     # Test-related URLs
@@ -31,7 +30,7 @@ urlpatterns = [
     path('test/records/', tmp_views.test_records, name='test_records'),
     path('test/modal/confirm_test_deletion/', tmp_views.test_delete, name='test_delete'),
     path('test/modal/confirm_ques_deletion/', tmp_views.question_delete, name='question_delete'),
-    path('test/<int:testid>/results', exam.ExamResultList, name='exam_result_list'),
+    path('test/<int:testid>/results', exam.exam_result_list, name='exam_result_list'),
 
 
     # Question-related URLs
@@ -49,9 +48,9 @@ urlpatterns = [
 
 
     # Exam-related URLs
-    path('exam/<int:testid>/', exam.GetExam, name='get_exam'),  # 受験ページ
-    path('exam/<int:testid>/post/', exam.PostExam, name='post_exam'),  # 回答送信
-    path('exam/result/<int:examinationid>/', exam.ExamResult, name='exam_result'),  # 結果ページ
+    path('exam/<int:testid>/', exam.get_exam, name='get_exam'),  # 受験ページ
+    path('exam/<int:testid>/post/', exam.post_exam, name='post_exam'),  # 回答送信
+    path('exam/result/<int:examinationid>/', exam.exam_result, name='exam_result'),  # 結果ページ
 
 
 ]
