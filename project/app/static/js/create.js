@@ -2,7 +2,11 @@
 
 const addQuestionButton = document.getElementById("addQuestionButton");
 
-addQuestionButton.addEventListener("click", () => addQuestionForm());
+addQuestionButton.addEventListener("click", () => {
+  addQuestionForm();
+  // 連打防止のため1秒無効化
+  disableButton(addQuestionButton);
+});
 
 function addQuestionForm() {
   // 要素を作成・属性の設定
@@ -68,4 +72,9 @@ function addQuestionForm() {
   question.appendChild(commentaryLabel);
   question.appendChild(commentaryText);
   questions.appendChild(question);
+}
+
+function disableButton(addQuestionButton) {
+  addQuestionButton.disabled = true;
+  addQuestionButton.style.background = "gray";
 }
