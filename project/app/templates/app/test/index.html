@@ -11,50 +11,47 @@
       <li>
         <a href="{% url 'app:home' %}">Home</a> 
         (<a href="{% url 'app:home' %}">/</a>)
-    </li>
-    <li>
+      </li>
+      <li>
         <a href="{% url 'app:test_create' %}">テスト作成</a> 
         (<a href="{% url 'app:test_create' %}">/test/create/</a>)
-    </li>
-    <li>
+      </li>
+      <li>
         <a href="{% url 'app:creation_successful' %}">テスト作成完了</a> 
         (<a href="{% url 'app:creation_successful' %}">/test/create/tmp</a>)
-    </li>
-    <li>
+      </li>
+      <li>
         <a href="{% url 'app:user_edit' %}">ユーザー編集</a> 
         (<a href="{% url 'app:user_edit' %}">/user/edit</a>)
-    </li>
-    <li>
+      </li>
+      <li>
         <a href="{% url 'app:logout' %}">ログアウト</a> 
         (<a href="{% url 'app:logout' %}">/user/logout/</a>)
-    </li>
-    <li>
+      </li>
+      <li>
         <a href="{% url 'app:test_detail' %}">テスト詳細</a> 
         (<a href="{% url 'app:test_detail' %}">/test/detail/</a>)
-    </li>
-    <li>
+      </li>
+      <li>
         <a href="{% url 'app:test_update' %}">テスト編集</a> 
         (<a href="{% url 'app:test_update' %}">/test/update/</a>)
-    </li>
-    <li>
+      </li>
+      <li>
         <a href="{% url 'app:test_delete' %}">テスト削除</a> 
         (<a href="{% url 'app:test_delete' %}">/test/modal/confirm_test_deletion</a>)
-    </li>
-    <li>
-        <a href="{% url 'app:test_records' %}">回答履歴一覧</a> 
-        (<a href="{% url 'app:test_records' %}">/test/records/</a>)
-    </li>
-    <li>
+      </li>
+      <li>
+        <a href="{% url 'app:exam_result_list' testid=1 %}">回答履歴一覧</a> 
+        (<a href="{% url 'app:exam_result_list' testid=1 %}">/test/results/1/</a>)
+      </li>
+      <li>
         <a href="{% url 'app:question_delete' %}">問題削除</a> 
         (<a href="{% url 'app:question_delete' %}">/test/modal/confirm_question_deletion</a>)
-    </li>
+      </li>
+      <li>
         <a href="{% url 'app:get_exam' testid=1 %}">試験受験</a> 
         (<a href="{% url 'app:get_exam' testid=1 %}">/exam/1/</a>)
-    </li>
-    <li>
-        <a href="{% url 'app:post_exam' testid=1 %}">試験回答</a> 
-        (<a href="{% url 'app:post_exam' testid=1 %}">/exam/1/post/</a>)
-    </li>
+      </li>
     <li>
         <a href="{% url 'app:exam_result' examinationid=1 %}">試験結果</a> 
         (<a href="{% url 'app:exam_result' examinationid=1 %}">/exam/result/1/</a>)
