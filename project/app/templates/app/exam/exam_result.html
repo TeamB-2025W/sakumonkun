@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/result.css' %}" rel="stylesheet">
+        <title></title>
+    </head>
+    <body>
+        <div class="amswer_background">
+            <header class="answer_header">
+                テストタイトル
+            </header>
+            <!-- for -->
+            <div class="answer_container">
+                <div class="question_box" id="question1">
+                    <div class="question_number">
+                        問１
+                    </div>
+                    <div class="answer_text_box">
+                        １＋１＝？
+                    </div>
+                    <div class="answer_choice_box">
+                        <div class="selected_choice">
+                            <h5 class="">選んだ選択肢</h5>
+                            <p></p><!-- 選んだ選択肢を持ってくる -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- endfor -->
+        </div>
+        
+    </body>
+</html>

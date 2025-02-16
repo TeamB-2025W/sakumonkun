@@ -1,0 +1,30 @@
+{% extends 'app/header_base.html' %}
+{% load static %}
+
+{% block title %}回答者一覧{% endblock %}
+
+{% block content %}
+<div class="home-main">
+    <div class="answer_container">
+        <div class="answer_list">
+            <h2>回答者一覧</h2>
+            <table class="records_table" border="1">
+                <tr class="records_table_tr">
+                    <th class="records_table_th">名前</th>
+                    <th class="records_table_th">時間</th>
+                    <th class="records_table_th">点数</th>
+                    <th class="records_table_th">詳細</th>
+                </tr>
+                <tr class="records_table_tr">
+                    <th class="records_table_th">あああ</th>
+                    <th class="records_table_th">2024/2/16 10:00</th>
+                    <th class="records_table_th">15/20</th>
+                    <th class="records_table_th">
+                        <button class="records_button">回答詳細</button>
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

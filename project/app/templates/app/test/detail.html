@@ -1,0 +1,39 @@
+{% extends 'app/header_base.html' %}
+{% load static %}
+
+{% block title %}テスト詳細{% endblock %}
+
+{% block content %}
+<div class="exam_background">
+    <!-- for -->
+    <div class="exam_container">
+        <div class="question_box" id="question1">
+            <div class="question_number">
+                問１
+            </div>
+            <div class="question_text_box">
+                １＋１＝？
+            </div>
+            <div class="question_choices_box">
+                <div class="choices">
+                    <input type="radio" name="q1" id="radio1">
+                    <label for="radio1">選択肢１</label>
+                </div>
+                <div class="choices">
+                    <input type="radio" name="q1" id="radio2">
+                    <label for="radio2">選択肢２</label>
+                </div>
+                <div class="choices">
+                    <input type="radio" name="q1" id="radio3">
+                    <label for="radio3">選択肢３</label>
+                </div>
+                <div class="choices">
+                    <input type="radio" name="q1" id="radio4">
+                    <label for="radio4">選択肢４</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- endfor -->
+</div>
+{% endblock %}

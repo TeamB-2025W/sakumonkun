@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/exam.css' %}" rel="stylesheet">
+        <title></title>
+    </head>
+    <body>
+        <div class="exam_background">
+            <header class="exam_header">
+                テストタイトル
+            </header>
+            <div class="exam_container">
+                <div class="name_box">
+                    <div class="name_title exam_text">名前</div>
+                    <input class="name_input_box" name="name" value="名前">
+                </div>
+            </div>
+            <!-- ここからfor -->
+            <div class="exam_container">
+                <div class="question_box" id="question1">
+                    <div class="question_number">
+                        問１
+                    </div>
+                    <div class="question_text_box">
+                        １＋１＝？
+                    </div>
+                    <div class="question_choices_box">
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio1">
+                            <label for="radio1">選択肢１</label>
+                        </div>
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio2">
+                            <label for="radio2">選択肢２</label>
+                        </div>
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio3">
+                            <label for="radio3">選択肢３</label>
+                        </div>
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio4">
+                            <label for="radio4">選択肢４</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- endfor -->
+        </div>
+    </body>
+</html>
