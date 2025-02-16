@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/result.css' %}" rel="stylesheet">
+        <title>結果</title>
+    </head>
+    <body>
+        <div class="result_background">
+            <header class="result_header">
+                テストタイトル
+            </header>
+            <div class="result_container">
+                <div class="score_box">
+                    <div class="score_title score_text">点数</div>
+                    <h2 class="result_score"><span class="score">１０</span><span>/</span><span>２０</span></h2>
+                </div>
+            </div>
+            <!-- for -->
+            <div class="result_container">
+                <div class="question_box" id="question1">
+                    <div class="question_number">
+                        問１
+                    </div>
+                    <div class="result_text_box">
+                        １＋１＝？
+                    </div>
+                    <div class="result_choice_box">
+                        <div class="selected_choice">
+                            <h5 class="">選んだ選択肢</h5>
+                            <p>あああああ</p><!-- 選んだ選択肢を持ってくる -->
+                            <!-- if -->
+                            <span class="judge_icon correct">〇</span><span class="judge correct">正解</span>
+                            <!-- else -->
+                            <span class="judge_icon incorrect">✕</span><span class="judge incorrect">不正解</span>
+                        </div>
+                        <div class="selected_choice">
+                            <h5>正しい答え</h5>
+                            <p>いいいいい</p><!-- 正しい選択肢を持ってくる -->
+                            <h5>解説</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- endfor -->
+        </div>
+        
+    </body>
+</html>
