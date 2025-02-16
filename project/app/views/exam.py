@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from app.models import Test, Question, QuestionChoice, Examination, Answer
-from app.forms.exam import AnswerForm
 
 
-def GetExam(request, testid):
+def get_exam(request, testid):
     """試験画面を表示する
 
     Returns:
@@ -32,7 +31,7 @@ def GetExam(request, testid):
     return render(request, 'app/test_view/exam.html', context) 
 
 
-def PostExam(request, testid):
+def post_exam(request, testid):
     """試験の回答を保存する
 
     Expected POST data:
@@ -86,7 +85,7 @@ def PostExam(request, testid):
         return redirect('app:exam_result', examinationid=examination.id)
 
 
-def ExamResult(request, examinationid):
+def exam_result(request, examinationid):
     """試験結果画面を表示する
 
     Returns:
@@ -129,7 +128,7 @@ def ExamResult(request, examinationid):
     return render(request, 'app/test_view/exam_result.html', context) 
 
 
-def ExamResultList(request, testid):
+def exam_result_list(request, testid):
     """特定のテストに紐づく試験結果一覧画面を表示する
 
     Returns:
