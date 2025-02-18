@@ -11,6 +11,21 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# .envファイルの読み込み
+load_dotenv()
+
+# 環境変数ファイルの読み込み
+# 開発環境: development.env
+# 本番環境: production.env
+if os.getenv("DJANGO_ENV") == "production":
+    env_path = ".env_files/production.env"
+else:
+    # デフォルトは開発環境
+    env_path = ".env_files/development.env"
+load_dotenv(dotenv_path=env_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,27 +37,43 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-8icgv5+zx!p=eqopt=)3oz$r)84c5(r=7!(rr=v=gm)7um^ei6'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# デバッグモードの設定
+# 開発環境でもデフォルトはFalse（より安全な設定）
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '0.0.0.0',
-]
+# メールバックエンドの設定
+# DEBUG=True: コンソールに出力
+# DEBUG=False: 実際にメール送信
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" if DEBUG else "django.core.mail.backends.smtp.EmailBackend"
 
+# allauth for mail
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True") == "True"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,0.0.0.0").split(",")
 
 # Application definition
 
 INSTALLED_APPS = [
-    'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # allauthに必要
+    'allauth',
+    'allauth.account',
+    'app.apps.AppConfig',
 ]
+
+# allauth for site
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +83,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -59,7 +91,9 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'app', 'templates'),  # アプリケーションのテンプレート
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +164,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Allauth設定
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# アカウント認証設定
+ACCOUNT_LOGIN_METHODS = {'email'}  # メールアドレスでのログインを有効化
+ACCOUNT_USERNAME_REQUIRED = True  # ユーザー名は必須
+ACCOUNT_EMAIL_REQUIRED = True  # メールアドレスは必須
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # メール認証を必須にする
+ACCOUNT_MAX_EMAIL_ADDRESSES = 1  # 登録メールアドレス数の上限
+
+# ログイン・ログアウト設定
+LOGIN_URL = 'account_login'
+LOGIN_REDIRECT_URL = '/'  # ログイン後のリダイレクト先
+LOGOUT_REDIRECT_URL = '/'  # ログアウト後のリダイレクト先
