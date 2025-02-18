@@ -274,3 +274,41 @@ a.login-block {
   color: #fff;
   margin-left: 16px;
 }
+
+.modal {
+  width: 400px;
+  background: #fff;
+  height: 240px;
+  text-align: center;
+  padding: 16px 40px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.modal > h1,
+.modal > p {
+  font-size: 1.5rem;
+  margin: 8px 0;
+}
+
+.modal > label {
+  font-size: 1.25rem;
+}
+
+.modal > .flex {
+  margin-top: 24px;
+}
+
+.modal > .flex > button {
+  width: 120px;
+  height: 32px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  color: #fff;
+  background: #00bfff;
+  border-radius: 4px;
+}
+
+.modal > .flex > button:nth-of-type(1) {
+  background: #ff1500;
+}
