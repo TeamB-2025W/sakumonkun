@@ -50,6 +50,10 @@ li {
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 header > nav > a:nth-of-type(2) {
   margin-left: auto;
   color: #fff;
@@ -92,8 +96,9 @@ header > nav > a:nth-of-type(2) {
   gap: 8px;
 }
 
-.function-buttons > a {
-  width: 40px;
+.function-buttons > a,
+.function-buttons > button {
+  width: 48px;
   color: #fff;
 }
 
@@ -101,8 +106,9 @@ header > nav > a:nth-of-type(2) {
   width: 80px;
 }
 
-.function-buttons > a:nth-of-type(3) {
+.function-buttons > button {
   background: #ff1500;
+  font-size: 1rem;
 }
 
 #question {
@@ -283,6 +289,7 @@ a.login-block {
   padding: 16px 40px;
   border: 1px solid black;
   border-radius: 4px;
+  margin: 40px auto;
 }
 
 .modal > h1,
