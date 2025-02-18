@@ -43,3 +43,9 @@ build/
 # Media and static files (開発環境用)
 /media/
 /static/
+
+# 本番環境の設定は本来は共有しないがハッカソンだから許可
+!.env_files/production.env
+
+# 開発環境の設定は共有
+!.env_files/development.env
