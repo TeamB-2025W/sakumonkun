@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from app.forms.test import TestForm
-from app.models import User, Test, Question, QuestionChoice
+from django.shortcuts import render
 
+"""
+NOTE: 使用しなくなった関数(レンダリング専用)はコメントアウト
+"""
 
 # ホーム画面（テスト一覧）
 def home(request):
@@ -97,11 +98,11 @@ def test_update(request):
 def test_delete(request):
     return render(request, 'app/test/modal/confirm_test_deletion.html')
 
-
+"""
 # 回答履歴一覧
 def test_records(request):
     return render(request, 'app/test/records.html')
-
+"""
 
 # 問題削除
 def question_delete(request):
