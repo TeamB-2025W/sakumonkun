@@ -39,12 +39,12 @@ SECRET_KEY = 'django-insecure-8icgv5+zx!p=eqopt=)3oz$r)84c5(r=7!(rr=v=gm)7um^ei6
 
 # デバッグモードの設定
 # 開発環境でもデフォルトはFalse（より安全な設定）
-DEBUG = True
+DEBUG = False
 
 # メールバックエンドの設定
 # DEBUG=True: コンソールに出力
 # DEBUG=False: 実際にメール送信
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" if DEBUG else "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 # allauth for mail
 EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
