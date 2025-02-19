@@ -58,63 +58,74 @@
     </li>
     </ul>
 
-    <h2>作成テスト一覧</h2>
+  <h2>作成テスト一覧</h2>
   <table>
-    <tr>
-      <th>テストタイトル</th>
-      <th>作成日時</th>
-      <th>更新日時</th>
-      <th>問題数</th>
-      <th>(機能ボタン)</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>テストタイトル</th>
+        <th>作成日時</th>
+        <th>更新日時</th>
+        <th>問題数</th>
+        <th>(機能ボタン)</th>
+      </tr>
+    </thead>
 
-    <tr>
-      <td>
-        <h3>クイズ１</h3>
-      </td>
-      <td>□</td>
-      <td>□</td>
-      <td>□</td>
-      <td>
-        <nav class="function-buttons">
-          <a href="" class="link-button">回答確認</a>
-          <a href="" class="link-button">編集</a>
-          <a href="" class="link-button">削除</a>
-        </nav>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <h3>クイズ２</h3>
-      </td>
-      <td>□</td>
-      <td>□</td>
-      <td>□</td>
-      <td>
-        <nav class="function-buttons">
-          <a href="" class="link-button">回答確認</a>
-          <a href="" class="link-button">編集</a>
-          <a href="" class="link-button">削除</a>
-        </nav>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <h3>クイズ３</h3>
-      </td>
-      <td>□</td>
-      <td>□</td>
-      <td>□</td>
-      <td>
-        <nav class="function-buttons">
-          <a href="" class="link-button">回答確認</a>
-          <a href="" class="link-button">編集</a>
-          <a href="" class="link-button">削除</a>
-        </nav>
-      </td>
-    </tr>
+    <tbody id="test-list">
+      <tr>
+        <td>
+          <h3>クイズ１</h3>
+        </td>
+        <td>□</td>
+        <td>□</td>
+        <td>□</td>
+        <td>
+          <div class="function-buttons">
+            <a href="" class="link-button">回答確認</a>
+            <a href="" class="link-button">編集</a>
+            <button class="link-button" onclick="toggleModal('クイズ１')">削除</button>
+          </div>
+        </td>
+      </tr>
+      
+      <tr>
+        <td>
+          <h3>クイズ２</h3>
+        </td>
+        <td>□</td>
+        <td>□</td>
+        <td>□</td>
+        <td>
+          <div class="function-buttons">
+            <a href="" class="link-button">回答確認</a>
+            <a href="" class="link-button">編集</a>
+            <button class="link-button" onclick="toggleModal('クイズ２')">削除</button>
+          </div>
+        </td>
+      </tr>
+      
+      <tr>
+        <td>
+          <h3>クイズ３</h3>
+        </td>
+        <td>□</td>
+        <td>□</td>
+        <td>□</td>
+        <td>
+          <div class="function-buttons">
+            <a href="" class="link-button">回答確認</a>
+            <a href="" class="link-button">編集</a>
+            <button class="link-button" onclick="toggleModal('クイズ３')">削除</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
+
+{% include "app/test/modal/confirm_test_deletion.html" %}
+
+{% load static %}
+{% block extra_js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
 {% endblock %}
