@@ -50,6 +50,10 @@ li {
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 header > nav > a:nth-of-type(2) {
   margin-left: auto;
   color: #fff;
@@ -92,8 +96,9 @@ header > nav > a:nth-of-type(2) {
   gap: 8px;
 }
 
-.function-buttons > a {
-  width: 40px;
+.function-buttons > a,
+.function-buttons > button {
+  width: 48px;
   color: #fff;
 }
 
@@ -101,8 +106,9 @@ header > nav > a:nth-of-type(2) {
   width: 80px;
 }
 
-.function-buttons > a:nth-of-type(3) {
+.function-buttons > button {
   background: #ff1500;
+  font-size: 1rem;
 }
 
 #question {
@@ -273,4 +279,43 @@ a.login-block {
   width: 80px;
   color: #fff;
   margin-left: 16px;
+}
+
+.modal {
+  width: 400px;
+  background: #fff;
+  height: 240px;
+  text-align: center;
+  padding: 16px 40px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 40px auto;
+}
+
+.modal > h1,
+.modal > p {
+  font-size: 1.5rem;
+  margin: 8px 0;
+}
+
+.modal > label {
+  font-size: 1.25rem;
+}
+
+.modal > .flex {
+  margin-top: 24px;
+}
+
+.modal > .flex > button {
+  width: 120px;
+  height: 32px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  color: #fff;
+  background: #00bfff;
+  border-radius: 4px;
+}
+
+.modal > .flex > button:nth-of-type(1) {
+  background: #ff1500;
 }

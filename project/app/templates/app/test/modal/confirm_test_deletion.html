@@ -1,7 +1,10 @@
-{% extends 'app/header_base.html' %}
-{% block title %}テスト削除{% endblock %}
-
-{% block content %}
-<h1>テストを削除してもよろしいですか。</h1>
-<a href="{% url 'app:home' %}">ホームに戻る</a>
-{% endblock %}
+<div class="modal hidden">
+  <h1>テストを削除します</h1>
+  <p>よろしいですか？</p>
+  <label>テスト名</label>
+  <p id="test-title-viewer">テスト名を表示します</p>
+  <div class="flex">
+    <button>削除する</button>
+    <button id="close-modal-button" onclick="toggleModal()">戻る</button>
+  </div>
+</div>
