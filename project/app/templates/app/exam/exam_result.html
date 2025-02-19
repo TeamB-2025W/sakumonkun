@@ -10,27 +10,80 @@
     <body>
         <div class="result_background">
             <header class="result_header">
-                テストタイトル
+                <div>
+                    <!-- 本番用 -->
+                    <p class="exam_title">{{ model.testid.title }}</p>
+                    <!-- 表示テスト用 -->
+                    <p class="exam_title">テストタイトル</p>
+                </div>
             </header>
+
+            <div class="result_container">
+                <div class="name_box">
+                    <h2 class="result_name_title name_text">受験者名</h2>
+                    <p class="result_name">テスト</p>
+                    <p class="result_name">{{ model.guestname }}</p>
+                </div>
+            </div>
+            
             <div class="result_container">
                 <div class="score_box">
                     <div class="score_title score_text">点数</div>
-                    <h2 class="result_score"><span class="score">１０</span><span>/</span><span>２０</span></h2>
+                    <h2 class="result_score">
+                        <span class="score">{{ correct_count }}</span>
+                        <span>問/</span><span>{{ total_count }}問中</span>
+                    </h2>
                 </div>
             </div>
-            <!-- for -->
+            {% for answer in answer_list %}
             <div class="result_container">
                 <div class="question_box" id="question1">
-                    <div class="question_number">
-                        問１
+                    <h2 class="question_number">
+                        問{{ forloop.count }}
+                    </h2>
+                    <p class="result_text_box">
+                        {{ answer.question.text }}
+                    </p>
+                    <div class="result_choice_box">
+                        <div class="selected_choice">
+                            <h5 class="">選んだ選択肢</h5>
+                            <p>{{ answer.questionchoice_text.text }}</p><!-- 選んだ選択肢を持ってくる -->
+                            {% if answer.answer.iscorrect == true %}
+                            <span class="judge_icon correct">〇</span><span class="judge correct">正解</span>
+                            {% else %}
+                            <span class="judge_icon incorrect">✕</span><span class="judge incorrect">不正解</span>
+                            {% endif %}
+                        </div>
+                        <div class="selected_choice">
+                            <h5>正しい答え</h5>
+                            <p>{{ answer.correct_choice_text.text }}</p><!-- 正しい選択肢を持ってくる -->
+                            <h5>解説</h5>
+                            <p>{{ answer.question.explanation }}</p>
+                        </div>
                     </div>
+                </div>
+            </div>
+            {% endfor %}
+
+             <!-- 以下表示テスト -->
+            <div class="result_container">
+                <div class="score_box">
+                    <div class="score_title score_text">点数</div>
+                    <h2 class="result_score"><span class="score">１０</span><span>問/</span><span>２０問中</span></h2>
+                </div>
+            </div>
+            <div class="result_container">
+                <div class="question_box" id="question1">
+                    <h2 class="question_number">
+                        問１
+                    </h2>
                     <div class="result_text_box">
                         １＋１＝？
                     </div>
                     <div class="result_choice_box">
                         <div class="selected_choice">
                             <h5 class="">選んだ選択肢</h5>
-                            <p>あああああ</p><!-- 選んだ選択肢を持ってくる -->
+                            <p>あああああ</p>
                             <!-- if -->
                             <span class="judge_icon correct">〇</span><span class="judge correct">正解</span>
                             <!-- else -->
@@ -38,13 +91,13 @@
                         </div>
                         <div class="selected_choice">
                             <h5>正しい答え</h5>
-                            <p>いいいいい</p><!-- 正しい選択肢を持ってくる -->
+                            <p>いいいいい</p>
                             <h5>解説</h5>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- endfor -->
+            <!-- 以上表示テスト -->
         </div>
         
     </body>

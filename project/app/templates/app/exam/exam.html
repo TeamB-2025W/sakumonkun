@@ -5,29 +5,60 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{% static 'css/exam.css' %}" rel="stylesheet">
-        <title>テスト画面</title>
+        <title>受験画面</title>
     </head>
     <body>
         <div class="exam_background">
             <header class="exam_header">
-                テストタイトル
+                <div>
+                    <!-- 本番用 -->
+                    <p class="exam_title">{{ model.title }}</p>
+                    <!-- 表示テスト用 -->
+                    <p class="exam_title">テストタイトル</p>
+                </div>
             </header>
             <form>
                 <div class="exam_container">
                     <div class="name_box">
                         <div class="name_title exam_text">名前</div>
-                        <input class="name_input_box" name="name" value="名前">
+                        <input class="name_input_box" name="guestname" required>
                     </div>
                 </div>
-                <!-- ここからfor -->
+                <!-- 本番用 -->
+                <!-- 問題数分ループ -->
+                {% for items in question_list %}
+                <div class="exam_container">
+                    <div class="question_box" id="question_{{ forloop.counter }}">
+                        <h2 class="question_number">
+                            <!-- 問題番号 -->
+                            問{{ forloop.counter }}
+                        </h2>
+                        <p class="question_text_box">
+                            <!-- 問題文 -->
+                            {{ items.question.text }}
+                        </p>
+                        <div class="question_choices_box">
+                            <!-- 選択肢の数だけループ -->
+                            {% for question_choice in question_choices %}
+                            <div class="choices">
+                                <input type="radio" name="question_{{ items.question.id }}" id="radio_{{ question_choice.id }}" value="{{ question_choice.id }}">
+                                <label for="radio_{{ question_choice.id }}">{{ question_choice.text }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!-- ここから表示テスト用 -->
                 <div class="exam_container">
                     <div class="question_box" id="question1">
-                        <div class="question_number">
-                            問１
-                        </div>
-                        <div class="question_text_box">
-                            １＋１＝？
-                        </div>
+                        <h2 class="question_number">
+                            問：表示テスト
+                        </h2>
+                        <p class="question_text_box">
+                            表示テスト
+                        </p>
                         <div class="question_choices_box">
                             <div class="choices">
                                 <input type="radio" name="q1" id="radio1">
@@ -48,7 +79,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- endfor -->
+                <!-- ここまで表示テスト -->
                 <div class="exam_container finish_button_box">
                     <button class="exam_finish_button">回答を提出する
                     </button>
