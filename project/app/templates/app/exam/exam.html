@@ -20,7 +20,7 @@
             <form>
                 <div class="exam_container">
                     <div class="name_box">
-                        <div class="name_title exam_text">名前</div>
+                        <h2 class="name_title exam_title_text">名前</h2>
                         <input class="name_input_box" name="guestname" required>
                     </div>
                 </div>
@@ -29,11 +29,11 @@
                 {% for items in question_list %}
                 <div class="exam_container">
                     <div class="question_box" id="question_{{ forloop.counter }}">
-                        <h2 class="question_number">
+                        <h2 class="question_number exam_title_text">
                             <!-- 問題番号 -->
                             問{{ forloop.counter }}
                         </h2>
-                        <p class="question_text_box">
+                        <p class="question_text_box exam_text">
                             <!-- 問題文 -->
                             {{ items.question.text }}
                         </p>
@@ -53,10 +53,10 @@
                 <!-- ここから表示テスト用 -->
                 <div class="exam_container">
                     <div class="question_box" id="question1">
-                        <h2 class="question_number">
+                        <h2 class="question_number exam_title_text">
                             問：表示テスト
                         </h2>
-                        <p class="question_text_box">
+                        <p class="question_text_box exam_text">
                             表示テスト
                         </p>
                         <div class="question_choices_box">
