@@ -1,13 +1,42 @@
-{% extends 'app/header_base.html' %}
+{% extends 'app/detail_base.html' %}
 {% load static %}
 
 {% block title %}回答者一覧{% endblock %}
 
 {% block content %}
+
+<!-- 本番用 -->
 <div class="home-main">
-    <div class="answer_container">
-        <div class="answer_list">
-            <h2>回答者一覧</h2>
+    <div class="records_container">
+        <div class="records_list">
+            <h2>{{ test.title }}の回答者一覧</h2>
+            <table class="records_table" border="1">
+                <tr class="records_table_tr">
+                    <th class="records_table_th">名前</th>
+                    <th class="records_table_th">時間</th>
+                    <th class="records_table_th">点数</th>
+                    <th class="records_table_th">詳細</th>
+                </tr>
+                {% for records in examination_list %}
+                <tr class="records_table_tr">
+                    <td class="records_table_th">{{ records.guestname }}</td>
+                    <td class="records_table_th">{{ records.answered_at }}</td>
+                    <td class="records_table_th">{{ records.correct_count }}/{{ records.total_count }}</td>
+                    <td class="records_table_th">
+                        <button class="records_button" href="">回答詳細</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 表示テスト用 -->
+<div class="home-main">
+    <div class="records_container">
+        <div class="records_list">
+            <h2>回答者一覧（表示テスト）</h2>
             <table class="records_table" border="1">
                 <tr class="records_table_tr">
                     <th class="records_table_th">名前</th>
@@ -16,16 +45,25 @@
                     <th class="records_table_th">詳細</th>
                 </tr>
                 <tr class="records_table_tr">
-                    <th class="records_table_th">あああ</th>
-                    <th class="records_table_th">2024/2/16 10:00</th>
-                    <th class="records_table_th">15/20</th>
-                    <th class="records_table_th">
+                    <td class="records_table_th">あああ</td>
+                    <td class="records_table_th">2024/2/16 10:00</td>
+                    <td class="records_table_th">15/20</td>
+                    <td class="records_table_th">
                         <button class="records_button">回答詳細</button>
-                    </th>
+                    </td>
+                </tr>
+                <tr class="records_table_tr">
+                    <td class="records_table_th">いいい</td>
+                    <td class="records_table_th">2024/2/16 10:00</td>
+                    <td class="records_table_th">15/20</td>
+                    <td class="records_table_th">
+                        <button class="records_button">回答詳細</button>
+                    </td>
                 </tr>
                 <!-- endfor -->
             </table>
         </div>
     </div>
 </div>
+<!-- ここまで -->
 {% endblock %}

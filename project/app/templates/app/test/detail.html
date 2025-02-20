@@ -1,17 +1,24 @@
-{% extends 'app/header_base.html' %}
+{% extends 'app/detail_base.html' %}
 {% load static %}
 
 {% block title %}テスト詳細{% endblock %}
 
 {% block content %}
 <div class="exam_background">
+    <div class="exam_container">
+        <h2 class="exam_title_text">タイトル</h2>
+        <p class="exam_text">テストタイトル</p>
+    </div>
     <!-- for -->
     <div class="exam_container">
         <div class="question_box" id="question1">
-            <div class="question_number">
+            <div class="question_number exam_title_text">
                 問１
             </div>
-            <button class="detail_button">編集</button><button class="detail_button">削除</button>
+            <div class="detail_button_block">
+                <button class="detail_button button_update">編集</button>
+                <button class="detail_button button_delete">削除</button>
+            </div>
             <div class="question_text_box">
                 １＋１＝？
             </div>
