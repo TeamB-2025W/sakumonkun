@@ -39,7 +39,7 @@ SECRET_KEY = 'django-insecure-8icgv5+zx!p=eqopt=)3oz$r)84c5(r=7!(rr=v=gm)7um^ei6
 
 # デバッグモードの設定
 # 開発環境でもデフォルトはFalse（より安全な設定）
-DEBUG = False
+DEBUG = True
 
 # メールバックエンドの設定
 # DEBUG=True: コンソールに出力
@@ -124,6 +124,21 @@ DATABASES = {
 }
 
 
+"""
+AllAuth関連
+AllAuthのユーザーモデルを既存のUserモデルと紐付け
+email, usernameどちらでもログイン可能にする
+"""
+
+AUTH_USER_MODEL = "app.User"
+
+# 認証バックエンドの設定
+# メールアドレスとユーザー名の両方で認証を可能にする
+AUTHENTICATION_BACKENDS = [
+    "app.auth_backend.EmailOrUsernameModelBackend",  # カスタム認証バックエンドauth_backend.py参照
+    "django.contrib.auth.backends.ModelBackend",  # Django のデフォルトバックエンド
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -165,7 +180,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Allauth設定
+# AllAuth設定
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
@@ -180,5 +195,8 @@ ACCOUNT_MAX_EMAIL_ADDRESSES = 1  # 登録メールアドレス数の上限
 
 # ログイン・ログアウト設定
 LOGIN_URL = 'account_login'
-LOGIN_REDIRECT_URL = '/'  # ログイン後のリダイレクト先
-LOGOUT_REDIRECT_URL = '/'  # ログアウト後のリダイレクト先
+LOGIN_REDIRECT_URL = 'app:home'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
+# セッション設定
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 days
