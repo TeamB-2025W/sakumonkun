@@ -3,9 +3,9 @@
 
 {% block content %}
 <div class="creation-successful">
-  <h1 class=>テスト作成を完了しました。</h1>
+  <h1>テスト作成を完了しました。</h1>
   <p>テストの名前</p>
-  <p>ーーーーー</p>
+  <p>{{ test.title }}</p>
   <label for="test-url">テストのURL</label>
   <div class="flex">
     <input id="test-url">

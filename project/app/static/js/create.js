@@ -33,6 +33,7 @@ function addQuestionForm() {
   title.textContent = `問題 ${questions.children.length + 1}`;
   // 問題文の入力欄
   const questionText = document.createElement("textarea");
+  questionText.name = `question_text_${questions.children.length + 1}`;
   questionText.placeholder = "問題文";
   questionText.rows = 5;
   questionText.cols = 96;
@@ -71,6 +72,7 @@ function addQuestionForm() {
   // 解説の入力欄
   const commentaryText = document.createElement("textarea");
   commentaryText.className = "commentary";
+  commentaryText.name = "test";
   commentaryText.id = `commentary-${questions.children.length + 1}`;
   commentaryText.placeholder = "解説文";
   commentaryText.rows = 7;

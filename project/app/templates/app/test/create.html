@@ -2,42 +2,78 @@
 {% block title %}テスト作成{% endblock %}
 
 {% block content %}
-<form id="create-test">
+<form id='create-test'  method="POST" action="{% url 'app:test_create' %}">
+  {% csrf_token %}
+
   <label for="test-title">テストタイトル</label>
-  <input id="test-title">
-</form>
+  <input type="text" id="test-title" name="title" required>
+
 
 <ol id="questions">
   <li id="question">
     <h3>問題1</h3>
-    <textarea placeholder="問題文" form="create-test" rows="5" cols="96"></textarea>
+    <textarea name='question_text_1' placeholder="問題文" form="create-test" rows="5" cols="96"></textarea>
 
     <label class="flex choiceies">
       <p>選択肢</p>
       <p>正答</p>
-    </label>
-    <ol class="choiceies">
-      <li class="flex">
-        <label>1</label>
-        <input>
-        <input type="radio" name="correct-1">
-      </li>
-      <li class="flex">
-        <label>2</label>
-        <input>
-        <input type="radio" name="correct-1">
-      </li>
-      <li class="flex">
-        <label>3</label>
-        <input>
-        <input type="radio" name="correct-1">
-      </li>
-      <li class="flex">
-        <label>4</label>
-        <input>
-        <input type="radio" name="correct-1">
-      </li>
-    </ol>
+    <label>
+      <ol class="choiceies">
+        <li class="flex">
+          <label>1</label>
+          <input name="choice_1_1" required>
+          <input type="radio" name="correct_1" value="1">
+        </li>
+        <li class="flex">
+          <label>2</label>
+          <input name="choice_1_2">
+          <input type="radio" name="correct_1" value="2">
+        </li>
+        <li class="flex">
+          <label>3</label>
+          <input name="choice_1_3">
+          <input type="radio" name="correct_1" value="3">
+        </li>
+          <li class="flex">
+          <label>4</label>
+          <input name="choice_1_4">
+          <input type="radio" name="correct_1" value="4">
+        </li>
+      </ol>
+
+    <label for="commentary" class="commentary">解説</label>
+    <textarea class="commentary" id="commentary" placeholder="解説文" rows="7" cols="96"></textarea>
+  </li>
+  <li id="question">
+    <h3>問題2</h3>
+    <textarea name='question_text_2' placeholder="問題文" form="create-test" rows="5" cols="96"></textarea>
+
+    <label class="flex choiceies">
+      <p>選択肢</p>
+      <p>正答</p>
+    <label>
+      <ol class="choiceies">
+        <li class="flex">
+          <label>1</label>
+          <input name="choice_2_1" required>
+          <input type="radio" name="correct_2" value="1">
+        </li>
+        <li class="flex">
+          <label>2</label>
+          <input name="choice_2_2">
+          <input type="radio" name="correct_2" value="2">
+        </li>
+        <li class="flex">
+          <label>3</label>
+          <input name="choice_2_3">
+          <input type="radio" name="correct_2" value="3">
+        </li>
+          <li class="flex">
+          <label>4</label>
+          <input name="choice_2_4">
+          <input type="radio" name="correct_2" value="4">
+        </li>
+      </ol>
 
     <label for="commentary" class="commentary">解説</label>
     <textarea class="commentary" id="commentary" placeholder="解説文" rows="7" cols="96"></textarea>
@@ -59,6 +95,7 @@
     問題作成を完了する
   </button>
 </div>
+</form>
 {% endblock %}
 
 {% load static %}

@@ -6,7 +6,7 @@ urlpatterns = [
     # テスト用のURL
     path('', tmp_views.home, name='home'),
     path('test/create/', tmp_views.create, name='test_create'),
-    path('test/create/tmp', tmp_views.creation_successful, name='creation_successful'),
+    path('test/creation_successful/<int:test_id>/', tmp_views.creation_successful, name='creation_successful'),
     path('user/edit', tmp_views.user_edit, name='user_edit'),
 
 
@@ -22,15 +22,15 @@ urlpatterns = [
     # Test-related URLs
     # path('', tmp_views.home, name='home'),
     # path('test/detail/<int:test_id>/', tmp_views.test_detail, name='test_detail'),
-    path('test/detail/', tmp_views.test_detail, name='test_detail'),
+    path('test/detail/<int:test_id>/', tmp_views.test_detail, name='test_detail'),
     # path('test/create/', tmp_views.create, name='test_create'),
     # path('test/creation_successful/', tmp_views.creation_successful, name='creation_successful'),
-    path('test/update/', tmp_views.test_update, name='test_update'),
+    path('test/update/<int:test_id>/', tmp_views.test_update, name='test_update'),
     # path('test/records/<int:test_id>/', tmp_views.test_records, name='test_records'),
     path('test/records/', tmp_views.test_records, name='test_records'),
     path('test/modal/confirm_test_deletion/', tmp_views.test_delete, name='test_delete'),
     path('test/modal/confirm_ques_deletion/', tmp_views.question_delete, name='question_delete'),
-    path('test/<int:testid>/results', exam.exam_result_list, name='exam_result_list'),
+    path('test/<int:test_id>/results', exam.exam_result_list, name='exam_result_list'),
 
 
     # Question-related URLs
