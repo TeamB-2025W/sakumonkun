@@ -2,15 +2,16 @@
 {% block title %}テスト作成{% endblock %}
 
 {% block content %}
-<form id="create-test">
+<form id="create-test" method="post">
   <label for="test-title">テストタイトル</label>
-  <input id="test-title">
+  <input name="title" id="test-title" required>
+  {% csrf_token %}
 </form>
 
 <ol id="questions">
-  <li id="question">
-    <h3>問題1</h3>
-    <textarea placeholder="問題文" form="create-test" rows="5" cols="96"></textarea>
+  <li class="question">
+    <h3>問題 1</h3>
+    <textarea name="question_text_1" placeholder="問題文" form="create-test" rows="5" cols="96" required></textarea>
 
     <label class="flex choiceies">
       <p>選択肢</p>
@@ -19,28 +20,28 @@
     <ol class="choiceies">
       <li class="flex">
         <label>1</label>
-        <input>
-        <input type="radio" name="correct-1">
+        <input name="choice_1_1" form="create-test" required>
+        <input value="1" type="radio" name="correct_1" form="create-test" required>
       </li>
       <li class="flex">
         <label>2</label>
-        <input>
-        <input type="radio" name="correct-1">
+        <input name="choice_1_2" form="create-test" required>
+        <input value="2" type="radio" name="correct_1" form="create-test">
       </li>
       <li class="flex">
         <label>3</label>
-        <input>
-        <input type="radio" name="correct-1">
+        <input name="choice_1_3" form="create-test">
+        <input value="3" type="radio" name="correct_1" form="create-test">
       </li>
       <li class="flex">
         <label>4</label>
-        <input>
-        <input type="radio" name="correct-1">
+        <input name="choice_1_4" form="create-test">
+        <input value="4" type="radio" name="correct_1" form="create-test">
       </li>
     </ol>
 
-    <label for="commentary" class="commentary">解説</label>
-    <textarea class="commentary" id="commentary" placeholder="解説文" rows="7" cols="96"></textarea>
+    <label for="commentary-1" class="commentary">解説</label>
+    <textarea name="commentary" class="commentary" id="commentary-1" placeholder="解説文" rows="7" cols="96" form="create-test"></textarea>
   </li>
 </ol>
 
@@ -55,7 +56,7 @@
   </button>
 </div>
 <div class="button-area">
-  <button type="submit">
+  <button type="submit" form="create-test">
     問題作成を完了する
   </button>
 </div>
