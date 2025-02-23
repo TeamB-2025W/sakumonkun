@@ -57,7 +57,13 @@ class Test(models.Model):
         User, 
         verbose_name='ユーザーID', 
         on_delete=models.PROTECT,
-        db_column='userid'
+        db_column='userid',
+        
+        # デバッグ中のみ
+        null=True,
+        blank=True
+        # ここまで
+    
     )
     title = models.CharField('問題タイトル', max_length=50)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
@@ -76,11 +82,12 @@ class Question(models.Model):
         Test, 
         verbose_name='テストID', 
         on_delete=models.PROTECT,
-        db_column='testid'
+        db_column='testid',
+        related_name='questions', 
     )
     correct_choiceid = models.IntegerField('正解の選択肢')
     text = models.TextField('問題文')
-    explanation = models.TextField('解説')
+    explanation = models.TextField('解説', null=True, blank=True)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
     updated_at = models.DateTimeField('更新日時', default=timezone.now)
 
