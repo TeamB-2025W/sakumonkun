@@ -27,7 +27,7 @@ function addQuestionForm() {
   const questions = document.getElementById("questions");
   // 追加するまとめ要素
   const question = document.createElement("li");
-  question.id = "question";
+  question.classList.add("question");
   // タイトル
   const title = document.createElement("h3");
   title.textContent = `問題 ${questions.children.length + 1}`;
