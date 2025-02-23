@@ -49,3 +49,6 @@ build/
 
 # 開発環境の設定は共有
 !.env_files/development.env
+
+
+*.md
