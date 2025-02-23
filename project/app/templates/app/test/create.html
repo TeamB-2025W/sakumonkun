@@ -4,13 +4,13 @@
 {% block content %}
 <form id="create-test" method="post">
   <label for="test-title">テストタイトル</label>
-  <input name="title" id="test-title">
+  <input name="title" id="test-title" required>
   {% csrf_token %}
 </form>
 
 <ol id="questions">
   <li class="question">
-    <h3>問題1</h3>
+    <h3>問題 1</h3>
     <textarea name="question_text_1" placeholder="問題文" form="create-test" rows="5" cols="96"></textarea>
 
     <label class="flex choiceies">
@@ -20,12 +20,12 @@
     <ol class="choiceies">
       <li class="flex">
         <label>1</label>
-        <input name="choice_1_1" form="create-test">
+        <input name="choice_1_1" form="create-test" required>
         <input value="1" type="radio" name="correct_1" form="create-test" required>
       </li>
       <li class="flex">
         <label>2</label>
-        <input name="choice_1_2" form="create-test">
+        <input name="choice_1_2" form="create-test" required>
         <input value="2" type="radio" name="correct_1" form="create-test">
       </li>
       <li class="flex">

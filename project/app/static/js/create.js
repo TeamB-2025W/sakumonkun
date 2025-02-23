@@ -58,12 +58,14 @@ function addQuestionForm() {
     const choiceNumber = i + 1;
     choiceInput.name = `choice_${questionNumber}_${choiceNumber}`;
     choiceInput.setAttribute("form", "create-test");
+    if (i < 2) choiceInput.required = true;
 
     const choiceRadio = document.createElement("input");
     choiceRadio.value = choiceNumber;
     choiceRadio.type = "radio";
     choiceRadio.name = `correct_${questionNumber}`;
     choiceRadio.setAttribute("form", "create-test");
+    if (i < 1) choiceRadio.required = true;
 
     // 要素を連結
     choiceItem.appendChild(choiceLabel);
