@@ -13,7 +13,7 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     fields = ['username', 'email']
     template_name = 'app/user/edit.html'
-    success_url = reverse_lazy('account:edit')
+    success_url = reverse_lazy('accounts:edit')
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -26,7 +26,7 @@ def change_password(request):
             # パスワード変更後もログイン状態を維持
             update_session_auth_hash(request, user)
             messages.success(request, 'パスワードが正常に変更されました。')
-            return redirect('account:edit')
+            return redirect('accounts:edit')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'app/user/change_password.html', {

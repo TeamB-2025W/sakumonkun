@@ -4,8 +4,8 @@
   <header>
     <nav>
       <a href="{% url 'app:home' %}" class="link-button">ホーム</a>
-      <a href="{% url 'account:edit' %}" class="link-button">ユーザー情報</a>
-      <a href="{% url 'account:logout' %}" class="link-button">ログアウト</a>
+      <a href="{% url 'accounts:edit' %}" class="link-button">ユーザー情報</a>
+      <a href="{% url 'accounts:account_logout' %}" class="link-button">ログアウト</a>
     </nav>
   </header>
 {% endblock %}

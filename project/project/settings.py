@@ -93,6 +93,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'app', 'templates'),  # アプリケーションのテンプレート
+            os.path.join(BASE_DIR, 'account', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -101,6 +102,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                 # AllAuthで使用されている。国際化のためのコンテキストプロセッサー
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -147,9 +150,14 @@ ACCOUNT_EMAIL_REQUIRED = True  # メールアドレスは必須
 ACCOUNT_EMAIL_VERIFICATION = 'none'  # メール確認をスキップ
 ACCOUNT_UNIQUE_EMAIL = True  # メールアドレスの重複を禁止
 
+# テンプレート設定
+ACCOUNT_TEMPLATE_EXTENSION = 'html'
+ACCOUNT_TEMPLATE_DIR = 'account'
+
 # リダイレクト設定
+LOGIN_URL = 'accounts:account_login'  # 名前空間を追加
 LOGIN_REDIRECT_URL = 'app:home'  # ログイン後のリダイレクト先
-ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'  # ログアウト後のリダイレクト先
+ACCOUNT_LOGOUT_REDIRECT_URL = 'accounts:account_login'  # 名前空間を追加
 
 
 # Password validation

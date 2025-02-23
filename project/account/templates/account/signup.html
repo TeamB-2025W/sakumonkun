@@ -1,52 +1,16 @@
-{% extends 'app/base.html'%}
+{% extends 'app/base.html' %}
+{% block title %}新規登録{% endblock %}
 
 {% block content %}
 <div class="register">
   <h1>新規登録</h1>
 
- <!--
-  <form class="register-form">
-    <label for="username">ユーザー名</label>
-    <input id="email">
-    <label for="email">メールアドレス</label>
-    <input id="email">
-    <label for="password">パスワード</label>
-    <input id="password">
-    <label for="password2">パスワード確認</label>
-    <input id="password2">
-    <button>登録</button>
-  </form>
-  <a href="{% url 'app:login' %}">ログイン</a>
-</div>
--->
-
-<form class="register-form" method="POST" action="{% url 'account:account_signup' %}">
+<form class="register-form" method="POST" action="{% url 'accounts:account_signup' %}">
   {% csrf_token %}
-  {# フォームフィールドを個別に配置 #}
-  <label for="{{ form.username.id_for_label }}">ユーザー名</label>
-  {{ form.username }}
-  
-  <label for="{{ form.email.id_for_label }}">メールアドレス</label>
-  {{ form.email }}
-  
-  <label for="{{ form.password1.id_for_label }}">パスワード</label>
-  {{ form.password1 }}
-  
-  <label for="{{ form.password2.id_for_label }}">パスワード確認</label>
-  {{ form.password2 }}
-  
-  {# エラーメッセージの表示 #}
-  {% if form.errors %}
-    {% for field in form %}
-      {% for error in field.errors %}
-        <p class="error">{{ error }}</p>
-      {% endfor %}
-    {% endfor %}
-  {% endif %}
-  
+  {{ form.as_p }}
   <button type="submit">登録</button>
 </form>
-<a href="{% url 'account:account_login' %}">ログイン</a>
+<a href="{% url 'accounts:account_login' %}">ログイン</a>
 </div>
 
 
