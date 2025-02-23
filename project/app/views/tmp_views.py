@@ -19,10 +19,6 @@ def creation_successful(request):
     return render(request, 'app/test/creation_successful.html')
 
 
-# ユーザー情報編集
-def user_edit(request):
-    return render(request, 'app/user/edit.html')
-
 """
 # テスト一覧
 def test_list(request):

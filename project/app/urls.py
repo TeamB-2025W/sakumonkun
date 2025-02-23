@@ -1,5 +1,6 @@
 from django.urls import path
-from app.views import user, exam, tmp_views
+from app.views import exam, tmp_views
+
 app_name = 'app'
 
 urlpatterns = [
@@ -7,16 +8,12 @@ urlpatterns = [
     path('', tmp_views.home, name='home'),
     path('test/create/', tmp_views.create, name='test_create'),
     path('test/create/tmp', tmp_views.creation_successful, name='creation_successful'),
-    path('user/edit', tmp_views.user_edit, name='user_edit'),
 
 
     # User-related URLs
-    # path('user/', user.info, name='info'),
-    # path('user/register/', user.register, name='register'),
-    # path('user/login/', user.login, name='login'),
-    path('user/logout/', user.logout, name='logout'),
-    # path('user/update/username/', user.username, name='username'),
-    # path('user/update/password/', user.password, name='password'),
+    # AllAuthの標準クラスを使用
+    # 認証関連は全てaccount/urls.pyに記載
+
 
 
     # Test-related URLs

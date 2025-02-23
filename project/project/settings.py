@@ -135,9 +135,22 @@ AUTH_USER_MODEL = "app.User"
 # 認証バックエンドの設定
 # メールアドレスとユーザー名の両方で認証を可能にする
 AUTHENTICATION_BACKENDS = [
-    "app.auth_backend.EmailOrUsernameModelBackend",  # カスタム認証バックエンドauth_backend.py参照
-    "django.contrib.auth.backends.ModelBackend",  # Django のデフォルトバックエンド
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+# allauth の基本設定
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'  # 非推奨
+ACCOUNT_LOGIN_METHODS = {'email'}  # 新しい書き方
+ACCOUNT_USERNAME_REQUIRED = False  # ユーザー名不要
+ACCOUNT_EMAIL_REQUIRED = True  # メールアドレスは必須
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # メール確認をスキップ
+ACCOUNT_UNIQUE_EMAIL = True  # メールアドレスの重複を禁止
+
+# リダイレクト設定
+LOGIN_REDIRECT_URL = 'app:home'  # ログイン後のリダイレクト先
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'  # ログアウト後のリダイレクト先
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -180,23 +193,3 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AllAuth設定
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-# アカウント認証設定
-ACCOUNT_LOGIN_METHODS = {'email'}  # メールアドレスでのログインを有効化
-ACCOUNT_USERNAME_REQUIRED = True  # ユーザー名は必須
-ACCOUNT_EMAIL_REQUIRED = True  # メールアドレスは必須
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # メール認証を必須にする
-ACCOUNT_MAX_EMAIL_ADDRESSES = 1  # 登録メールアドレス数の上限
-
-# ログイン・ログアウト設定
-LOGIN_URL = 'account_login'
-LOGIN_REDIRECT_URL = 'app:home'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
-
-# セッション設定
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 days
