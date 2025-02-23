@@ -1,4 +1,4 @@
-{% extends "app/base.html" %}
+{% extends 'app/header_base.html' %}
 
 {% block content %}
 <h2>プロフィール編集</h2>
@@ -9,5 +9,5 @@
 </form>
 
 <h3>パスワード変更</h3>
-<a href="{% url 'account:change_password' %}" class="button">パスワードを変更する</a>
+<a href="{% url 'accounts:change_password' %}" class="button">パスワードを変更する</a>
 {% endblock %}
