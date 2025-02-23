@@ -53,14 +53,14 @@ def create_initial_data(apps, schema_editor):
     tests = [
         Test(
             id=1,
-            userid_id=1,
+            userid_id=2,
             title='基本情報技術者試験模擬テスト',
             created_at=timezone.now(),
             updated_at=timezone.now()
         ),
         Test(
             id=2,
-            userid_id=1,
+            userid_id=4,
             title='Python基礎テスト',
             created_at=timezone.now(),
             updated_at=timezone.now()
