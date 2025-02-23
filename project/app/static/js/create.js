@@ -25,17 +25,21 @@ function addQuestionForm() {
 
   // 親要素
   const questions = document.getElementById("questions");
+  const questionNumber = questions.children.length + 1;
   // 追加するまとめ要素
   const question = document.createElement("li");
-  question.id = "question";
+  question.classList.add("question");
   // タイトル
   const title = document.createElement("h3");
-  title.textContent = `問題 ${questions.children.length + 1}`;
+  title.textContent = `問題 ${questionNumber}`;
   // 問題文の入力欄
   const questionText = document.createElement("textarea");
+  questionText.name = `question_text_${questionNumber}`;
   questionText.placeholder = "問題文";
+  questionText.setAttribute("form", "create-test");
   questionText.rows = 5;
   questionText.cols = 96;
+  questionText.required = true;
   // 選択肢ラベル
   const choicesLabel = document.createElement("label");
   choicesLabel.className = "flex choiceies";
@@ -52,10 +56,17 @@ function addQuestionForm() {
     choiceLabel.textContent = i + 1;
 
     const choiceInput = document.createElement("input");
+    const choiceNumber = i + 1;
+    choiceInput.name = `choice_${questionNumber}_${choiceNumber}`;
+    choiceInput.setAttribute("form", "create-test");
+    if (i < 2) choiceInput.required = true;
 
     const choiceRadio = document.createElement("input");
+    choiceRadio.value = choiceNumber;
     choiceRadio.type = "radio";
-    choiceRadio.name = `correct-${questions.children.length + 1}`;
+    choiceRadio.name = `correct_${questionNumber}`;
+    choiceRadio.setAttribute("form", "create-test");
+    if (i < 1) choiceRadio.required = true;
 
     // 要素を連結
     choiceItem.appendChild(choiceLabel);
@@ -65,17 +76,18 @@ function addQuestionForm() {
   }
   // 解説ラベル
   const commentaryLabel = document.createElement("label");
-  commentaryLabel.setAttribute("for", `commentary-${questions.children.length + 1}`);
+  commentaryLabel.setAttribute("for", `commentary-${questionNumber}`);
   commentaryLabel.className = "commentary";
   commentaryLabel.textContent = "解説";
   // 解説の入力欄
   const commentaryText = document.createElement("textarea");
+  commentaryText.name = "commentary";
   commentaryText.className = "commentary";
-  commentaryText.id = `commentary-${questions.children.length + 1}`;
+  commentaryText.id = `commentary-${questionNumber}`;
   commentaryText.placeholder = "解説文";
   commentaryText.rows = 7;
   commentaryText.cols = 96;
-
+  commentaryText.setAttribute("form", "create-test");
   // 要素を連結
   question.appendChild(title);
   question.appendChild(questionText);
