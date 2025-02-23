@@ -14,7 +14,7 @@ def create_initial_data(apps, schema_editor):
     # ユーザーデータ
     users = [
         User(
-            id=1,
+            id=2,
             username='佐藤健一',
             email='test1@example.com',
             password=make_password('password123'),
@@ -25,7 +25,7 @@ def create_initial_data(apps, schema_editor):
             updated_at=timezone.now()
         ),
         User(
-            id=2,
+            id=3,
             username='田中美咲',
             email='test2@example.com',
             password=make_password('password456'),
@@ -36,7 +36,7 @@ def create_initial_data(apps, schema_editor):
             updated_at=timezone.now()
         ),
         User(
-            id=3,
+            id=4,
             username='山田太郎',
             email='test3@example.com',
             password=make_password('password789'),
@@ -473,10 +473,13 @@ def remove_initial_data(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('app', '0001_initial'),
+        ('app', '0002_create_superuser'),
     ]
 
     operations = [
-        migrations.RunPython(create_initial_data, remove_initial_data),
+        migrations.RunPython(
+            create_initial_data,
+            reverse_code=remove_initial_data
+        ),
     ] 
     
