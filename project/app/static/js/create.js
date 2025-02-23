@@ -39,6 +39,7 @@ function addQuestionForm() {
   questionText.setAttribute("form", "create-test");
   questionText.rows = 5;
   questionText.cols = 96;
+  questionText.required = true;
   // 選択肢ラベル
   const choicesLabel = document.createElement("label");
   choicesLabel.className = "flex choiceies";
