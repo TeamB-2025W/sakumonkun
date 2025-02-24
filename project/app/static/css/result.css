@@ -19,12 +19,11 @@ body {
 .result_header {
     background-color: white;
     min-width: 95vw;
-    font-size: 40px;
     font-weight: 200;
     border-radius: 5px;
     text-align: center;
     box-shadow: 0 1px 2px 2px black;
-    margin-top: 10px;
+    margin: 10px 0 0 0;
 }
 
 .result_container {
@@ -39,42 +38,40 @@ body {
 }
 
 .exam_title {
-    font-size: 60px;
+    font-size: 28px;
+    margin: 10px 0 10px 0;
 }
 
 .result_title {
-    margin-left: 15px;
+    margin-left: 10px;
     margin-top: 15px;
-    font-size: 30px;
+    font-size: 28px;
 }
 
 .result_text {
-    margin-left: 50px;
+    margin-left: 15px;
+    font-size: 24px;
 }
 
 .result_score {
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .score {
     color: red;
 }
 
-.question_box {
-    margin-left: 10px;
- }
-
 .selected_choice {
-  margin-left: 15px;
+  margin-left: 10px;
   margin-top: 30px;
 }
 
 .judge {
-    font-size: 40px;
+    font-size: 24px;
 }
 
 .judge_icon {
-    font-size: 60px;
+    font-size: 36px;
     margin-left: 30px;
 }
 
