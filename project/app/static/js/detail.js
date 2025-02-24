@@ -27,7 +27,6 @@ copyButton.addEventListener('click', () => {
 // ブロックidを格納する変数を作成
 let currentBlockId = '';
 
-
 // 編集ボタンの動作
 function showEditForm(blockId) {
     const block = document.getElementById(blockId);
@@ -62,15 +61,23 @@ function cancelEdit(blockId) {
     editForm.style.display = 'none';
 }
 
+const body = document.body;
+let scrollPosition = 0;
 
 // id毎の削除モーダルを表示
 function showDeleteConfirmation(blockId) {
+    scrollPosition = window.pageYOffset;
+    body.style.top = `-${scrollPosition}px`;
+    body.classList.add('no-scroll');
     currentBlockId = blockId;
     document.getElementById('deleteConfirmationModal').style.display = 'block';
 }
 
 // 削除モーダルを閉じる処理
 function closeModal() {
+    body.classList.remove('no-scroll');
+    body.style.top = '';
+    window.scrollTo(0, scrollPosition);
     document.getElementById('deleteConfirmationModal').style.display = 'none';
 }
 

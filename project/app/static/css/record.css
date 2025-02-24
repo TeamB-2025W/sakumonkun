@@ -55,6 +55,7 @@ table {
     width: 100%;
     margin-bottom: 10px;
 }
+
 .url_get {
     flex-grow: 1;
     padding: 10px;
@@ -74,9 +75,11 @@ table {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 .copy_button:hover {
     background-color: #00BFFF;
 }
+
 .copy_button:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
@@ -125,11 +128,11 @@ table {
 
 .delete_modal {
     display: none;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
     align-items: center;
@@ -173,4 +176,11 @@ table {
 .cancel_delete {
     background-color: #6c757d;
     color: white;
+}
+
+.no-scroll { 
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
