@@ -6,6 +6,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+from allauth.account.utils import send_email_confirmation
+from allauth.account.adapter import DefaultAccountAdapter
+
 from app.models import User
 
 
@@ -33,3 +36,18 @@ def change_password(request):
     return render(request, 'account/change_password.html', {
         'form': form
     })
+
+
+def send_email_confirmation(request, user):
+    send_email_confirmation(request, user)
+    return redirect('accounts:edit')
+
+
+class CustomAccountAdapter(DefaultAccountAdapter):
+    def send_mail(self, template_prefix, email, context):
+        # メールのコンテキストをカスタマイズ
+        context.update({
+            "site_name": "さくもんくん",
+            "custom_message": "ご登録ありがとうございます！",
+        })
+        super().send_mail(template_prefix, email, context)

@@ -55,6 +55,8 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
+# メール認証
+
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,0.0.0.0").split(",")
 
 # Application definition
@@ -147,6 +149,8 @@ ACCOUNT_USERNAME_REQUIRED = False  # ユーザー名不要
 ACCOUNT_EMAIL_REQUIRED = True  # メールアドレスは必須
 ACCOUNT_EMAIL_VERIFICATION = 'none'  # メール確認をスキップ
 ACCOUNT_UNIQUE_EMAIL = True  # メールアドレスの重複を禁止
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"  # メール認証を必須にする
+
 
 # テンプレート設定
 ACCOUNT_TEMPLATE_EXTENSION = 'html'
