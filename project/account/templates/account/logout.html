@@ -1,0 +1,22 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "ログアウト" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "ログアウト" %}</h1>
+
+<p>{% trans "ログアウトしますか？" %}</p>
+
+<form method="post" action="{% url 'accounts:account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+  <button type="submit">{% trans "ログアウト" %}</button>
+</form>
+
+<p>
+  <a href="{% url 'accounts:account_login' %}">{% trans "ログインに戻る" %}</a>
+</p>
+{% endblock %}

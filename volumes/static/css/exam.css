@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color:#00BFFF;
+}
+
+.exam_background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+ 
+.exam_header {
+    background-color: white;
+    min-width: 95vw;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 1px 2px 2px black;
+    margin-top: 10px;
+}
+ 
+.exam_container {
+    background-color: white;
+    min-width: 95vw;
+    font-size: 30px;
+    font-weight: 200;
+    border-radius: 5px;
+    margin: 9px 0 0 0;
+    padding: 10px 0 15px 0;
+    box-shadow: 0 1px 2px 2px black;
+}
+
+.exam_title {
+    font-size: 60px;
+}
+
+.exam_title_text {
+    margin-left: 15px;
+    margin-top: 15px;
+    font-size: 40px;
+}
+
+.exam_text {
+    margin-left: 30px;
+}
+
+.name_input_box {
+    font-size: 30px;
+    margin: 20px 0 20px 40px;
+}
+
+.question_box {
+    margin: 0 10px 0 10px;
+}
+  
+.question_text_box {
+    margin: 30px 0 0 40px;
+    font-size: 30px;
+}
+  
+.question_choices_box {
+    display: grid;
+    gap: 10px;
+    margin: 60px 0 20px 40px;
+}
+  
+.choices input[type=radio] {
+    position: absolute;
+    appearance: none;
+}
+  
+.choices label {
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 30px;
+    transition: .5s;
+}
+  
+.choices input[type=radio]:checked+label {
+    background-color: #3079b5;
+    color: #fff;
+}
+
+.finish_button_box {
+    text-align: center;
+}
+
+.exam_finish_button {
+    background-color: #00BFFF;
+    color: white;
+    font-size: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 20px 0 20px;
+}

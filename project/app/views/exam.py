@@ -58,10 +58,10 @@ def post_exam(request, testid):
         結果画面へのリダイレクト
     """
     if request.method == 'POST':
-        test_id = Test.objects.get(pk=testid)
+        testid = Test.objects.get(pk=testid)
         #まずはこのテストをExaminationに保存し、そのexaminationのidを取得
         examination = Examination.objects.create(
-            testid=test_id,
+            testid=testid,
             guestname=request.POST.get('guestname')
         )
 

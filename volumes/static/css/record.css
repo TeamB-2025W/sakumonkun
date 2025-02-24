@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    width: 100%;
+}
+
+
+/* records */
+
+.records_container {
+    padding: 20px 0 0 20px;
+    min-height: 100%;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+table {
+    table-layout: fixed;
+}
+
+.records_table_tr {
+    font-size: 30px;
+}
+
+.records_table_th {
+    width: 400px;
+    text-align: center;
+    font-size: 40px;
+}
+
+.records_button {
+    background-color: #00BFFF;
+    color: white;
+    font-size: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 10px 0 10px;
+    box-shadow: 0 0 1px 1px black;
+}
+
+
+/* detail.html */
+
+.detail_button_block {
+    text-align: right;;
+}
+
+.detail_button {
+    font-size: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 20px 0 20px;
+    box-shadow: 0 0 1px 1px black;
+    margin: 0 10px 0 0;
+}
+
+.button_update {
+    background-color: #00BFFF;
+    color: white;
+}
+
+.button_delete {
+    background-color: red;
+    color: white;
+}
+
+
+/* update.html */

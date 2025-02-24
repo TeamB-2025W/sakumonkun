@@ -1,0 +1,321 @@
+body {
+  background: #00bfff;
+  padding: 8px;
+}
+
+main {
+  width: 720px;
+  margin: 0 auto;
+}
+
+header,
+.home-main,
+#create-test,
+.question,
+.button-area,
+.creation-successful {
+  background: #fff;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+header > nav {
+  display: flex;
+  gap: 16px;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+th {
+  font-size: 1.25rem;
+}
+
+ol {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+header > nav > a:nth-of-type(2) {
+  margin-left: auto;
+  color: #fff;
+}
+
+.link-button,
+.creation-successful > a,
+.creation-successful > .flex > button {
+  background: #00bfff;
+  padding: 0 4px;
+  border-radius: 4px;
+  border: 1px solid black;
+  font-weight: bold;
+  display: block;
+  width: 160px;
+  text-align: center;
+}
+
+.home-main {
+  margin-top: 12px;
+  padding: 12px;
+}
+
+.create-link,
+.creation-successful > a {
+  color: #fff;
+  font-size: 1.25rem;
+  width: 200px;
+}
+
+.home-main > table {
+  border: 2px solid black;
+  width: 100%;
+  text-align: center;
+}
+
+.function-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.function-buttons > a,
+.function-buttons > button {
+  width: 48px;
+  color: #fff;
+}
+
+.function-buttons > a:nth-of-type(1) {
+  width: 80px;
+}
+
+.function-buttons > button {
+  background: #ff1500;
+  font-size: 1rem;
+}
+
+.question {
+  margin-top: 16px;
+}
+
+#create-test {
+  margin-top: 12px;
+  padding-left: 40px;
+}
+
+#create-test > label {
+  font-weight: bold;
+}
+
+#create-test > input {
+  display: block;
+  margin-left: 40px;
+  width: 520px;
+}
+
+label.choiceies > p {
+  font-weight: bold;
+  display: block;
+}
+
+label.choiceies > p:nth-of-type(1) {
+  margin-right: auto;
+}
+
+ol.choiceies > li > * {
+  display: block;
+  margin-top: 8px;
+}
+
+ol.choiceies > li > input:nth-of-type(1) {
+  width: 640px;
+  margin-left: 8px;
+  margin-right: 12px;
+}
+
+.commentary {
+  display: block;
+}
+
+label.commentary {
+  font-weight: bold;
+  margin-top: 16px;
+}
+
+.button-area {
+  margin-top: 12px;
+}
+
+.button-area > button {
+  background: #00bfff;
+  color: #fff;
+  width: 320px;
+  border-radius: 4px;
+  margin: 0 auto;
+  display: block;
+}
+
+.login-block,
+.login-form,
+.register > * {
+  width: 216px;
+  margin: 0 auto;
+}
+
+h1.login-block {
+  margin-top: 80px;
+  font-size: 3rem;
+  color: #fff;
+}
+
+.login-form > * ,
+.register-form > * {
+  margin: 0 auto;
+  display: block;
+}
+
+.login-form > label,
+.register-form > label {
+  color: #fff;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.login-form > button,
+.register-form > button {
+  margin-top: 40px;
+  width: 96px;
+  font-size: 1rem;
+}
+
+a.login-block {
+  width: 96px;
+  display: block;
+  background: buttonface;
+  color: buttontext;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin-top: 12px;
+}
+
+.register {
+  background: #fff;
+  padding: 80px 0;
+}
+
+.register > h1 {
+  font-size: 3rem;
+}
+
+.register-form > label {
+  color: #00bfff;
+  font-weight: bold;
+}
+
+.register-form > button {
+  background: #00bfff;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.register > a {
+  width: 96px;
+  display: block;
+  text-align: center;
+  border: 2px solid #00bfff;
+  border-radius: 4px;
+  margin-top: 12px;
+}
+
+.creation-successful {
+  margin: 12px;
+}
+
+.creation-successful > * {
+  width: 520px;
+  margin: 12px auto;
+}
+
+.creation-successful > h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.creation-successful > p:nth-of-type(1),
+.creation-successful > label {
+  font-weight: bold;
+  display: block;
+  font-size: 1.25rem;
+}
+
+.creation-successful > p:nth-of-type(2),
+.creation-successful > .flex {
+  padding-left: 48px;
+}
+
+.creation-successful > .flex > input {
+  width: 400px;
+}
+
+.creation-successful > .flex > button {
+  width: 80px;
+  color: #fff;
+  margin-left: 16px;
+}
+
+.modal {
+  width: 400px;
+  background: #fff;
+  height: 240px;
+  text-align: center;
+  padding: 16px 40px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 40px auto;
+}
+
+.modal > h1,
+.modal > p {
+  font-size: 1.5rem;
+  margin: 8px 0;
+}
+
+.modal > label {
+  font-size: 1.25rem;
+}
+
+.modal > .flex {
+  margin-top: 24px;
+}
+
+.modal > .flex > button {
+  width: 120px;
+  height: 32px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  color: #fff;
+  background: #00bfff;
+  border-radius: 4px;
+}
+
+.modal > .flex > button:nth-of-type(1) {
+  background: #ff1500;
+}

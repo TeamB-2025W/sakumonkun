@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+{% block title %}新規登録{% endblock %}
+
+{% block content %}
+<div class="register">
+  <h1>新規登録</h1>
+
+<form class="register-form" method="POST" action="{% url 'accounts:account_signup' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">登録</button>
+</form>
+<a href="{% url 'accounts:account_login' %}">ログイン</a>
+</div>
+
+
+{% endblock %}
+
+{# 
+  利用可能なフォームフィールド：
+  form.username - ユーザー名フィールド
+  form.email - メールアドレスフィールド
+  form.password1 - パスワードフィールド
+  form.password2 - パスワード確認フィールド
+  
+  各フィールドの属性：
+  {{ field.label }} - ラベルテキスト
+  {{ field.help_text }} - ヘルプテキスト
+  {{ field.errors }} - エラーメッセージ
+  #}
+  

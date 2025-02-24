@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load account %}
+
+{% block title %}{% trans "ログイン" %}{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h1 class="login-block">作問くん</h1>
+
+    <form class="login-form" method="POST" action="{% url 'accounts:account_login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="primaryAction" type="submit">{% trans "ログイン" %}</button>
+    </form>
+
+    <p>
+        <a href="{% url 'accounts:account_signup' %}" class="login-block">{% trans "新規登録" %}</a>
+    </p>
+</div>
+{% endblock %}
