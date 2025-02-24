@@ -17,7 +17,7 @@
                     <p class="exam_title">テストタイトル</p>
                 </div>
             </header>
-            <form>
+            <form method="post" id="examForm" action=" url 'app:post_exam' model.id %}"> <!-- ここ未完成 -->
                 <div class="exam_container">
                     <div class="name_box">
                         <h2 class="name_title exam_title_text">名前</h2>
@@ -80,11 +80,24 @@
                     </div>
                 </div>
                 <!-- ここまで表示テスト -->
-                <div class="exam_container finish_button_box">
-                    <button class="exam_finish_button">回答を提出する
-                    </button>
+                <div id="submitAnswerButton" class="exam_container finish_button_box">
+                    <button type="submit" class="exam_finish_button">回答を提出する</button>
                 </div>
             </form>
         </div>
+
+        <!-- モーダル -->
+        <div id="submitModal" class="submit_modal">
+            <div class="modal_content">
+                <h2>確認</h2>
+                <p>回答を完了してよろしいですか？</p>
+                <div class="submit_modal_buttons">
+                  <button id="confirmButton" class="confirm_submit">回答を投稿</button>
+                  <button id="cancelButton" class="cancel_submit">キャンセル</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static 'js/exam.js' %}"></script>
     </body>
 </html>
