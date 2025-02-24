@@ -11,6 +11,21 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# .envファイルの読み込み
+load_dotenv()
+
+# 環境変数ファイルの読み込み
+# 開発環境: development.env
+# 本番環境: production.env
+if os.getenv("DJANGO_ENV") == "production":
+    env_path = ".env_files/production.env"
+else:
+    # デフォルトは開発環境
+    env_path = ".env_files/development.env"
+load_dotenv(dotenv_path=env_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,27 +37,45 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-8icgv5+zx!p=eqopt=)3oz$r)84c5(r=7!(rr=v=gm)7um^ei6'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# デバッグモードの設定
+# 開発環境でもデフォルトはFalse（より安全な設定）
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '0.0.0.0',
-]
+# メールバックエンドの設定
+# DEBUG=True: コンソールに出力
+# DEBUG=False: 実際にメール送信
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
+# allauth for mail
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True") == "True"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+# メール認証
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,0.0.0.0").split(",")
 
 # Application definition
 
 INSTALLED_APPS = [
-    'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # allauthに必要
+    'allauth',
+    'allauth.account',
+    'app.apps.AppConfig',
 ]
+
+# allauth for site
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +85,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -59,7 +93,10 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'app', 'templates'),  # アプリケーションのテンプレート
+            os.path.join(BASE_DIR, 'account', 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,6 +127,41 @@ DATABASES = {
 }
 
 
+"""
+AllAuth関連
+AllAuthのユーザーモデルを既存のUserモデルと紐付け
+email, usernameどちらでもログイン可能にする
+"""
+
+AUTH_USER_MODEL = "app.User"
+
+# 認証バックエンドの設定
+# メールアドレスとユーザー名の両方で認証を可能にする
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# allauth の基本設定
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'  # 非推奨
+ACCOUNT_LOGIN_METHODS = {'email'}  # 新しい書き方
+ACCOUNT_USERNAME_REQUIRED = False  # ユーザー名不要
+ACCOUNT_EMAIL_REQUIRED = True  # メールアドレスは必須
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # メール確認をスキップ
+ACCOUNT_UNIQUE_EMAIL = True  # メールアドレスの重複を禁止
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"  # メール認証を必須にする
+
+
+# テンプレート設定
+ACCOUNT_TEMPLATE_EXTENSION = 'html'
+ACCOUNT_TEMPLATE_DIR = 'account'
+
+# リダイレクト設定
+LOGIN_URL = 'accounts:account_login'  # 名前空間を追加
+LOGIN_REDIRECT_URL = 'app:home'  # ログイン後のリダイレクト先
+ACCOUNT_LOGOUT_REDIRECT_URL = 'accounts:account_login'  # 名前空間を追加
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -108,6 +180,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# パスワードハッシャーの設定
+# 上から順に実行する。新規サービスのためハッシュ化の方針は1つでいいが、
+# 実際のシステムではハッシュ化の方針を変える場合は、優先したい方式を上位に記述する。
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',  # Argon2（デフォルトはid）
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -130,3 +211,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
