@@ -3,12 +3,15 @@
 # MySQLでDBを削除・作成（警告を回避）
 # DBにScriptで接続できない設定があるっぽい
 
-# echo "Dropping and recreating database..."
-# MYSQL_PWD=root docker-compose exec -T db mysql -u root -e "DROP DATABASE sakumon_db;"
-# MYSQL_PWD=root docker-compose exec -T db mysql -u root -e "CREATE DATABASE sakumon_db;"
+# MySQLのパスワードを環境変数に設定
+export MYSQL_PWD="root"
+
+echo "Dropping and recreating database..."
+docker-compose exec -T db mysql -u root -e "DROP DATABASE IF EXISTS sakumon_db; CREATE DATABASE sakumon_db;"
+
 
 # MySQLの準備ができるまで待機
-# sleep 3
+sleep 3
 
 # マイグレーションファイルの削除
 echo "Removing migration files..."
