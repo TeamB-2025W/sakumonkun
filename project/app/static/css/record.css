@@ -25,39 +25,77 @@ table {
 }
 
 .records_table_tr {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .records_table_th {
-    width: 400px;
+    width: 300px;
     text-align: center;
-    font-size: 40px;
+    font-size: 20px;
 }
 
 .records_button {
     background-color: #00BFFF;
     color: white;
-    font-size: 30px;
+    font-size: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
     padding: 0 10px 0 10px;
+    margin: 10px 0 10px 0;
     box-shadow: 0 0 1px 1px black;
 }
 
 
 /* detail.html */
 
+.exam_url_box {
+    display: flex;
+    max-width: 350px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.url_get {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    margin-left: 20px;
+}
+.copy_button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #00BFFF;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.copy_button:hover {
+    background-color: #00BFFF;
+}
+.copy_button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+}
+.copy_button.copied {
+    background-color: #2196F3;
+}
+
+
 .detail_button_block {
     text-align: right;;
 }
 
 .detail_button {
-    font-size: 30px;
+    font-size: 18px;
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
-    padding: 0 20px 0 20px;
+    padding: 0 12px 0 12px;
     box-shadow: 0 0 1px 1px black;
     margin: 0 10px 0 0;
 }
@@ -72,5 +110,67 @@ table {
     color: white;
 }
 
+.edit_mode {
+    display: none;
+}
 
-/* update.html */
+.button_position {
+    display: block;
+    text-align: left;
+    margin-left: 10px;
+}
+
+
+/* モーダル部分 */
+
+.delete_modal {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+}
+  
+.modal_content {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+}
+  
+.delete_modal_buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+  
+.delete_modal_buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+}
+  
+.confirm_delete {
+    background-color: red;
+    color: white;
+}
+  
+.cancel_delete {
+    background-color: #6c757d;
+    color: white;
+}
