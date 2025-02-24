@@ -102,8 +102,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                 # AllAuthで使用されている。国際化のためのコンテキストプロセッサー
-                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -178,6 +176,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# パスワードハッシャーの設定
+# 上から順に実行する。新規サービスのためハッシュ化の方針は1つでいいが、
+# 実際のシステムではハッシュ化の方針を変える場合は、優先したい方式を上位に記述する。
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',  # Argon2（デフォルトはid）
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
