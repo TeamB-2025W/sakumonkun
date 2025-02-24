@@ -5,7 +5,6 @@
 }
 
 body {
-    min-height: 100vh;
     background-color:#00BFFF;
 }
 
@@ -14,6 +13,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
  
 .exam_header {
@@ -37,37 +38,38 @@ body {
 }
 
 .exam_title {
-    font-size: 60px;
+    font-size: 28px;
+    margin: 10px 0 10px 0;
 }
 
 .exam_title_text {
     margin-left: 15px;
     margin-top: 15px;
-    font-size: 40px;
+    font-size: 24px;
 }
 
 .exam_text {
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 .name_input_box {
-    font-size: 30px;
+    font-size: 24px;
     margin: 20px 0 20px 40px;
 }
 
 .question_box {
-    margin: 0 10px 0 10px;
+    margin: 0 10px 0 0;
 }
   
 .question_text_box {
-    margin: 30px 0 0 40px;
-    font-size: 30px;
+    margin: 15px 0 0 15px;
+    font-size: 24px;
 }
   
 .question_choices_box {
     display: grid;
     gap: 10px;
-    margin: 60px 0 20px 40px;
+    margin: 30px 0 20px 20px;
 }
   
 .choices input[type=radio] {
@@ -80,8 +82,8 @@ body {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 10px;
-    font-size: 30px;
+    padding: 8px;
+    font-size: 20px;
     transition: .5s;
 }
   
@@ -97,9 +99,71 @@ body {
 .exam_finish_button {
     background-color: #00BFFF;
     color: white;
-    font-size: 30px;
+    font-size: 24px;
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
     padding: 0 20px 0 20px;
+}
+
+
+/* モーダル部分 */
+
+.submit_modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+}
+  
+.modal_content {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+}
+  
+.submit_buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+  
+.submit_buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+}
+  
+.confirm_submit {
+    background-color: #00BFFF;
+    color: white;
+}
+  
+.cancel_submit {
+    background-color: #6c757d;
+    color: white;
+}
+
+.no-scroll { 
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }

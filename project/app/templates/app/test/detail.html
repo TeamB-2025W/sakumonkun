@@ -6,42 +6,143 @@
 {% block content %}
 <div class="exam_background">
     <div class="exam_container">
-        <h2 class="exam_title_text">タイトル</h2>
-        <p class="exam_text">テストタイトル</p>
-    </div>
-    <!-- for -->
-    <div class="exam_container">
-        <div class="question_box" id="question1">
-            <div class="question_number exam_title_text">
-                問１
+        <div class="view_mode">
+            <div class="exam_title_box">
+                <h2 class="exam_title_text">タイトル</h2>
+                <p class="exam_text" id="test_title">テストタイトル</p>
             </div>
             <div class="detail_button_block">
-                <button class="detail_button button_update">編集</button>
-                <button class="detail_button button_delete">削除</button>
+                <button class="detail_button button_update" onclick="showEditForm('test_title')">編集</button>
             </div>
-            <div class="question_text_box">
-                １＋１＝？
+            <h2 class="exam_title_text">URL</h2>
+            <div class="exam_url_box">
+                <input type="text" class="url_get" value="https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" readonly aria-label="URL to copy">
+                <button class="copy_button" aria-label="Copy URL to clipboard">Copy</button>
             </div>
-            <div class="question_choices_box">
-                <div class="choices">
-                    <input type="radio" name="q1" id="radio1">
-                    <label for="radio1">選択肢１</label>
+        </div>
+        <div class="edit_mode">
+            <form id="create-test"">
+                <label for="test-title">テストタイトル</label>
+                <input class="edit_content" id="test-title">
+
+            </form>
+        </div>
+    </div>
+    <!-- for -->
+    <div class="exam_container" id="question1">
+        <div class="question_box">
+            <div class="view_mode">
+                <div class="view_content">
+                    <div class="question_number exam_title_text">
+                        問１
+                    </div>
+                    <div class="question_text_box">
+                        １＋１＝？
+                    </div>
+                    <div class="question_choices_box">
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio1">
+                            <label for="radio1">選択肢１</label>
+                        </div>
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio2">
+                            <label for="radio2">選択肢２</label>
+                        </div>
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio3">
+                            <label for="radio3">選択肢３</label>
+                        </div>
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio4">
+                            <label for="radio4">選択肢４</label>
+                        </div>
+                        <div>
+                            <h5 class="result_title">解説</h5>
+                            <p class="result_text">解説</p>
+                        </div>
+                    </div>
+                    <div class="detail_button_block">
+                        <button class="detail_button button_update" onclick="showEditForm('question1')">編集</button>
+                        <button class="detail_button button_delete" onclick="showDeleteConfirmation('question1')">削除</button>
+                    </div>
                 </div>
-                <div class="choices">
-                    <input type="radio" name="q1" id="radio2">
-                    <label for="radio2">選択肢２</label>
+            </div>
+            <div class="edit_mode">
+                <div class="edit_content">
+                    <h2>Question1を編集</h2>
+                    <textarea class="edit_content"></textarea>
+                    <div class="submit_buttons button_position">
+                        <button class="confirm_submit " onclick="saveEdit('question1')">保存</button>
+                        <button class="cancel_submit" onclick="cancelEdit('question1')">キャンセル</button>
+                    </div>
                 </div>
-                <div class="choices">
-                    <input type="radio" name="q1" id="radio3">
-                    <label for="radio3">選択肢３</label>
+            </div>
+        </div>
+    </div>
+    <div class="exam_container" id="question2">
+        <div class="question_box">
+            <div class="view_mode">
+                <div class="view_content">
+                    <div class="question_number exam_title_text">
+                        問１
+                    </div>
+                    <div class="question_text_box">
+                        １＋１＝？
+                    </div>
+                    <div class="question_choices_box">
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio1">
+                            <label for="radio1">選択肢１</label>
+                        </div>
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio2">
+                            <label for="radio2">選択肢２</label>
+                        </div>
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio3">
+                            <label for="radio3">選択肢３</label>
+                        </div>
+                        <div class="choices">
+                            <input type="radio" name="q1" id="radio4">
+                            <label for="radio4">選択肢４</label>
+                        </div>
+                        <div>
+                            <h5 class="result_title">解説</h5>
+                            <p class="result_text">解説</p>
+                        </div>
+                    </div>
+                    <div class="detail_button_block">
+                        <button class="detail_button button_update" onclick="showEditForm('question2')">編集</button>
+                        <button class="detail_button button_delete" onclick="showDeleteConfirmation('question2')">削除</button>
+                    </div>
                 </div>
-                <div class="choices">
-                    <input type="radio" name="q1" id="radio4">
-                    <label for="radio4">選択肢４</label>
+            </div>
+            <div class="edit_mode">
+                <div class="edit_content">
+                    <h2>Question1を編集</h2>
+                    <textarea class="edit_content"></textarea>
+                    <div class="submit_buttons button_position">
+                        <button class="confirm_submit " onclick="saveEdit('question2')">保存</button>
+                        <button class="cancel_submit" onclick="cancelEdit('question2')">キャンセル</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- endfor -->
 </div>
+
+<!-- モーダル -->
+<div id="deleteConfirmationModal" class="delete_modal">
+    <div class="modal_content">
+        <h2>確認</h2>
+        <p>この問題を削除してよろしいですか？</p>
+        <div class="delete_modal_buttons">
+          <button id="confirmButton" class="confirm_delete" onclick="deleteBlock()">削除</button>
+          <button id="cancelButton" class="cancel_submit" onclick="closeModal()">キャンセル</button>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/detail.js' %}"></script>
 {% endblock %}
