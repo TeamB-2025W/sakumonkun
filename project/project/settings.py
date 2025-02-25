@@ -143,10 +143,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # allauth の基本設定
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'  # 非推奨
-ACCOUNT_LOGIN_METHODS = {'email'}  # 新しい書き方
-ACCOUNT_USERNAME_REQUIRED = False  # ユーザー名不要
-ACCOUNT_EMAIL_REQUIRED = True  # メールアドレスは必須
+ACCOUNT_LOGIN_METHODS = {'email'}  # emailでログイン
+ACCOUNT_USERNAME_REQUIRED = True  # ユーザー名必須
+ACCOUNT_EMAIL_REQUIRED = True  # メールアドレスも必須
 ACCOUNT_EMAIL_VERIFICATION = 'none'  # メール確認をスキップ
 ACCOUNT_UNIQUE_EMAIL = True  # メールアドレスの重複を禁止
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"  # メール認証を必須にする

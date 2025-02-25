@@ -124,7 +124,7 @@ def test_update(request, testid=None):
 
 
 # テスト削除
-def test_delete(request):
+def test_delete(request, testid):
     if request.method == 'POST':
         testid = request.POST.get('testid')
         if testid:
@@ -132,4 +132,8 @@ def test_delete(request):
             test.delete()
             return redirect('app:home')
         
+    return render(request, 'app/test/modal/confirm_test_deletion.html')
+
+
+def test_delete_confirm(request):
     return render(request, 'app/test/modal/confirm_test_deletion.html')
