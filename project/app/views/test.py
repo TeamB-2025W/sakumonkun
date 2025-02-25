@@ -48,7 +48,7 @@ def create(request):
                 if not question_text:
                     break
                 correct_choice = request.POST.get(f'correct_{question_count}')
-                explanation = request.POST.get('commentary')
+                explanation = request.POST.get(f'commentary_{question_count}')
                 print('question_text', 'correct_choice', 'explanation')
 
                 # Questionの作成
