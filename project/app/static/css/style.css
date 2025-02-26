@@ -181,6 +181,7 @@ div.profile-edit {
 .login-block,
 .profile-edit > *,
 .login-form,
+.change-password,
 .register > * {
   width: 216px;
   margin: 0 auto;
@@ -192,11 +193,12 @@ h1.login-block {
   color: #fff;
 }
 
-.login-form > * ,
-.register-form > * ,
+.login-form > *,
+.register-form > *,
 form.profile-edit > *,
-.login-form > p > * ,
-.profile-edit > p > * ,
+.login-form > p > *,
+form.change-password > p > *,
+.profile-edit > p > *,
 .register-form > div > * {
   margin: 0 auto;
   display: block;
@@ -212,6 +214,7 @@ form.profile-edit > button {
 
 .login-form > p > label,
 form.profile-edit > p > label,
+form.change-password > p > label,
 .register-form > div > label {
   color: #fff;
   margin-top: 12px;
@@ -274,6 +277,7 @@ p.logout {
   text-align: center;
 }
 
+form.change-password > button,
 form.logout > button {
   margin: 32px auto;
   display: block;
