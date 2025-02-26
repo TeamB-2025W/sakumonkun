@@ -15,7 +15,7 @@ urlpatterns = [
     path('test/create/', test.create, name='test_create'),
     path('test/creation_successful/<int:testid>/', test.creation_successful, name='creation_successful'),
     path('test/detail/<int:testid>/', test.test_detail, name='test_detail'),
-    path('test/update/<int:testid>/', test.test_update, name='test_update'),
+    # path('test/update/<int:testid>/', test.test_update, name='test_update'),
     path('test/modal/confirm_test_deletion/', test.test_delete, name='test_delete'),
     path('test/<int:testid>/results', exam.exam_result_list, name='exam_result_list'),
 
