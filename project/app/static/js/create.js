@@ -81,7 +81,7 @@ function addQuestionForm() {
   commentaryLabel.textContent = "解説";
   // 解説の入力欄
   const commentaryText = document.createElement("textarea");
-  commentaryText.name = "commentary";
+  commentaryText.name = `commentary_${questionNumber}`;
   commentaryText.className = "commentary";
   commentaryText.id = `commentary-${questionNumber}`;
   commentaryText.placeholder = "解説文";
