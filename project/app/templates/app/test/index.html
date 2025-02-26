@@ -71,13 +71,14 @@
     </thead>
 
     <tbody id="test-list">
+      {% for test in test %}
       <tr>
         <td>
-          <h3>クイズ１</h3>
+          <h3>{{ test.title }}</h3>
         </td>
-        <td>□</td>
-        <td>□</td>
-        <td>□</td>
+        <td>{{ test.created_at }}</td>
+        <td>{{ test.updated_at }}</td>
+        <td>{{ test.question_count }}</td>
         <td>
           <div class="function-buttons">
             <a href="" class="link-button">回答確認</a>
@@ -86,38 +87,7 @@
           </div>
         </td>
       </tr>
-      
-      <tr>
-        <td>
-          <h3>クイズ２</h3>
-        </td>
-        <td>□</td>
-        <td>□</td>
-        <td>□</td>
-        <td>
-          <div class="function-buttons">
-            <a href="" class="link-button">回答確認</a>
-            <a href="" class="link-button">編集</a>
-            <button class="link-button" onclick="toggleModal('クイズ２')">削除</button>
-          </div>
-        </td>
-      </tr>
-      
-      <tr>
-        <td>
-          <h3>クイズ３</h3>
-        </td>
-        <td>□</td>
-        <td>□</td>
-        <td>□</td>
-        <td>
-          <div class="function-buttons">
-            <a href="" class="link-button">回答確認</a>
-            <a href="" class="link-button">編集</a>
-            <button class="link-button" onclick="toggleModal('クイズ３')">削除</button>
-          </div>
-        </td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
