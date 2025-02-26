@@ -8,11 +8,16 @@
   <p>{{ test.title }}</p>
   <label for="test-url">テストのURL</label>
   <div class="flex">
-    <input id="test-url">
-    <button>コピーする</button>
+    <input class="url_get">
+    <button class="copy_button">Copy</button>
   </div>
 </div>
 <div class="creation-successful">
   <a href="{% url 'app:home' %}">ホームに戻る</a>
 </div>
+{% endblock %}
+
+{% load static %}
+{% block extra_js %}
+<script src="{% static 'js/detail.js' %}"></script>
 {% endblock %}
