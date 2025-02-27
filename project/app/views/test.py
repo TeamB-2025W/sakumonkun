@@ -175,7 +175,7 @@ def test_detail(request, testid):
 # テスト削除
 def test_delete(request, testid):
     if request.method == 'POST':
-        testid = request.POST.get('testid')
+        # testid = request.POST.get('testid')
         if testid:
             test = Test.objects.get(id=testid)
             test.delete()

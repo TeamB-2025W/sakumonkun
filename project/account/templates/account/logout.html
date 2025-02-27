@@ -3,11 +3,11 @@
 {% block title %}ログアウト{% endblock %}
 
 {% block content %}
-<h1>ログアウト</h1>
+<h1 class="logout">ログアウト</h1>
 
-<p>ログアウトしますか？</p>
+<p class="logout">ログアウトしますか？</p>
 
-<form method="post" action="{% url 'accounts:account_logout' %}">
+<form class="logout" method="post" action="{% url 'accounts:account_logout' %}">
   {% csrf_token %}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
@@ -15,7 +15,7 @@
   <button type="submit">ログアウト</button>
 </form>
 
-<p>
-  <a href="{% url 'accounts:account_login' %}">ログインに戻る</a>
+<p class="logout">
+  <a href="{% url 'accounts:account_login' %}">ホームに戻る</a>
 </p>
 {% endblock %}

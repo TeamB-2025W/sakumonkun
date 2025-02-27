@@ -11,20 +11,17 @@
         <div class="exam_background">
             <header class="exam_header">
                 <div>
-                    <!-- 本番用 -->
                     <p class="exam_title">{{ model.title }}</p>
-                    <!-- 表示テスト用 -->
-                    <p class="exam_title">テストタイトル</p>
                 </div>
             </header>
-            <form method="post" id="examForm" action=" url 'app:post_exam' model.id %}"> <!-- ここ未完成 -->
+            <form method="post" id="examForm" action="{% url 'app:post_exam' model.id %}" target="_blank">
+                {% csrf_token %}
                 <div class="exam_container">
                     <div class="name_box">
                         <h2 class="name_title exam_title_text">名前</h2>
                         <input class="name_input_box" name="guestname" required>
                     </div>
                 </div>
-                <!-- 本番用 -->
                 <!-- 問題数分ループ -->
                 {% for items in question_list %}
                 <div class="exam_container">
@@ -39,9 +36,9 @@
                         </p>
                         <div class="question_choices_box">
                             <!-- 選択肢の数だけループ -->
-                            {% for question_choice in question_choices %}
+                            {% for question_choice in items.questionchoices %}
                             <div class="choices">
-                                <input type="radio" name="question_{{ items.question.id }}" id="radio_{{ question_choice.id }}" value="{{ question_choice.id }}">
+                                <input type="radio" name="question_{{ items.question.id }}" id="radio_{{ question_choice.id }}" value="{{ question_choice.id }}" required>
                                 <label for="radio_{{ question_choice.id }}">{{ question_choice.text }}</label>
                             </div>
                             {% endfor %}
@@ -49,121 +46,6 @@
                     </div>
                 </div>
                 {% endfor %}
-
-                <!-- ここから表示テスト用 -->
-                <div class="exam_container">
-                    <div class="question_box" id="question1">
-                        <h2 class="question_number exam_title_text">
-                            問：表示テスト
-                        </h2>
-                        <p class="question_text_box exam_text">
-                            表示テスト
-                        </p>
-                        <div class="question_choices_box">
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio1">
-                                <label for="radio1">選択肢１</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio2">
-                                <label for="radio2">選択肢２</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio3">
-                                <label for="radio3">選択肢３</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio4">
-                                <label for="radio4">選択肢４</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="exam_container">
-                    <div class="question_box" id="question1">
-                        <h2 class="question_number exam_title_text">
-                            問：表示テスト
-                        </h2>
-                        <p class="question_text_box exam_text">
-                            表示テスト
-                        </p>
-                        <div class="question_choices_box">
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio1">
-                                <label for="radio1">選択肢１</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio2">
-                                <label for="radio2">選択肢２</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio3">
-                                <label for="radio3">選択肢３</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio4">
-                                <label for="radio4">選択肢４</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="exam_container">
-                    <div class="question_box" id="question1">
-                        <h2 class="question_number exam_title_text">
-                            問：表示テスト
-                        </h2>
-                        <p class="question_text_box exam_text">
-                            表示テスト
-                        </p>
-                        <div class="question_choices_box">
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio1">
-                                <label for="radio1">選択肢１</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio2">
-                                <label for="radio2">選択肢２</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio3">
-                                <label for="radio3">選択肢３</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio4">
-                                <label for="radio4">選択肢４</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="exam_container">
-                    <div class="question_box" id="question1">
-                        <h2 class="question_number exam_title_text">
-                            問：表示テスト
-                        </h2>
-                        <p class="question_text_box exam_text">
-                            表示テスト
-                        </p>
-                        <div class="question_choices_box">
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio1">
-                                <label for="radio1">選択肢１</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio2">
-                                <label for="radio2">選択肢２</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio3">
-                                <label for="radio3">選択肢３</label>
-                            </div>
-                            <div class="choices">
-                                <input type="radio" name="q1" id="radio4">
-                                <label for="radio4">選択肢４</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ここまで表示テスト -->
                 <div id="submitAnswerButton" class="exam_container finish_button_box">
                     <button type="submit" class="exam_finish_button">回答を提出する</button>
                 </div>
