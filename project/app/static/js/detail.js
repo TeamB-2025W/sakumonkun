@@ -60,7 +60,6 @@ function cancelEdit(blockId) {
 let currentBlockId = '';// ブロックidを格納する変数を作成
 const body = document.body;
 let scrollPosition = 0;
-const deleteQuestionForm = document.getElementById('delete_question_form');
 
 // id毎の削除モーダルを表示
 function showDeleteConfirmation(blockId) {
@@ -80,15 +79,8 @@ function closeModal() {
 }
 
 // ブロック削除処理＆DB削除処理
-function deleteBlock() {
-    if (currentBlockId) {
-        const blockElement = document.getElementById(currentBlockId);
-        if (blockElement) {
-            blockElement.remove();
-            deleteQuestionForm.submit();
-        }
-    }
-    closeModal();
+function deleteBlock(blockId) {
+    document.getElementById(`delete_${blockId}`).submit();
 }
 
 // モーダル外クリックでモーダルを閉じる

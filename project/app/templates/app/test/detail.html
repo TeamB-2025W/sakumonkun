@@ -30,7 +30,7 @@
     </div>
 
     {% for question in questions %}
-    <div class="exam_container" id="question_{{ question.id }}">
+    <div class="exam_container" id="{{ question.id }}">
         <div class="question_box">
             <div class="view_mode">
                 <div class="view_content">
@@ -57,16 +57,16 @@
                             <p class="result_text">{{ question.explanation }}</p>
                         </div>
                     </div>
-
                     <div class="detail_button_block">
-                            <!-- 編集ボタン -->
-                            <button type="button" class="detail_button button_update" onclick="showEditForm('question_{{ question.id }}')">編集</button>
-                            <!-- 削除ボタン -->
-                            <form method="post" id="delete_question_form" class="delete_form" action="{% url 'app:test_detail' test.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="{{ question.id }}">
-                                <button type="button" class="detail_button button_delete" name="delete_question" value="" onclick="showDeleteConfirmation('question_{{ question.id }}')">削除</button>
-                            </form>
+                        <!-- 編集ボタン -->
+                        <button type="button" class="detail_button button_update" onclick="showEditForm('{{ question.id }}')">編集</button>
+                        <!-- 削除ボタン -->
+                        <form method="post" id="delete_{{ question.id }}" action="{% url 'app:test_detail' test.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="question_id" value="{{ question.id }}">                   
+                            <input type="hidden" name="delete_question" value="">
+                            <button type="button" class="detail_button button_delete" onclick="showDeleteConfirmation('{{ question.id }}')">削除</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -92,14 +92,27 @@
                         {% endfor %}
                     </table>
                     <label for="commentary-1" class="commentary">解説</label>
-                    <textarea name="commentary" class="question_text" id="commentary-1" placeholder="解説文" rows="7" cols="96" form="create-test">{{ question.explanation }}</textarea>
+                    <textarea name="commentary" class="question_text" id="commentary-1" placeholder="解説文" rows="7" cols="96">{{ question.explanation }}</textarea>
 
-                    <input type="hidden" name="question_id" value="">
-                    <div method="POST" class="submit_buttons button_position">
-                        <button type="button" class="confirm_submit" name="update_question" onclick="saveEdit('question_{{ question.id }}')">保存</button>
-                        <button type="button" class="cancel_submit" onclick="cancelEdit('question_{{ question.id }}')">キャンセル</button>
+                    <input type="hidden" name="question_id" value="{{ question.id }}">
+                    <input type="hidden" name="update_question" value="">
+                    <div class="submit_buttons button_position">
+                        <button type="button" class="confirm_submit" onclick="saveEdit('{{ question.id }}')">保存</button>
+                        <button type="button" class="cancel_submit" onclick="cancelEdit('{{ question.id }}')">キャンセル</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- モーダル -->
+    <div id="deleteConfirmationModal" class="delete_modal">
+        <div class="modal_content">
+            <h2>確認</h2>
+            <p>この問題を削除してよろしいですか？</p>
+            <div class="delete_modal_buttons">
+              <button method="post" id="confirmButton" class="confirm_delete" onclick="deleteBlock('{{ question.id }}')">削除</button>
+              <button id="cancelButton" class="cancel_submit" onclick="closeModal()">キャンセル</button>
             </div>
         </div>
     </div>
@@ -108,16 +121,6 @@
 </div>
 
 <!-- モーダル -->
-<div id="deleteConfirmationModal" class="delete_modal">
-    <div class="modal_content" test_delete>
-        <h2>確認</h2>
-        <p>この問題を削除してよろしいですか？</p>
-        <div class="delete_modal_buttons">
-          <button id="confirmButton" class="confirm_delete" onclick="deleteBlock()">削除</button>
-          <button id="cancelButton" class="cancel_submit" onclick="closeModal()">キャンセル</button>
-        </div>
-    </div>
-</div>
 
 <script src="{% static 'js/detail.js' %}"></script>
 {% endblock %}
