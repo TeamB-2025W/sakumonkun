@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count
+from django.http import JsonResponse
+from django.utils import timezone
 from app.forms.test import TestForm
-from app.models import User, Test, Question, QuestionChoice
-
+from app.models import Test, Question, QuestionChoice
+import json
 
 # ホーム画面（テスト一覧）
 def home(request):
@@ -96,31 +98,78 @@ def creation_successful(request, testid):
 
 # テスト詳細
 def test_detail(request, testid):
+    # テストIDに基づいてTestオブジェクトを取得
     test = get_object_or_404(Test, id=testid)
-    context = {
-        'test': test
-    }
-    return render(request, 'app/test/detail.html', context)
+    
+    # テストに関連する質問と選択肢を取得
+    questions = test.questions.prefetch_related('choices').all()
 
-
-# テスト編集
-def test_update(request, testid=None):
-    test = get_object_or_404(Test, pk=testid)
-
+    # **リクエストメソッドに基づいて処理を分岐**
     if request.method == 'POST':
-        form = TestForm(request.POST, instance=test)
-        if form.is_valid():
-            form.save()
-            return redirect('app:home')
-    else:
-        form = TestForm(instance=test)
+        try:
+            if 'update_question' in request.POST:  # 質問更新フォームの送信
+                question_id = request.POST.get('question_id')
+                question = get_object_or_404(Question, id=int(question_id))
 
+                # 質問のテキストを更新
+                question.text = request.POST.get('text', question.text)
+                question.updated_at = timezone.now()
+
+                # 正解の選択肢を更新
+                correct_choice_id = request.POST.get('correct_choice')
+                if correct_choice_id:
+                    correct_choice = get_object_or_404(QuestionChoice, id=correct_choice_id)
+                    question.correct_choice = correct_choice
+
+                question.save()
+
+                # 選択肢の更新
+                for key, value in request.POST.items():
+                    if key.startswith('choice_'):
+                        choice_id = key.split('_')[1]
+                        choice = get_object_or_404(QuestionChoice, id=choice_id)
+                        choice.text = value
+                        choice.updated_at = timezone.now()
+                        choice.save()
+
+                # Testのupdated_atを更新
+                test.updated_at = timezone.now()
+                test.save()
+
+                return redirect('app:test_detail', testid=testid)
+            
+            # 質問削除フォームの送信かどうかを確認
+            elif 'delete_question' in request.POST:
+                question_id = request.POST.get('question_id')
+                question = get_object_or_404(Question, id=question_id)
+                
+                # 関連するQuestionChoiceを削除
+                question.choices.all().delete()
+
+                # Question を削除
+                question.delete()
+
+                # Testのupdated_atを更新
+                test.updated_at = timezone.now()
+                test.save()
+                
+                # 削除成功のレスポンスを返す
+                return JsonResponse({'status': 'success', 'message': '削除が完了しました。'})
+
+        
+        # 例外が発生した場合
+        except Exception as e:
+            # エラーメッセージを返す
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
+    # テンプレートに渡すコンテキスト
     context = {
-        'form': form,
-        'testid': testid
+        'test': test,
+        'questions': questions,
     }
     
-    return render(request, 'app/test/update.html', context)
+    # 'app/test/detail.html'テンプレートをレンダリングして返す
+    return render(request, 'app/test/detail.html', context)
 
 
 # テスト削除

@@ -59,6 +59,7 @@ class Test(models.Model):
         verbose_name='ユーザーID', 
         on_delete=models.PROTECT,
         db_column='userid',
+        related_name='tests',
         
         # デバッグ中のみ
         null=True,
@@ -104,9 +105,10 @@ class QuestionChoice(models.Model):
     questionid = models.ForeignKey(
         Question, 
         verbose_name='問題ID', 
-        on_delete=models.PROTECT,
-        db_column='questionid'
-    )
+        on_delete=models.CASCADE,
+        db_column='questionid',
+        related_name='choices',
+        )
     
     text = models.TextField('選択肢文')
     created_at = models.DateTimeField('作成日時', default=timezone.now)
