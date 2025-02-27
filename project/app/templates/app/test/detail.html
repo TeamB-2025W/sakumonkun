@@ -9,14 +9,14 @@
         <div class="view_mode">
             <div class="exam_title_box">
                 <h2 class="exam_title_text">タイトル</h2>
-                <p class="exam_text" id="test_title">テストタイトル</p>
+                <p class="exam_text" id="test_title">{{ test.title }}</p>
             </div>
-            <div class="detail_button_block">
+            <!-- <div class="detail_button_block">
                 <button class="detail_button button_update" onclick="showEditForm('test_title')">編集</button>
-            </div>
-            <h2 class="exam_title_text">URL</h2>
+            </div> -->
+            <h2 class="exam_title_text">テストのURL</h2>
             <div class="exam_url_box">
-                <input type="text" class="url_get" value="https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" readonly aria-label="URL to copy">
+                <input type="text" class="url_get" value="http://localhost:8000/exam/{{ test.id }}" readonly aria-label="URL to copy">
                 <button class="copy_button" aria-label="Copy URL to clipboard">Copy</button>
             </div>
         </div>
@@ -28,113 +28,88 @@
             </form>
         </div>
     </div>
-    <!-- for -->
-    <div class="exam_container" id="question1">
+
+    {% for question in questions %}
+    <div class="exam_container" id="question_{{ question.id }}">
         <div class="question_box">
             <div class="view_mode">
                 <div class="view_content">
+                    <!-- 問番号 -->
                     <div class="question_number exam_title_text">
-                        問１
+                        問{{ forloop.counter }}
                     </div>
+                    <!-- 問題文 -->
                     <div class="question_text_box">
-                        １＋１＝？
+                        {{ question.text }}
                     </div>
+
                     <div class="question_choices_box">
+                        <!-- 選択肢 -->
+                        {% for choice in question.choices.all %}
                         <div class="choices">
-                            <input type="radio" name="q1" id="radio1">
-                            <label for="radio1">選択肢１</label>
+                            <input type="radio" name="question_{{ question.id }}" id="radio_{{ choice.id }}" value="{{ choice.id }}">
+                            <label for="radio_{{ choice.id }}">{{ choice.text }}</label>
                         </div>
-                        <div class="choices">
-                            <input type="radio" name="q1" id="radio2">
-                            <label for="radio2">選択肢２</label>
-                        </div>
-                        <div class="choices">
-                            <input type="radio" name="q1" id="radio3">
-                            <label for="radio3">選択肢３</label>
-                        </div>
-                        <div class="choices">
-                            <input type="radio" name="q1" id="radio4">
-                            <label for="radio4">選択肢４</label>
-                        </div>
+                        {% endfor %}
+                        <!-- 解説 -->
                         <div>
                             <h5 class="result_title">解説</h5>
-                            <p class="result_text">解説</p>
+                            <p class="result_text">{{ question.explanation }}</p>
                         </div>
                     </div>
+
                     <div class="detail_button_block">
-                        <button class="detail_button button_update" onclick="showEditForm('question1')">編集</button>
-                        <button class="detail_button button_delete" onclick="showDeleteConfirmation('question1')">削除</button>
+                            <!-- 編集ボタン -->
+                            <button type="button" class="detail_button button_update" onclick="showEditForm('question_{{ question.id }}')">編集</button>
+                            <!-- 削除ボタン -->
+                            <form method="post" id="delete_question_form" class="delete_form" action="{% url 'app:test_detail' test.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="{{ question.id }}">
+                                <button type="button" class="detail_button button_delete" name="delete_question" value="" onclick="showDeleteConfirmation('question_{{ question.id }}')">削除</button>
+                            </form>
                     </div>
                 </div>
             </div>
+
+            <!-- 編集画面 -->
             <div class="edit_mode">
-                <div class="edit_content">
-                    <h2>Question1を編集</h2>
-                    <textarea class="edit_content"></textarea>
-                    <div class="submit_buttons button_position">
-                        <button class="confirm_submit " onclick="saveEdit('question1')">保存</button>
-                        <button class="cancel_submit" onclick="cancelEdit('question1')">キャンセル</button>
+                <form method="post" class="edit_content" id="update_question_form" action="{% url 'app:test_detail' test.id %}">
+                    {% csrf_token %}
+                    <h2 class="update_title">問{{ forloop.counter }}を編集</h2>
+                    <textarea class="question_text" placeholder="問題文" name="text" rows="5" cols="96" required>{{ question.text }}</textarea>
+                    <table class="choices_table">
+                        <tr class=>
+                            <th></th>
+                            <th class="choices_input">選択肢</th>
+                            <th>正答</th>
+                        </tr>
+                        {% for edit_choice in question.choices.all %}
+                        <tr class="choiceies">
+                            <td><label>{{ forloop.counter }}</label></td>
+                            <td><input class="choices_input" name="choice_{{ question.id }}_{{ forloop.counter }}" value="{{ edit_choice.text }}" {% if forloop.counter <= 2 %}required{% endif %}></td>
+                            <td><input class="choices_radio" value="1" type="radio" name="correct_{{ question.id }}" {% if edit_choice.id == question.correct_choiceid %}checked{% endif %} required></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <label for="commentary-1" class="commentary">解説</label>
+                    <textarea name="commentary" class="question_text" id="commentary-1" placeholder="解説文" rows="7" cols="96" form="create-test">{{ question.explanation }}</textarea>
+
+                    <input type="hidden" name="question_id" value="">
+                    <div method="POST" class="submit_buttons button_position">
+                        <button type="button" class="confirm_submit" name="update_question" onclick="saveEdit('question_{{ question.id }}')">保存</button>
+                        <button type="button" class="cancel_submit" onclick="cancelEdit('question_{{ question.id }}')">キャンセル</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-    <div class="exam_container" id="question2">
-        <div class="question_box">
-            <div class="view_mode">
-                <div class="view_content">
-                    <div class="question_number exam_title_text">
-                        問１
-                    </div>
-                    <div class="question_text_box">
-                        １＋１＝？
-                    </div>
-                    <div class="question_choices_box">
-                        <div class="choices">
-                            <input type="radio" name="q1" id="radio1">
-                            <label for="radio1">選択肢１</label>
-                        </div>
-                        <div class="choices">
-                            <input type="radio" name="q1" id="radio2">
-                            <label for="radio2">選択肢２</label>
-                        </div>
-                        <div class="choices">
-                            <input type="radio" name="q1" id="radio3">
-                            <label for="radio3">選択肢３</label>
-                        </div>
-                        <div class="choices">
-                            <input type="radio" name="q1" id="radio4">
-                            <label for="radio4">選択肢４</label>
-                        </div>
-                        <div>
-                            <h5 class="result_title">解説</h5>
-                            <p class="result_text">解説</p>
-                        </div>
-                    </div>
-                    <div class="detail_button_block">
-                        <button class="detail_button button_update" onclick="showEditForm('question2')">編集</button>
-                        <button class="detail_button button_delete" onclick="showDeleteConfirmation('question2')">削除</button>
-                    </div>
-                </div>
-            </div>
-            <div class="edit_mode">
-                <div class="edit_content">
-                    <h2>Question1を編集</h2>
-                    <textarea class="edit_content"></textarea>
-                    <div class="submit_buttons button_position">
-                        <button class="confirm_submit " onclick="saveEdit('question2')">保存</button>
-                        <button class="cancel_submit" onclick="cancelEdit('question2')">キャンセル</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- endfor -->
+    {% endfor %}
+
 </div>
 
 <!-- モーダル -->
 <div id="deleteConfirmationModal" class="delete_modal">
-    <div class="modal_content">
+    <div class="modal_content" test_delete>
         <h2>確認</h2>
         <p>この問題を削除してよろしいですか？</p>
         <div class="delete_modal_buttons">
