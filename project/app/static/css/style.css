@@ -172,8 +172,16 @@ label.commentary {
   display: block;
 }
 
+h2.profile-edit,
+h3.profile-edit,
+div.profile-edit {
+  text-align: center;
+}
+
 .login-block,
+.profile-edit > *,
 .login-form,
+.change-password,
 .register > * {
   width: 216px;
   margin: 0 auto;
@@ -185,14 +193,29 @@ h1.login-block {
   color: #fff;
 }
 
-.login-form > * ,
-.register-form > * {
+.login-form > *,
+.register-form > *,
+form.profile-edit > *,
+.login-form > p > *,
+form.change-password > p > *,
+.profile-edit > p > *,
+.register-form > div > * {
   margin: 0 auto;
   display: block;
 }
 
-.login-form > label,
-.register-form > label {
+form.profile-edit > * {
+  margin-top: 16px;
+}
+
+form.profile-edit > button {
+  width: 120px;
+}
+
+.login-form > p > label,
+form.profile-edit > p > label,
+form.change-password > p > label,
+.register-form > div > label {
   color: #fff;
   margin-top: 12px;
   font-weight: bold;
@@ -225,9 +248,8 @@ a.login-block {
   font-size: 3rem;
 }
 
-.register-form > label {
+.register-form > div > label {
   color: #00bfff;
-  font-weight: bold;
 }
 
 .register-form > button {
@@ -243,6 +265,22 @@ a.login-block {
   border: 2px solid #00bfff;
   border-radius: 4px;
   margin-top: 12px;
+}
+
+.logout {
+  display: block;
+  margin: 0 auto;
+}
+
+h1.logout,
+p.logout {
+  text-align: center;
+}
+
+form.change-password > button,
+form.logout > button {
+  margin: 32px auto;
+  display: block;
 }
 
 .creation-successful {
@@ -306,6 +344,7 @@ a.login-block {
   margin-top: 24px;
 }
 
+.modal > .flex > a,
 .modal > .flex > button {
   width: 120px;
   height: 32px;
