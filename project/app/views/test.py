@@ -174,15 +174,21 @@ def test_detail(request, testid):
 
 # テスト削除
 def test_delete(request, testid):
+    test = get_object_or_404(Test, id=testid)
     if request.method == 'POST':
-        # testid = request.POST.get('testid')
-        if testid:
-            test = Test.objects.get(id=testid)
+        if "delete" in request.POST:
+            # テストに紐づく問題全てを取得
+            for question in test.questions.all():
+                # 各問題に紐づく選択肢を全て削除
+                question.choices.all().delete()
+            # テストに紐づく問題全てを削除
+            test.questions.all().delete()
+            # テストを削除
             test.delete()
             return redirect('app:home')
-        
-    return render(request, 'app/test/modal/confirm_test_deletion.html')
-
-
-def test_delete_confirm(request):
-    return render(request, 'app/test/modal/confirm_test_deletion.html')
+    
+    context = {
+        'test': test
+    }
+    
+    return render(request, 'app/test/index.html', context)
