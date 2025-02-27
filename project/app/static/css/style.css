@@ -344,6 +344,7 @@ form.logout > button {
   margin-top: 24px;
 }
 
+.modal > .flex > a,
 .modal > .flex > button {
   width: 120px;
   height: 32px;
