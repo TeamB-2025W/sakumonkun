@@ -23,7 +23,7 @@
                     <td class="records_table_th">{{ records.answered_at }}</td>
                     <td class="records_table_th">{{ records.correct_count }}/{{ records.total_count }}</td>
                     <td class="records_table_th">
-                        <button class="records_button" href="">回答詳細</button>
+                        <a class="records_button" id="detail-button-{{ records.id }}" href="{% url 'app:exam_result' examinationid=records.id %}" target="_blank" rel="noopener noreferrer"">回答詳細</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -32,38 +32,4 @@
     </div>
 </div>
 
-<!-- 表示テスト用 -->
-<div class="home-main">
-    <div class="records_container">
-        <div class="records_list">
-            <h2>回答者一覧（表示テスト）</h2>
-            <table class="records_table" border="1">
-                <tr class="records_table_tr">
-                    <th class="records_table_th">名前</th>
-                    <th class="records_table_th">時間</th>
-                    <th class="records_table_th">点数</th>
-                    <th class="records_table_th">詳細</th>
-                </tr>
-                <tr class="records_table_tr">
-                    <td class="records_table_th">あああ</td>
-                    <td class="records_table_th">2024/2/16 10:00</td>
-                    <td class="records_table_th">15/20</td>
-                    <td class="records_table_th">
-                        <button class="records_button">回答詳細</button>
-                    </td>
-                </tr>
-                <tr class="records_table_tr">
-                    <td class="records_table_th">いいい</td>
-                    <td class="records_table_th">2024/2/16 10:00</td>
-                    <td class="records_table_th">15/20</td>
-                    <td class="records_table_th">
-                        <button class="records_button">回答詳細</button>
-                    </td>
-                </tr>
-                <!-- endfor -->
-            </table>
-        </div>
-    </div>
-</div>
-<!-- ここまで -->
 {% endblock %}
