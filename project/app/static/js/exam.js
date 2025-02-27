@@ -15,7 +15,7 @@ cancelButton.onclick = function() {
 }
 
 confirmButton.onclick = function() {
-    alert('回答が送信されました。');
+    examForm.submit();
     submitModal.style.display = 'none';
 }
 
