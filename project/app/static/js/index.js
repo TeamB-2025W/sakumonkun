@@ -1,6 +1,6 @@
 "use strict";
 
-function toggleModal(testTitle) {
+function toggleModal(testTitle, testId) {
   // mainタグのhidden切り替え
   const homeMain = document.getElementsByClassName("home-main")[0];
   homeMain.classList.toggle("hidden");
@@ -10,5 +10,9 @@ function toggleModal(testTitle) {
 
   if (testTitle) {
     document.getElementById("test-title-viewer").textContent = testTitle;
+  }
+  if (testId) {
+    const deleteForm= document.getElementById("delete-form");
+    deleteForm.setAttribute("action", `/test/delete/${testId}/`);
   }
 }

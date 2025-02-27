@@ -31,8 +31,8 @@
       {{ form.password1 }}
       {% if form.password1.errors %}
         <div class="error-message">{{ form.password1.errors }}</div>
+        <div class="help-text">{{ form.password1.help_text }}</div>
       {% endif %}
-      <div class="help-text">{{ form.password1.help_text }}</div>
     </div>
 
     <div class="form-field">
@@ -46,7 +46,7 @@
     
     <button type="submit">登録</button>
   </form>
-  <a href="{% url 'accounts:account_login' %}">ログイン</a>
+  <a href="{% url 'accounts:account_login' %}">ログインへ</a>
 </div>
 
 
