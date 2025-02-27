@@ -18,7 +18,7 @@ urlpatterns = [
 
     # path('test/update/<int:testid>/', test.test_update, name='test_update'),
     path('test/modal/confirm_test_deletion/', test.test_delete, name='test_delete'),
-    path('test/update/<int:testid>/', test.test_update, name='test_update'),
+    # path('test/update/<int:testid>/', test.test_update, name='test_update'),
     path('test/delete/<int:testid>/', test.test_delete, name='test_delete'),
     path('test/<int:testid>/results', exam.exam_result_list, name='exam_result_list'),
 
