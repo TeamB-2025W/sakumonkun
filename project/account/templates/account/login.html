@@ -1,8 +1,7 @@
 {% extends 'app/base.html' %}
-{% load i18n %}
 {% load account %}
 
-{% block title %}{% trans "ログイン" %}{% endblock %}
+{% block title %}ログイン{% endblock %}
 
 {% block content %}
 <div class="login-container">
@@ -14,11 +13,11 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <button class="primaryAction" type="submit">{% trans "ログイン" %}</button>
+        <button class="primaryAction" type="submit">ログイン</button>
     </form>
 
     <p>
-        <a href="{% url 'accounts:account_signup' %}" class="login-block">{% trans "新規登録" %}</a>
+        <a href="{% url 'accounts:account_signup' %}" class="login-block">新規登録</a>
     </p>
 </div>
 {% endblock %}
