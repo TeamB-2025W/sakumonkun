@@ -16,14 +16,6 @@
         <a href="{% url 'app:question_delete' %}">問題削除</a> 
         (<a href="{% url 'app:question_delete' %}">/test/modal/confirm_question_deletion</a>)
       </li>
-      <li>
-        <a href="{% url 'app:get_exam' testid=1 %}">試験受験</a> 
-        (<a href="{% url 'app:get_exam' testid=1 %}">/exam/1/</a>)
-      </li>
-    <li>
-        <a href="{% url 'app:exam_result' examinationid=1 %}">試験結果</a> 
-        (<a href="{% url 'app:exam_result' examinationid=1 %}">/exam/result/1/</a>)
-    </li>
     </ul>
 
   <h2>作成テスト一覧</h2>
@@ -49,7 +41,7 @@
         <td>{{ test.question_count }}</td>
         <td>
           <div class="function-buttons">
-            <a href="{% url 'app:exam_result_list' testid=test.id %}" class="link-button">回答確認</a>
+            <a href="{% url 'app:exam_result_list_for_admin' testid=test.id %}" class="link-button">回答確認</a>
             <a href="{% url 'app:test_detail' testid=test.id %}" class="link-button">詳細</a>
             <button class="link-button" onclick="toggleModal('{{ test.title }}', '{{ test.id }}')">削除</button>
           </div>

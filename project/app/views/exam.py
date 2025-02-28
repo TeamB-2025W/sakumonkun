@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from app.models import Test, Question, QuestionChoice, Examination, Answer
+from app.views import crypturl
 
 
-def get_exam(request, testid):
+def get_exam(request, signed_testid):
     """試験画面を表示する
 
     Returns:
@@ -14,6 +15,7 @@ def get_exam(request, testid):
                 - question (Question): 問題情報（問題文、配点）
                 - questionchoices (list[QuestionChoice]): 選択肢リスト
     """
+    testid = crypturl.verify_exam_url(signed_testid)
     model = Test.objects.get(pk=testid)
     question_list = []
     
@@ -31,7 +33,7 @@ def get_exam(request, testid):
     return render(request, 'app/exam/exam.html', context) 
 
 
-def post_exam(request, testid):
+def post_exam(request, signed_testid):
     """試験の回答を保存する
 
     Expected POST data:
@@ -57,6 +59,7 @@ def post_exam(request, testid):
     Returns:
         結果画面へのリダイレクト
     """
+    testid = crypturl.verify_exam_url(signed_testid)
     if request.method == 'POST':
         testid = Test.objects.get(pk=testid)
         #まずはこのテストをExaminationに保存し、そのexaminationのidを取得
@@ -82,10 +85,54 @@ def post_exam(request, testid):
                 iscorrect=is_correct
             )
 
-        return redirect('app:exam_result', examinationid=examination.id)
+        return redirect('app:exam_result', signed_examinationid=crypturl.generate_exam_result_url(examination.id))
 
 
-def exam_result(request, examinationid):
+def exam_result(request, signed_examinationid):
+    """試験結果画面を表示する
+
+    Returns:
+        テンプレートコンテキスト:
+            model (Examination): 受験情報
+                - id: 受験ID
+                - guestname: 受験者名
+            answer_list (list[dict]): 回答結果リスト
+                - answer (Answer): 回答情報（選択肢、正誤）
+                - question (Question): 問題情報
+                - questionchoice_text (str): 選択された選択肢
+                - correct_choice_text (str): 正解の選択肢
+            correct_count (int): 正解数
+            total_count (int): 問題総数
+    """
+    examinationid = crypturl.verify_exam_result_url(signed_examinationid)
+    model = Examination.objects.get(pk=examinationid)
+    answer_list = []
+    for answer in Answer.objects.filter(examinationid=examinationid):
+        question = answer.questionid
+        questionchoice_text = QuestionChoice.objects.get(id=answer.selected_sequence)
+        correct_choice_text = QuestionChoice.objects.get(id=answer.questionid.correct_sequence)
+        answer_list.append({
+            'answer': answer,
+            'question': question,
+            'questionchoice_text': questionchoice_text,
+            'correct_choice_text': correct_choice_text,
+        })
+
+    # 正解数を計算
+    correct_count = len([answer for answer in answer_list if answer['answer'].iscorrect])
+    total_count = len(answer_list)
+    
+    context = {
+        'model': model,
+        'answer_list': answer_list,
+        'correct_count': correct_count,
+        'total_count': total_count,
+    }
+
+    return render(request, 'app/exam/exam_result.html', context) 
+
+
+def exam_result_for_admin(request, examinationid):
     """試験結果画面を表示する
 
     Returns:
@@ -125,9 +172,10 @@ def exam_result(request, examinationid):
         'total_count': total_count,
     }
 
-    return render(request, 'app/exam/exam_result.html', context) 
+    return render(request, 'app/exam/exam_result_for_admin.html', context) 
 
 
+# リストは管理者画面のため、URLの暗号化は不要
 def exam_result_list(request, testid):
     """特定のテストに紐づく試験結果一覧画面を表示する
 

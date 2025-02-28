@@ -34,9 +34,10 @@ urlpatterns = [
 
 
     # Exam-related URLs
-    path('exam/<int:testid>/', exam.get_exam, name='get_exam'),  # 受験ページ
-    path('exam/<int:testid>/post/', exam.post_exam, name='post_exam'),  # 回答送信
-    path('exam/result/<int:examinationid>/', exam.exam_result, name='exam_result'),  # 結果ページ
+    path('exam/<str:signed_testid>/', exam.get_exam, name='get_exam'),  # 受験ページ
+    path('exam/<str:signed_testid>/post/', exam.post_exam, name='post_exam'),  # 回答送信
+    path('exam/result/<str:signed_examinationid>/', exam.exam_result, name='exam_result'),  # 結果ページ
+    path('exam/result/admin/<str:examinationid>/', exam.exam_result_for_admin, name='exam_result_for_admin'),  # 結果ページ
 
 
 ]

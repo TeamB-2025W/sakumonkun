@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.utils import timezone
 from app.forms.test import TestForm
 from app.models import Test, Question, QuestionChoice
+from app.views import crypturl
 import json
 
 # ホーム画面（テスト一覧）
@@ -101,7 +102,8 @@ def creation_successful(request, testid):
 def test_detail(request, testid):
     # テストIDに基づいてTestオブジェクトを取得
     test = get_object_or_404(Test, id=testid)
-    
+    test.signed_id = crypturl.generate_exam_url(testid)
+
     # テストに関連する質問と選択肢を取得
     questions = test.questions.prefetch_related('choices').all()
 

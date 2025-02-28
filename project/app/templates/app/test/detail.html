@@ -16,7 +16,7 @@
             </div> -->
             <h2 class="exam_title_text">テストのURL</h2>
             <div class="exam_url_box">
-                <input type="text" class="url_get" value="http://localhost:8000/exam/{{ test.id }}" readonly aria-label="URL to copy">
+                <input type="text" class="url_get" value="{{ test.signed_id }}" readonly aria-label="URL to copy">
                 <button class="copy_button" aria-label="Copy URL to clipboard">Copy</button>
             </div>
         </div>
