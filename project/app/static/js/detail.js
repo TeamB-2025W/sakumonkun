@@ -24,19 +24,16 @@ copyButton.addEventListener('click', () => {
 
 //編集・削除ボタンの挙動
 
-// ブロックidを格納する変数を作成
-let currentBlockId = '';
+const updateQuestionForm = document.getElementById('update_question_form');
 
 // 編集ボタンの動作
 function showEditForm(blockId) {
     const block = document.getElementById(blockId);
     const viewMode = block.querySelector('.view_mode');
     const editMode = block.querySelector('.edit_mode');
-    const content = block.querySelector('.view_content');//編集前の内容を格納
-            
+      
     viewMode.style.display = 'none';
     editMode.style.display = 'block';
-    editMode.querySelector('.edit_content') = content;//編集前の内容を編集画面に表示
 }
 
 // 保存ボタンの動作
@@ -44,9 +41,8 @@ function saveEdit(blockId) {
     const block = document.getElementById(blockId);
     const viewMode = block.querySelector('.view_mode');
     const editMode = block.querySelector('.edit_mode');
-    const newContent = editForm.querySelector('.edit_content');//編集後の内容を格納
     
-    block.querySelector('.view-content') = newContent;//編集後の内容を表示
+    updateQuestionForm.submit();
     viewMode.style.display = 'block';
     editMode.style.display = 'none';
 }
@@ -61,6 +57,7 @@ function cancelEdit(blockId) {
     editForm.style.display = 'none';
 }
 
+let currentBlockId = '';// ブロックidを格納する変数を作成
 const body = document.body;
 let scrollPosition = 0;
 
@@ -82,14 +79,8 @@ function closeModal() {
 }
 
 // ブロック削除処理＆DB削除処理
-function deleteBlock() {
-    if (currentBlockId) {
-        const blockElement = document.getElementById(currentBlockId);
-        if (blockElement) {
-            blockElement.remove();
-        }
-    }
-    closeModal();
+function deleteBlock(blockId) {
+    document.getElementById(`delete_${blockId}`).submit();
 }
 
 // モーダル外クリックでモーダルを閉じる
