@@ -149,8 +149,9 @@ class Answer(models.Model):
     questionid = models.ForeignKey(
         Question, 
         verbose_name='問題ID', 
-        on_delete=models.DO_NOTHING, # 影響なし
-        db_column='questionid'
+        on_delete=models.SET_NULL, # 影響なし
+        db_column='questionid',
+        null=True,
     )
     selected_sequence = models.IntegerField('選択肢順番')
     iscorrect = models.BooleanField('正解', default=False)
