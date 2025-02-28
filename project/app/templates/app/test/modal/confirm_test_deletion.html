@@ -6,6 +6,7 @@
   <div class="flex">
     <form method="post" id="delete-form">
       {% csrf_token %}
+      <input type="hidden" name="delete">
     </form>
     <button form="delete-form" type="submit">削除する</button>
     <button id="close-modal-button" onclick="toggleModal()">戻る</button>
