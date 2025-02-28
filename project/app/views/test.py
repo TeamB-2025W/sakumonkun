@@ -49,15 +49,15 @@ def create(request):
                 print('question_text', question_count, question_text, request)
                 if not question_text:
                     break
-                correct_choice = request.POST.get(f'correct_{question_count}')
+                correct_sequence = request.POST.get(f'correct_{question_count}')
                 explanation = request.POST.get(f'commentary_{question_count}')
-                print('question_text', 'correct_choice', 'explanation')
+                print('question_text', 'correct_sequence', 'explanation')
 
                 # Questionの作成
                 question = Question(
                     testid=test,
                     text=question_text,
-                    correct_choiceid=int(correct_choice),
+                    correct_sequence=int(correct_sequence),
                     explanation=explanation,
                 )
                 question.save()
@@ -68,6 +68,7 @@ def create(request):
                     if choice_text:
                         choice = QuestionChoice(
                             questionid=question,
+                            sequence=choice_number,
                             text=choice_text
                         )
                         choice.save()
