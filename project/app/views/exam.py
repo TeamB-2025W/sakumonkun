@@ -68,17 +68,17 @@ def post_exam(request, testid):
         # questionオブジェクトを直接取得
         for question in Question.objects.filter(testid=testid):
             # questionはオブジェクトなのでidにアクセス可能
-            selected_choiceid = request.POST.get(f'question_{question.id}')
+            selected_sequence = request.POST.get(f'question_{question.id}')
             #   value="{{ questionchoice.id }}"   <=   question_1
             is_correct = False
             
-            if selected_choiceid:
-                is_correct = int(selected_choiceid) == question.correct_choiceid
+            if selected_sequence:
+                is_correct = int(selected_sequence) == question.correct_sequence
             
             Answer.objects.create(
                 examinationid=examination,
                 questionid=question,
-                selected_choiceid=selected_choiceid,
+                selected_sequence=selected_sequence,
                 iscorrect=is_correct
             )
 
@@ -105,8 +105,8 @@ def exam_result(request, examinationid):
     answer_list = []
     for answer in Answer.objects.filter(examinationid=examinationid):
         question = answer.questionid
-        questionchoice_text = QuestionChoice.objects.get(id=answer.selected_choiceid)
-        correct_choice_text = QuestionChoice.objects.get(id=answer.questionid.correct_choiceid)
+        questionchoice_text = QuestionChoice.objects.get(id=answer.selected_sequence)
+        correct_choice_text = QuestionChoice.objects.get(id=answer.questionid.correct_sequence)
         answer_list.append({
             'answer': answer,
             'question': question,

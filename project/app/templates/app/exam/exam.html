@@ -38,8 +38,8 @@
                             <!-- 選択肢の数だけループ -->
                             {% for question_choice in items.questionchoices %}
                             <div class="choices">
-                                <input type="radio" name="question_{{ items.question.id }}" id="radio_{{ question_choice.id }}" value="{{ question_choice.id }}" required>
-                                <label for="radio_{{ question_choice.id }}">{{ question_choice.text }}</label>
+                                <input type="radio" name="question_{{ items.question.id }}" id="radio_{{ question_choice.sequence }}" value="{{ question_choice.sequence }}" required>
+                                <label for="radio_{{ question_choice.sequence }}">{{ question_choice.text }}</label>
                             </div>
                             {% endfor %}
                         </div>
