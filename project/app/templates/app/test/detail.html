@@ -59,14 +59,26 @@
                     </div>
                     <div class="detail_button_block">
                         <!-- 編集ボタン -->
-                        <button type="button" class="detail_button button_update" onclick="showEditForm('{{ question.id }}')">編集</button>
+                        <button type="button" class="detail_button button_update" id="edit_button_{{ question.id }}" onclick="showEditForm('{{ question.id }}')">編集</button>
                         <!-- 削除ボタン -->
                         <form method="post" id="delete_{{ question.id }}" action="{% url 'app:test_detail' test.id %}">
                             {% csrf_token %}
                             <input type="hidden" name="question_id" value="{{ question.id }}">                   
                             <input type="hidden" name="delete_question" value="">
-                            <button type="button" class="detail_button button_delete" onclick="showDeleteConfirmation('{{ question.id }}')">削除</button>
+                            <button type="button" class="detail_button button_delete" id="delete_button_{{ question.id }}" onclick="showDeleteConfirmation('{{ question.id }}')">削除</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- モーダル -->
+            <div id="deleteConfirmationModal" class="delete_modal">
+                <div class="modal_content">
+                    <h2>確認</h2>
+                    <p>この問題を削除してよろしいですか？</p>
+                    <div class="delete_modal_buttons">
+                    <button id="confirmButton" class="confirm_delete" onclick="deleteBlock('{{ question.id }}')">削除</button>
+                    <button id="cancelButton" class="cancel_submit" onclick="closeModal()">キャンセル</button>
                     </div>
                 </div>
             </div>
@@ -105,17 +117,6 @@
         </div>
     </div>
 
-    <!-- モーダル -->
-    <div id="deleteConfirmationModal" class="delete_modal">
-        <div class="modal_content">
-            <h2>確認</h2>
-            <p>この問題を削除してよろしいですか？</p>
-            <div class="delete_modal_buttons">
-              <button method="post" id="confirmButton" class="confirm_delete" onclick="deleteBlock('{{ question.id }}')">削除</button>
-              <button id="cancelButton" class="cancel_submit" onclick="closeModal()">キャンセル</button>
-            </div>
-        </div>
-    </div>
     {% endfor %}
 
 </div>
