@@ -33,7 +33,7 @@ def get_exam(request, signed_testid):
     return render(request, 'app/exam/exam.html', context) 
 
 
-def post_exam(request, signed_testid):
+def post_exam(request, testid):
     """試験の回答を保存する
 
     Expected POST data:
@@ -59,7 +59,6 @@ def post_exam(request, signed_testid):
     Returns:
         結果画面へのリダイレクト
     """
-    testid = crypturl.verify_exam_url(signed_testid)
     if request.method == 'POST':
         testid = Test.objects.get(pk=testid)
         #まずはこのテストをExaminationに保存し、そのexaminationのidを取得
