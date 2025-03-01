@@ -6,6 +6,7 @@ from app.forms.test import TestForm
 from app.models import Test, Question, QuestionChoice
 from app.views import crypturl
 import json
+import os
 
 # ホーム画面（テスト一覧）
 def home(request):
@@ -91,7 +92,9 @@ def create(request):
 # テスト作成完了
 def creation_successful(request, testid):
     test = get_object_or_404(Test, id=testid)
-    print(test.id)
+    host_url = os.getenv("HOST_URL")
+    test.signed_id = f"{host_url}exam/{crypturl.generate_exam_url(testid)}"
+
     context = {
         'test': test,
     }
@@ -103,12 +106,8 @@ def test_detail(request, testid):
     # テストIDに基づいてTestオブジェクトを取得
     test = get_object_or_404(Test, id=testid)
 
-    """*******************************
-
-        開発環境のURLが入力されています
-
-    *******************************"""
-    test.signed_id = "http://localhost:8000/exam/" + crypturl.generate_exam_url(testid)
+    host_url = os.getenv("HOST_URL")
+    test.signed_id = f"{host_url}exam/{crypturl.generate_exam_url(testid)}"
 
     # テストに関連する質問と選択肢を取得
     questions = test.questions.prefetch_related('choices').all()
