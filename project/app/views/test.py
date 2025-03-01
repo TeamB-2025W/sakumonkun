@@ -102,7 +102,13 @@ def creation_successful(request, testid):
 def test_detail(request, testid):
     # テストIDに基づいてTestオブジェクトを取得
     test = get_object_or_404(Test, id=testid)
-    test.signed_id = crypturl.generate_exam_url(testid)
+
+    """*******************************
+
+        開発環境のURLが入力されています
+
+    *******************************"""
+    test.signed_id = "http://localhost:8000/exam/" + crypturl.generate_exam_url(testid)
 
     # テストに関連する質問と選択肢を取得
     questions = test.questions.prefetch_related('choices').all()
