@@ -25,7 +25,7 @@ class QuestionForm(forms.ModelForm):
 
     class Meta:
         model = Question # models.py から Testを継承
-        fields = ['text', 'explanation', 'correct_choiceid']
+        fields = ['text', 'explanation', 'correct_sequence']
 
 
 class QuestionChoiceForm(forms.ModelForm):

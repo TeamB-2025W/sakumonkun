@@ -7,11 +7,11 @@ class AnswerForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['examinationid'].widget = forms.HiddenInput()
         self.fields['questionid'].widget = forms.HiddenInput()
-        self.fields['selected_choiceid'].widget = forms.HiddenInput()
+        self.fields['selected_sequence'].widget = forms.HiddenInput()
 
     class Meta:
         model = Answer
-        fields = ['examinationid', 'questionid', 'selected_choiceid']
+        fields = ['examinationid', 'questionid', 'selected_sequence']
 
 class ExaminationForm(forms.ModelForm):
     class Meta:

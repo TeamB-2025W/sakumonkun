@@ -1,0 +1,52 @@
+{% extends "app/base.html" %}
+{% load i18n %}
+{% load account %}
+{% load allauth %}
+{% block head_title %}
+    {% trans "Confirm Email Address" %}
+{% endblock head_title %}
+{% block content %}
+<div class="confirm-email">
+    <h1 class="confirm-email">
+        {% trans "Confirm Email Address" %}
+    </h1>
+    {% if confirmation %}
+        {% user_display confirmation.email_address.user as user_display %}
+        {% if can_confirm %}
+            {% blocktrans with confirmation.email_address.email as email %}
+            <a href="mailto:{{ email }}" class="confirm-email">{{ email }}</a>
+            <p class="confirm-email">こちらのメールアドレスが</p>
+            <p class="confirm-email">{{ user_display }} さんのものであることを確認してください。</p>
+            {% endblocktrans %}
+            {% url 'account_confirm_email' confirmation.key as action_url %}
+            {% element form method="post" action=action_url %}
+                {% slot actions %}
+                    {% csrf_token %}
+                    {{ redirect_field }}
+                    <button type="submit" class="confirm-email">
+                        確認する
+                    </button>
+                {% endslot %}
+            {% endelement %}
+        {% else %}
+            <p class="confirm-email">
+                こちらのメールアドレスは、すでに利用されています。
+                {{ email }}
+            </p>
+        {% endif %}
+    {% else %}
+        {% url 'account_email' as email_url %}
+        <p class="confirm-email">
+            メールアドレス確認用のリンクが不正か、期限が切れています。<br>
+            <a href="{{ email_url }}">確認用のメールを再送する</a>
+        </p>
+    {% endif %}
+</div>
+{% endblock content %}
+
+{% comment %}
+Docker内でのデフォルトテンプレートのパス
+- /usr/local/lib/python3.11/site-packages/allauth/templates/account
+参考: ファイルと用途の対応
+- https://qiita.com/NOIZE/items/0522825a1de1d6aa4a2b#account--email--file
+{% endcomment %}

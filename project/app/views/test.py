@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count
+from django.http import JsonResponse
+from django.utils import timezone
 from app.forms.test import TestForm
-from app.models import User, Test, Question, QuestionChoice
-
+from app.models import Test, Question, QuestionChoice
+from app.views import crypturl
+import json
 
 # ホーム画面（テスト一覧）
 def home(request):
@@ -47,15 +50,15 @@ def create(request):
                 print('question_text', question_count, question_text, request)
                 if not question_text:
                     break
-                correct_choice = request.POST.get(f'correct_{question_count}')
+                correct_sequence = request.POST.get(f'correct_{question_count}')
                 explanation = request.POST.get(f'commentary_{question_count}')
-                print('question_text', 'correct_choice', 'explanation')
+                print('question_text', 'correct_sequence', 'explanation')
 
                 # Questionの作成
                 question = Question(
                     testid=test,
                     text=question_text,
-                    correct_choiceid=int(correct_choice),
+                    correct_sequence=int(correct_sequence),
                     explanation=explanation,
                 )
                 question.save()
@@ -66,6 +69,7 @@ def create(request):
                     if choice_text:
                         choice = QuestionChoice(
                             questionid=question,
+                            sequence=choice_number,
                             text=choice_text
                         )
                         choice.save()
@@ -96,44 +100,103 @@ def creation_successful(request, testid):
 
 # テスト詳細
 def test_detail(request, testid):
+    # テストIDに基づいてTestオブジェクトを取得
     test = get_object_or_404(Test, id=testid)
-    context = {
-        'test': test
-    }
-    return render(request, 'app/test/detail.html', context)
 
+    """*******************************
 
-# テスト編集
-def test_update(request, testid=None):
-    test = get_object_or_404(Test, pk=testid)
+        開発環境のURLが入力されています
 
+    *******************************"""
+    test.signed_id = "http://localhost:8000/exam/" + crypturl.generate_exam_url(testid)
+
+    # テストに関連する質問と選択肢を取得
+    questions = test.questions.prefetch_related('choices').all()
+
+    # **リクエストメソッドに基づいて処理を分岐**
     if request.method == 'POST':
-        form = TestForm(request.POST, instance=test)
-        if form.is_valid():
-            form.save()
-            return redirect('app:home')
-    else:
-        form = TestForm(instance=test)
+        try:
+            if 'update_question' in request.POST:  # 質問更新フォームの送信
+                question_id = request.POST.get('question_id')
+                question = get_object_or_404(Question, id=int(question_id))
 
+                # 質問のテキストを更新
+                question.text = request.POST.get('text', question.text)
+                question.updated_at = timezone.now()
+
+                # 正解の選択肢を更新
+                correct_choice_id = request.POST.get('correct_choice')
+                if correct_choice_id:
+                   question.correct_sequence = correct_choice_id
+
+                question.save()
+
+                # 選択肢の更新
+                for key, value in request.POST.items():
+                    if key.startswith('choice_'):
+                        choice_id = key.split('_')[2]
+                        choice = get_object_or_404(QuestionChoice, id=choice_id)
+                        choice.text = value
+                        choice.updated_at = timezone.now()
+                        choice.save()
+
+                # Testのupdated_atを更新
+                test.updated_at = timezone.now()
+                test.save()
+
+                return redirect('app:test_detail', testid=testid)
+            
+            # 質問削除フォームの送信かどうかを確認
+            elif 'delete_question' in request.POST:
+                question_id = request.POST.get('question_id')
+                question = get_object_or_404(Question, id=question_id)
+                
+                # 関連するQuestionChoiceを削除
+                question.choices.all().delete()
+
+                # Question を削除
+                question.delete()
+
+                # Testのupdated_atを更新
+                test.updated_at = timezone.now()
+                test.save()
+                
+                # 削除成功のレスポンスを返す
+                # return JsonResponse({'status': 'success', 'message': str(question_id)})
+
+        
+        # 例外が発生した場合
+        except Exception as e:
+            # エラーメッセージを返す
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
+    # テンプレートに渡すコンテキスト
     context = {
-        'form': form,
-        'testid': testid
+        'test': test,
+        'questions': questions,
     }
     
-    return render(request, 'app/test/update.html', context)
+    # 'app/test/detail.html'テンプレートをレンダリングして返す
+    return render(request, 'app/test/detail.html', context)
 
 
 # テスト削除
 def test_delete(request, testid):
+    test = get_object_or_404(Test, id=testid)
     if request.method == 'POST':
-        testid = request.POST.get('testid')
-        if testid:
-            test = Test.objects.get(id=testid)
+        if "delete" in request.POST:
+            # テストに紐づく問題全てを取得
+            for question in test.questions.all():
+                # 各問題に紐づく選択肢を全て削除
+                question.choices.all().delete()
+            # テストに紐づく問題全てを削除
+            test.questions.all().delete()
+            # テストを削除
             test.delete()
             return redirect('app:home')
-        
-    return render(request, 'app/test/modal/confirm_test_deletion.html')
-
-
-def test_delete_confirm(request):
-    return render(request, 'app/test/modal/confirm_test_deletion.html')
+    
+    context = {
+        'test': test
+    }
+    
+    return render(request, 'app/test/index.html', context)

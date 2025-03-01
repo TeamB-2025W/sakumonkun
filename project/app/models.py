@@ -57,14 +57,10 @@ class Test(models.Model):
     userid = models.ForeignKey(
         User, 
         verbose_name='ユーザーID', 
-        on_delete=models.PROTECT,
+        on_delete=models.SET_NULL,
         db_column='userid',
-        
-        # デバッグ中のみ
-        null=True,
-        blank=True
-        # ここまで
-    
+        related_name='tests',
+        null=True,  # SET_NULLを使用する場合は必須
     )
     title = models.CharField('問題タイトル', max_length=50)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
@@ -82,11 +78,11 @@ class Question(models.Model):
     testid = models.ForeignKey(
         Test, 
         verbose_name='テストID', 
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         db_column='testid',
         related_name='questions', 
     )
-    correct_choiceid = models.IntegerField('正解の選択肢')
+    correct_sequence = models.IntegerField('正解の選択肢順番')
     text = models.TextField('問題文')
     explanation = models.TextField('解説', null=True, blank=True)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
@@ -104,16 +100,18 @@ class QuestionChoice(models.Model):
     questionid = models.ForeignKey(
         Question, 
         verbose_name='問題ID', 
-        on_delete=models.PROTECT,
-        db_column='questionid'
-    )
-    
+        on_delete=models.CASCADE,
+        db_column='questionid',
+        related_name='choices',
+        )
+    sequence = models.IntegerField('順番')
     text = models.TextField('選択肢文')
     created_at = models.DateTimeField('作成日時', default=timezone.now)
     updated_at = models.DateTimeField('更新日時', default=timezone.now)
 
     class Meta:
         db_table = 'question_choices'
+        unique_together = ['questionid', 'sequence']
 
     def __str__(self):
         return str(self.id)
@@ -124,7 +122,7 @@ class Examination(models.Model):
     testid = models.ForeignKey(
         Test, 
         verbose_name='テストID', 
-        on_delete=models.PROTECT,
+        on_delete=models.DO_NOTHING, # 影響なし
         db_column='testid'
     )
     guestname = models.CharField('ゲスト名', max_length=20)
@@ -145,16 +143,17 @@ class Answer(models.Model):
     examinationid = models.ForeignKey(
         Examination, 
         verbose_name='受験ID', 
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         db_column='examinationid'
     )
     questionid = models.ForeignKey(
         Question, 
         verbose_name='問題ID', 
-        on_delete=models.PROTECT,
-        db_column='questionid'
+        on_delete=models.SET_NULL, # 影響なし
+        db_column='questionid',
+        null=True,
     )
-    selected_choiceid = models.IntegerField('選択肢')
+    selected_sequence = models.IntegerField('選択肢順番')
     iscorrect = models.BooleanField('正解', default=False)
     created_at = models.DateTimeField('作成日時', default=timezone.now)
     updated_at = models.DateTimeField('更新日時', default=timezone.now)
