@@ -23,7 +23,7 @@
                     <td class="records_table_th">{{ records.answered_at }}</td>
                     <td class="records_table_th">{{ records.correct_count }}/{{ records.total_count }}</td>
                     <td class="records_table_th">
-                        <a class="records_button" id="detail-button-{{ records.id }}" href="{% url 'app:exam_result' examinationid=records.id %}" target="_blank" rel="noopener noreferrer"">回答詳細</a>
+                        <a class="records_button" id="detail-button-{{ records.id }}" href="{% url 'app:exam_result_for_admin' examinationid=records.id %}" target="_blank" rel="noopener noreferrer"">回答詳細</a>
                     </td>
                 </tr>
                 {% endfor %}

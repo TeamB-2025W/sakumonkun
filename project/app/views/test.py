@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.utils import timezone
 from app.forms.test import TestForm
 from app.models import Test, Question, QuestionChoice
+from app.views import crypturl
 import json
 
 # ホーム画面（テスト一覧）
@@ -49,15 +50,15 @@ def create(request):
                 print('question_text', question_count, question_text, request)
                 if not question_text:
                     break
-                correct_choice = request.POST.get(f'correct_{question_count}')
+                correct_sequence = request.POST.get(f'correct_{question_count}')
                 explanation = request.POST.get(f'commentary_{question_count}')
-                print('question_text', 'correct_choice', 'explanation')
+                print('question_text', 'correct_sequence', 'explanation')
 
                 # Questionの作成
                 question = Question(
                     testid=test,
                     text=question_text,
-                    correct_choiceid=int(correct_choice),
+                    correct_sequence=int(correct_sequence),
                     explanation=explanation,
                 )
                 question.save()
@@ -68,6 +69,7 @@ def create(request):
                     if choice_text:
                         choice = QuestionChoice(
                             questionid=question,
+                            sequence=choice_number,
                             text=choice_text
                         )
                         choice.save()
@@ -100,7 +102,14 @@ def creation_successful(request, testid):
 def test_detail(request, testid):
     # テストIDに基づいてTestオブジェクトを取得
     test = get_object_or_404(Test, id=testid)
-    
+
+    """*******************************
+
+        開発環境のURLが入力されています
+
+    *******************************"""
+    test.signed_id = "http://localhost:8000/exam/" + crypturl.generate_exam_url(testid)
+
     # テストに関連する質問と選択肢を取得
     questions = test.questions.prefetch_related('choices').all()
 
@@ -174,15 +183,21 @@ def test_detail(request, testid):
 
 # テスト削除
 def test_delete(request, testid):
+    test = get_object_or_404(Test, id=testid)
     if request.method == 'POST':
-        # testid = request.POST.get('testid')
-        if testid:
-            test = Test.objects.get(id=testid)
+        if "delete" in request.POST:
+            # テストに紐づく問題全てを取得
+            for question in test.questions.all():
+                # 各問題に紐づく選択肢を全て削除
+                question.choices.all().delete()
+            # テストに紐づく問題全てを削除
+            test.questions.all().delete()
+            # テストを削除
             test.delete()
             return redirect('app:home')
-        
-    return render(request, 'app/test/modal/confirm_test_deletion.html')
-
-
-def test_delete_confirm(request):
-    return render(request, 'app/test/modal/confirm_test_deletion.html')
+    
+    context = {
+        'test': test
+    }
+    
+    return render(request, 'app/test/index.html', context)
