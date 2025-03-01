@@ -99,7 +99,7 @@ def exam_result(request, signed_examinationid):
             answer_list (list[dict]): 回答結果リスト
                 - answer (Answer): 回答情報（選択肢、正誤）
                 - question (Question): 問題情報
-                - questionchoice_text (str): 選択された選択肢
+                - selected_choice_text (str): 選択された選択肢
                 - correct_choice_text (str): 正解の選択肢
             correct_count (int): 正解数
             total_count (int): 問題総数
@@ -109,12 +109,18 @@ def exam_result(request, signed_examinationid):
     answer_list = []
     for answer in Answer.objects.filter(examinationid=examinationid):
         question = answer.questionid
-        questionchoice_text = QuestionChoice.objects.get(id=answer.selected_sequence)
-        correct_choice_text = QuestionChoice.objects.get(id=answer.questionid.correct_sequence)
+        selected_choice_text = QuestionChoice.objects.get(
+            questionid=question,
+            sequence=answer.selected_sequence
+        )
+        correct_choice_text = QuestionChoice.objects.get(
+            questionid=question,
+            sequence=question.correct_sequence
+        )
         answer_list.append({
             'answer': answer,
             'question': question,
-            'questionchoice_text': questionchoice_text,
+            'selected_choice_text': selected_choice_text,
             'correct_choice_text': correct_choice_text,
         })
 
@@ -143,7 +149,7 @@ def exam_result_for_admin(request, examinationid):
             answer_list (list[dict]): 回答結果リスト
                 - answer (Answer): 回答情報（選択肢、正誤）
                 - question (Question): 問題情報
-                - questionchoice_text (str): 選択された選択肢
+                - selected_choice_text (str): 選択された選択肢
                 - correct_choice_text (str): 正解の選択肢
             correct_count (int): 正解数
             total_count (int): 問題総数
@@ -152,13 +158,45 @@ def exam_result_for_admin(request, examinationid):
     answer_list = []
     for answer in Answer.objects.filter(examinationid=examinationid):
         question = answer.questionid
-        questionchoice_text = QuestionChoice.objects.get(id=answer.selected_sequence)
-        correct_choice_text = QuestionChoice.objects.get(id=answer.questionid.correct_sequence)
+        selected_choice_text = None
+        correct_choice_text = None
+
+        # 問題が削除されている場合のハンドリング
+        if question is None:
+            answer_list.append({
+                'answer': answer,
+                'question': {'text': '問題は削除されました'},
+                'selected_choice_text': {'text': '問題が削除されたため表示できません'},
+                'correct_choice_text': {'text': '問題が削除されたため表示できません'},
+            })
+            continue
+
+        # 選択された回答の取得（存在しない場合はNone）
+        if answer.selected_sequence:
+            try:
+                selected_choice_text = QuestionChoice.objects.get(
+                    questionid=question,
+                    sequence=answer.selected_sequence
+                )
+            except QuestionChoice.DoesNotExist:
+                selected_choice_text = {'text': f'選択肢{answer.selected_sequence}は削除されました'}
+
+        # 正解の選択肢の取得（存在しない場合はNone）
+        try:
+            correct_choice_text = QuestionChoice.objects.get(
+                questionid=question,
+                sequence=question.correct_sequence
+            )
+        except QuestionChoice.DoesNotExist:
+            correct_choice_text = {'text': f'正解の選択肢（{question.correct_sequence}）は削除されました'}
+        except AttributeError:  # correct_sequenceが設定されていない場合
+            correct_choice_text = {'text': '正解が設定されていません'}
+
         answer_list.append({
             'answer': answer,
             'question': question,
-            'questionchoice_text': questionchoice_text,
-            'correct_choice_text': correct_choice_text,
+            'selected_choice_text': selected_choice_text or {'text': '未回答'},
+            'correct_choice_text': correct_choice_text or {'text': '正解が設定されていません'},
         })
 
     # 正解数を計算
