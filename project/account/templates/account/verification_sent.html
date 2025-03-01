@@ -1,0 +1,17 @@
+{% extends "app/base.html" %}
+{% load i18n %}
+{% load allauth %}
+{% block head_title %}
+    {% trans "Verify Your Email Address" %}
+{% endblock head_title %}
+{% block content %}
+<div class="confirm-email">
+    <h1 class="confirm-email">メールアドレスを確認してください</h1>
+    <p class="confirm-email">
+      確認のメールを送信しました。<br>
+      メールに記載されたリンクをクリックして、ユーザー登録を完了させてください。<br>
+      確認メールが届かないときは迷惑メールフォルダをご確認ください。<br>
+      しばらくしても確認のメールが届かない場合はお問い合わせください。
+    </p>
+</div>
+{% endblock content %}
