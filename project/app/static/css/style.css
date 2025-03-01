@@ -130,21 +130,21 @@ header > nav > a:nth-of-type(2) {
   width: 520px;
 }
 
-label.choiceies > p {
+label.choices > p {
   font-weight: bold;
   display: block;
 }
 
-label.choiceies > p:nth-of-type(1) {
+label.choices > p:nth-of-type(1) {
   margin-right: auto;
 }
 
-ol.choiceies > li > * {
+ol.choices > li > * {
   display: block;
   margin-top: 8px;
 }
 
-ol.choiceies > li > input:nth-of-type(1) {
+ol.choices > li > input:nth-of-type(1) {
   width: 640px;
   margin-left: 8px;
   margin-right: 12px;
@@ -376,4 +376,17 @@ form.logout > button {
 
 .modal > .flex > button:nth-of-type(1) {
   background: #ff1500;
+}
+
+.modal.create {
+  color: red;
+  font-weight: bold;
+  position: absolute;
+  top: 35%;
+  left: calc(50vw - 200px);
+}
+
+.modal.create > p {
+  font-size: 2rem;
+  margin-top: 64px;
 }
