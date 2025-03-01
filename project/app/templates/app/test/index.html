@@ -41,7 +41,7 @@
         <td>{{ test.question_count }}</td>
         <td>
           <div class="function-buttons">
-            <a href="{% url 'app:exam_result_list_for_admin' testid=test.id %}" class="link-button">回答確認</a>
+            <a href="{% url 'app:exam_result_list' testid=test.id %}" class="link-button">回答確認</a>
             <a href="{% url 'app:test_detail' testid=test.id %}" class="link-button">詳細</a>
             <button class="link-button" onclick="toggleModal('{{ test.title }}', '{{ test.id }}')">削除</button>
           </div>
