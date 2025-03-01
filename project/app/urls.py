@@ -18,7 +18,7 @@ urlpatterns = [
 
     # path('test/update/<int:testid>/', test.test_update, name='test_update'),
     path('test/modal/confirm_test_deletion/', test.test_delete, name='test_delete'),
-    path('test/update/<int:testid>/', test.test_update, name='test_update'),
+    # path('test/update/<int:testid>/', test.test_update, name='test_update'),
     path('test/delete/<int:testid>/', test.test_delete, name='test_delete'),
     path('test/<int:testid>/results', exam.exam_result_list, name='exam_result_list'),
 
@@ -34,9 +34,10 @@ urlpatterns = [
 
 
     # Exam-related URLs
-    path('exam/<int:testid>/', exam.get_exam, name='get_exam'),  # 受験ページ
-    path('exam/<int:testid>/post/', exam.post_exam, name='post_exam'),  # 回答送信
-    path('exam/result/<int:examinationid>/', exam.exam_result, name='exam_result'),  # 結果ページ
+    path('exam/<str:signed_testid>/', exam.get_exam, name='get_exam'),  # 受験ページ
+    path('exam/<str:signed_testid>/post/', exam.post_exam, name='post_exam'),  # 回答送信
+    path('exam/result/<str:signed_examinationid>/', exam.exam_result, name='exam_result'),  # 結果ページ
+    path('exam/result/admin/<str:examinationid>/', exam.exam_result_for_admin, name='exam_result_for_admin'),  # 結果ページ
 
 
 ]
