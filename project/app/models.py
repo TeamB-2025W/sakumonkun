@@ -122,7 +122,7 @@ class Examination(models.Model):
     testid = models.ForeignKey(
         Test, 
         verbose_name='テストID', 
-        on_delete=models.DO_NOTHING, # 影響なし
+        on_delete=models.CASCADE,
         db_column='testid'
     )
     guestname = models.CharField('ゲスト名', max_length=20)
