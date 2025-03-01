@@ -4,20 +4,6 @@
 {% block content %}
 <div class="home-main">
   <a href="{% url 'app:test_create' %}" class="link-button create-link">新しいテストを作成</a>
-
-
-    <h1>エンドポイント一覧</h1>
-    <ul>
-      <li>
-        <a href="{% url 'app:creation_successful' testid=1 %}">テスト作成完了</a> 
-        (<a href="{% url 'app:creation_successful' testid=1 %}">/test/create/tmp</a>)
-      </li>
-      <li>
-        <a href="{% url 'app:question_delete' %}">問題削除</a> 
-        (<a href="{% url 'app:question_delete' %}">/test/modal/confirm_question_deletion</a>)
-      </li>
-    </ul>
-
   <h2>作成テスト一覧</h2>
   <table>
     <thead>
