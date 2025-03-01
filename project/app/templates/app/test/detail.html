@@ -96,7 +96,7 @@
                             <th>正答</th>
                         </tr>
                         {% for edit_choice in question.choices.all %}
-                        <tr class="choiceies">
+                        <tr class="choices">
                             <td><label>{{ forloop.counter }}</label></td>
                             <td><input class="choices_input" name="choice_{{ question.id }}_{{ edit_choice.id }}" value="{{ edit_choice.text }}" {% if forloop.counter <= 2 %}required{% endif %}></td>
                             <td><input class="choices_radio" value="{{ forloop.counter }}" type="radio" name="correct_choice" {% if forloop.counter == question.correct_sequence %}checked{% endif %} required></td>
