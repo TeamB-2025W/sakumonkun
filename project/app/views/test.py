@@ -127,15 +127,14 @@ def test_detail(request, testid):
                 # 正解の選択肢を更新
                 correct_choice_id = request.POST.get('correct_choice')
                 if correct_choice_id:
-                    correct_choice = get_object_or_404(QuestionChoice, id=correct_choice_id)
-                    question.correct_choice = correct_choice
+                   question.correct_sequence = correct_choice_id
 
                 question.save()
 
                 # 選択肢の更新
                 for key, value in request.POST.items():
                     if key.startswith('choice_'):
-                        choice_id = key.split('_')[1]
+                        choice_id = key.split('_')[2]
                         choice = get_object_or_404(QuestionChoice, id=choice_id)
                         choice.text = value
                         choice.updated_at = timezone.now()
@@ -163,7 +162,7 @@ def test_detail(request, testid):
                 test.save()
                 
                 # 削除成功のレスポンスを返す
-                return JsonResponse({'status': 'success', 'message': '削除が完了しました。'})
+                # return JsonResponse({'status': 'success', 'message': str(question_id)})
 
         
         # 例外が発生した場合

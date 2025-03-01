@@ -67,15 +67,15 @@ function showDeleteConfirmation(blockId) {
     body.style.top = `-${scrollPosition}px`;
     body.classList.add('no-scroll');
     currentBlockId = blockId;
-    document.getElementById('deleteConfirmationModal').style.display = 'block';
+    document.getElementById(`deleteConfirmationModal_${currentBlockId}`).style.display = 'block';
 }
 
 // 削除モーダルを閉じる処理
-function closeModal() {
+function closeModal(blockId) {
     body.classList.remove('no-scroll');
     body.style.top = '';
     window.scrollTo(0, scrollPosition);
-    document.getElementById('deleteConfirmationModal').style.display = 'none';
+    document.getElementById(`deleteConfirmationModal_${currentBlockId}`).style.display = 'none';
 }
 
 // ブロック削除処理＆DB削除処理

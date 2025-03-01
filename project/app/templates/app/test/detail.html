@@ -47,7 +47,7 @@
                         <!-- 選択肢 -->
                         {% for choice in question.choices.all %}
                         <div class="choices">
-                            <input type="radio" name="question_{{ question.id }}" id="radio_{{ choice.id }}" value="{{ choice.id }}">
+                            <input type="radio" name="choice_{{ question.id }}" id="radio_{{ choice.id }}" value="{{ choice.id }}">
                             <label for="radio_{{ choice.id }}">{{ choice.text }}</label>
                         </div>
                         {% endfor %}
@@ -72,13 +72,13 @@
             </div>
             
             <!-- モーダル -->
-            <div id="deleteConfirmationModal" class="delete_modal">
+            <div id="deleteConfirmationModal_{{ question.id }}" class="delete_modal">
                 <div class="modal_content">
                     <h2>確認</h2>
                     <p>この問題を削除してよろしいですか？</p>
                     <div class="delete_modal_buttons">
-                    <button id="confirmButton" class="confirm_delete" onclick="deleteBlock('{{ question.id }}')">削除</button>
-                    <button id="cancelButton" class="cancel_submit" onclick="closeModal()">キャンセル</button>
+                    <button id="confirmButton" id="delete_modal_button_{{ question.id }}" class="confirm_delete" onclick="deleteBlock('{{ question.id }}')">削除</button>
+                    <button id="cancelButton" class="cancel_submit" onclick="closeModal('{{ question.id }}')">キャンセル</button>
                     </div>
                 </div>
             </div>
@@ -98,13 +98,13 @@
                         {% for edit_choice in question.choices.all %}
                         <tr class="choiceies">
                             <td><label>{{ forloop.counter }}</label></td>
-                            <td><input class="choices_input" name="choice_{{ question.id }}_{{ forloop.counter }}" value="{{ edit_choice.text }}" {% if forloop.counter <= 2 %}required{% endif %}></td>
-                            <td><input class="choices_radio" value="1" type="radio" name="correct_{{ question.id }}" {% if edit_choice.id == question.correct_choiceid %}checked{% endif %} required></td>
+                            <td><input class="choices_input" name="choice_{{ question.id }}_{{ edit_choice.id }}" value="{{ edit_choice.text }}" {% if forloop.counter <= 2 %}required{% endif %}></td>
+                            <td><input class="choices_radio" value="{{ forloop.counter }}" type="radio" name="correct_choice" {% if forloop.counter == question.correct_sequence %}checked{% endif %} required></td>
                         </tr>
                         {% endfor %}
                     </table>
                     <label for="commentary-1" class="commentary">解説</label>
-                    <textarea name="commentary" class="question_text" id="commentary-1" placeholder="解説文" rows="7" cols="96">{{ question.explanation }}</textarea>
+                    <textarea name="explanation" class="question_text" placeholder="解説文" rows="7" cols="96">{{ question.explanation }}</textarea>
 
                     <input type="hidden" name="question_id" value="{{ question.id }}">
                     <input type="hidden" name="update_question" value="">
