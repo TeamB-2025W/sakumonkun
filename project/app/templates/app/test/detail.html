@@ -61,7 +61,7 @@
                         <!-- 編集ボタン -->
                         <button type="button" class="detail_button button_update" id="edit_button_{{ question.id }}" onclick="showEditForm('{{ question.id }}')">編集</button>
                         <!-- 削除ボタン -->
-                        <form method="post" id="delete_{{ question.id }}" action="{% url 'app:test_detail' test.id %}">
+                        <form class="delete_button_position" method="post" id="delete_{{ question.id }}" action="{% url 'app:test_detail' test.id %}">
                             {% csrf_token %}
                             <input type="hidden" name="question_id" value="{{ question.id }}">                   
                             <input type="hidden" name="delete_question" value="">
@@ -96,7 +96,7 @@
                             <th>正答</th>
                         </tr>
                         {% for edit_choice in question.choices.all %}
-                        <tr class="choiceies">
+                        <tr>
                             <td><label>{{ forloop.counter }}</label></td>
                             <td><input class="choices_input" name="choice_{{ question.id }}_{{ edit_choice.id }}" value="{{ edit_choice.text }}" {% if forloop.counter <= 2 %}required{% endif %}></td>
                             <td><input class="choices_radio" value="{{ forloop.counter }}" type="radio" name="correct_choice" {% if forloop.counter == question.correct_sequence %}checked{% endif %} required></td>

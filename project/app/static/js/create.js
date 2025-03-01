@@ -20,6 +20,9 @@ removeQuestionButton.addEventListener("click", () => {
   }, 1000);
 })
 
+document.getElementById("create-test-button")
+.onclick = e => checkChoicedCorrect(e)
+
 function addQuestionForm() {
   // 要素を作成・属性の設定
 
@@ -42,11 +45,11 @@ function addQuestionForm() {
   questionText.required = true;
   // 選択肢ラベル
   const choicesLabel = document.createElement("label");
-  choicesLabel.className = "flex choiceies";
+  choicesLabel.className = "flex choices";
   choicesLabel.innerHTML = "<p>選択肢</p><p>正答</p>";
   // 選択肢リスト
   const choicesList = document.createElement("ol");
-  choicesList.className = "choiceies";
+  choicesList.className = "choices";
   // 4つの選択肢を作成・追加
   for (let i=0; i<4; i++) {
     const choiceItem = document.createElement("li");
@@ -115,4 +118,29 @@ function removeQuestionForm() {
   if (lastIndex < 1) return;
   const removeQuestion = questions.children[lastIndex];
   questions.removeChild(removeQuestion);
+}
+
+function checkChoicedCorrect(e) {
+  // ラジオボタンの3か4が押されている&&その入力欄が空白の場合警告する
+  const questions = document.getElementById("questions");
+  for (const question of questions.children) {
+    const choices = question.children[3];
+    for (let i=0; i<2; i++) {
+      const choice = choices.children[2 + i];
+      const choiceRadio = choice.querySelector('input[type="radio"]');
+      if (!choiceRadio.checked) continue;
+      const choiceInput = choice.querySelector('input:not([type="radio"])');
+      if (choiceInput.value.trim() === "") {
+        e.preventDefault();
+        showModal();
+        return;
+      }
+    }
+  }
+}
+
+function showModal() {
+  const modal = document.getElementsByClassName("modal")[0];
+  modal.classList.remove("hidden");
+  setTimeout(() => modal.classList.add("hidden"), 3000);
 }

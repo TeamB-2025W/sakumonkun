@@ -13,11 +13,11 @@
     <h3>問題 1</h3>
     <textarea name="question_text_1" placeholder="問題文" form="create-test" rows="5" cols="96" required></textarea>
 
-    <label class="flex choiceies">
+    <label class="flex choices">
       <p>選択肢</p>
       <p>正答</p>
     </label>
-    <ol class="choiceies">
+    <ol class="choices">
       <li class="flex">
         <label>1</label>
         <input name="choice_1_1" form="create-test" required>
@@ -56,9 +56,14 @@
   </button>
 </div>
 <div class="button-area">
-  <button type="submit" form="create-test">
+  <button type="submit" form="create-test" id="create-test-button">
     問題作成を完了する
   </button>
+</div>
+<div class="modal create hidden">
+  <p>
+    選択肢と正答の組み合わせを正しくしてください。
+  </p>
 </div>
 {% endblock %}
 
