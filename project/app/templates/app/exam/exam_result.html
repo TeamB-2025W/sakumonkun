@@ -44,7 +44,7 @@
                         <div class="selected_choice">
                             <h5 class="result_title">選んだ選択肢</h5>
                             <p class="result_text">{{ answer.selected_choice_text.text }}</p><!-- 選んだ選択肢を持ってくる -->
-                            {% if answer.answer.iscorrect == 1 %}
+                            {% if answer.answer.selected_sequence == answer.question.correct_sequence %}
                             <span class="judge_icon correct">〇</span><span class="judge correct">正解</span>
                             {% else %}
                             <span class="judge_icon incorrect">✕</span><span class="judge incorrect">不正解</span>
